@@ -12,7 +12,7 @@ public class Room {
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: prints the room to the console
-    public void printRoom() {
+    public void printRoomWithNumbers() {
 
         List<List<String>> tempList = createPlane();
 
@@ -33,9 +33,24 @@ public class Room {
     }
 
     // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: prints a room with numbers substituted with dashes
+    public void printRoomWithDashes() {
+
+        List<List<String>> tempList = createPlane();
+
+        for (List<String> lst : tempList) {
+            for (String s : lst) {
+                int number = Integer.parseInt(s);
+                System.out.print(" _ ");
+            }
+            System.out.println();
+        }
+    }
+
+    // REQUIRES: nothing
     // MODIFIES: this
     // EFFECTS: creates a plane for a given dimension
-
     public List createPlane() {
 
         int count = 0;
