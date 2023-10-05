@@ -20,13 +20,11 @@ public class Dimension {
 
     // EFFECTS: returns the length
     public int getLength() {
-        // TODO: implement this getter method
         return this.length;// stub
     }
 
     // EFFECTS: returns the width
     public int getWidth() {
-        // TODO: implement this getter method
         return this.width;
     }
 
@@ -35,14 +33,12 @@ public class Dimension {
     // REQUIRES: l > 0
     // EFFECTS: sets the length to l
     public void setLength(int l) {
-        // TODO: implement this getter method
-        // stub
+        this.length = l;
     }
 
     // REQUIRES: w > 0
     // EFFECTS: sets the width to w
     public void setWidth(int w) {
-        // TODO: implement this getter method
-        // stub
+        this.width = w;
     }
 }

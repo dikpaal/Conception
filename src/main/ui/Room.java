@@ -18,7 +18,11 @@ public class Room {
     public void mainUserInput() {
         introductionOfUser();
         userChoosesDimension();
-        printRoomWithDashes();
+        if (userChoosesDashOrNumberedRoom()) {
+            printRoomWithNumbers();
+        } else {
+            printRoomWithDashes();
+        }
     }
 
 
@@ -39,12 +43,31 @@ public class Room {
     // MODIFIES: nothing
     // EFFECTS: inputs and stores the dimension from the user
     public void userChoosesDimension() {
-        Scanner s1 = new Scanner(System.in);
+        Scanner s = new Scanner(System.in);
         System.out.println();
         System.out.println("What would the dimension of your room be? ");
-        String dimensionString = s1.nextLine();
+        String dimensionString = s.nextLine();
         int dimensionInt = Integer.parseInt(dimensionString);
         setDimension(dimensionInt);
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: returns whether the user wishes to see a dashed room or a numbered room
+    //          - returns false if the user chooses a dashed view
+    //          - returns true if the user chooses a numbered view
+    public boolean userChoosesDashOrNumberedRoom() {
+        int temp = 0;
+
+        Scanner s = new Scanner(System.in);
+        System.out.println();
+        System.out.println("Would you like a dashed view (0) or a numbered view (1)? ");
+        int view = Integer.parseInt(s.next());
+        if (view == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     // REQUIRES: nothing
