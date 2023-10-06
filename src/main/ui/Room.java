@@ -9,7 +9,8 @@ import java.util.Scanner;
 public class Room {
     String username;
     Dimension dimension;
-    List<List<String>> plane;
+    List<List<String>> dashedPlane;
+    List<List<String>> numberedPlane;
 
 
     // REQUIRES: nothing
@@ -23,6 +24,7 @@ public class Room {
         } else {
             printRoomWithDashes();
         }
+        editRoom();
     }
 
 
@@ -123,6 +125,14 @@ public class Room {
             count += dimension.getLength();
         }
         return tempList;
+    }
+
+
+    // REQUIRES: nothing
+    // MODIFIES: this
+    // EFFECTS: allows the user to add/remove Furniture from the Room
+    public void editRoom() {
+        // stub
     }
 
     // GETTERS
