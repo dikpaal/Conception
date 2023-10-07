@@ -10,19 +10,24 @@ public abstract class Furniture {
 
     // GETTERS
 
-    // EFFECTS: returns the dimension of the chair
+    // EFFECTS: returns the dimension of the furniture
     public Dimension getDimension() {
         return this.dimension;
     }
 
-    // EFFECTS: returns the direction of the chair
+    // EFFECTS: returns the direction of the furniture
     public Direction getDirection() {
         return this.direction;
     }
 
-    // EFFECTS: returns the color of the chair
+    // EFFECTS: returns the color of the furniture
     public Color getColor() {
         return this.color;
+    }
+
+    // EFFECTS: returns the type of the furniture
+    public FurnitureType getType() {
+        return this.type;
     }
 
     // SETTERS
