@@ -14,9 +14,10 @@ import static model.FurnitureType.SOFA;
 public class Room {
     String username;
     Dimension dimension;
-    List<List<String>> dashedPlane;
-    List<List<String>> numberedPlane;
-    List<List<Furniture>> furnitureList;
+    List<List<String>> dashedPlane; // the dashed plane
+    List<List<String>> numberedPlane; // the numbered plane showcasing the numbers of each block
+    List<List<Furniture>> furnitureList; // the list of furniture placed in the room so far
+    List<List<String>> numberedAndFurnitureList; // the list to be used to find remaining space for a furniture
 
 
     public Room(int d) {
@@ -24,6 +25,7 @@ public class Room {
         List<List<String>> dashedPlane = new ArrayList<>();
         List<List<String>> numberedPlane = new ArrayList<>();
         List<List<Furniture>> furnitureList = new ArrayList<>();
+        List<List<String>> numberedAndFurnitureList = new ArrayList<>();
     }
 
 
@@ -132,16 +134,19 @@ public class Room {
     // MODIFIES: this
     // EFFECTS: creates a numbered plane for a given dimension (used for placing furniture)
     public List<List<String>> createNumberedPlane() {
-        int count = 0;
+        int numberedFactor = 0;
 
         List<List<String>> tempList = new ArrayList<>();
-        for (int i = 1; i < dimension.getWidth(); i++) {
-            List<String> subTempList = new ArrayList<>();
-            for (int j = 1; j < dimension.getLength(); j++) {
-                subTempList.add("" + (count + j) + "");
+
+        for (int i = 1; i <= getDimension().getLength() - 1; i++) {
+            List<String> subList = new ArrayList<>();
+
+            for (int j = 1; j <= getDimension().getWidth() - 1; j++) {
+                String number = Integer.toString(numberedFactor + j);
+                subList.add(number);
             }
-            tempList.add(subTempList);
-            count += dimension.getLength();
+            numberedFactor += getDimension().getLength() - 1;
+            tempList.add(subList);
         }
         return tempList;
     }
@@ -168,14 +173,34 @@ public class Room {
     // MODIFIES: nothing
     // EFFECTS: returns true, if f can be placed in the room (is there space for it or not),
     //          otherwise returns false
-    public boolean isThereSpace(Furniture f) {
+    public boolean isThereSpaceAnyMore(Furniture f) {
+        initiateNumberedAndFurnitureList();
+
         if (f.getType() == CHAIR) {
-            List<String> availableSpots = new ArrayList<>();
-            for (List<String> subNumberedList : getNumberedPlane()) {
-
-
+            if (isThereSpaceForAChair().isEmpty()) {
+                System.out.println("Sorry, no space for a chair anymore!");
+                return false;
+            } else {
+                System.out.println("You can place a chair in: " + isThereSpaceForAChair());
+                return true;
             }
         }
+        return false;
+    }
+
+    public List<String> isThereSpaceForAChair() {
+        List<String> availableSpots = new ArrayList<>();
+        for (List<String> subList : getNumberedAndFurnitureList()) {
+            for (String s : subList) {
+                try {
+                    int number = Integer.parseInt(s);
+                    availableSpots.add(s);
+                } catch (Exception e) {
+                    // nothing here!
+                }
+            }
+        }
+        return availableSpots;
     }
 
 
@@ -184,6 +209,16 @@ public class Room {
     // EFFECTS: allows the user to add/remove Furniture from the Room
     public void editRoom() {
         // stub
+    }
+
+    public void initiateNumberedAndFurnitureList() {
+        List<List<String>> tempList = new ArrayList<>();
+
+        for (List<String> subNumberedList : getNumberedPlane()) {
+            tempList.add(subNumberedList);
+        }
+
+        this.numberedAndFurnitureList = tempList;
     }
 
     // GETTERS
@@ -214,6 +249,13 @@ public class Room {
     // EFFECTS: returns the numberedPlane of the room
     public List<List<String>> getNumberedPlane() {
         return this.numberedPlane;
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: this
+    // EFFECTS: returns the numberedAndFurnitureList of the room
+    public List<List<String>> getNumberedAndFurnitureList() {
+        return this.numberedAndFurnitureList;
     }
 
     // SETTERS

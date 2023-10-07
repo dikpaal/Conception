@@ -5,6 +5,8 @@ import static model.FurnitureType.CENTERTABLE;
 
 public class CenterTable extends Furniture {
 
-    FurnitureType type = CENTERTABLE;
-    Color color = WHITE;
+    public CenterTable() {
+        FurnitureType type = CENTERTABLE;
+        Color color = WHITE;
+    }
 }

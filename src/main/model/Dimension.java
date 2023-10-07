@@ -11,7 +11,6 @@ public class Dimension {
     // MODIFIES: nothing
     // EFFECTS: constructs a dimension with the given length and width
     public Dimension(int l, int w) {
-        // TODO: implement this constructor
         this.length = l;
         this.width = w;
     }
