@@ -7,6 +7,7 @@ public abstract class Furniture {
     Direction direction; // the direction in which it is facing
     Color color; // the color of the chair
     FurnitureType type; // the type of the furniture
+    int spot; // the spot where the furniture has been placed
 
     // GETTERS
 
@@ -32,18 +33,22 @@ public abstract class Furniture {
 
     // SETTERS
 
-    // EFFECTS: sets the dimension of the chair to dim
+    // EFFECTS: sets the dimension of the furniture to dim
     public void setDimension(Dimension dim) {
         this.dimension = dim;
     }
 
-    // EFFECTS: sets the direction of the chair to dir
+    // EFFECTS: sets the direction of the furniture to dir
     public void setDirection(Direction dir) {
         this.direction = dir;
     }
 
-    // EFFECTS: sets the color of the chair to c
+    // EFFECTS: sets the color of the furniture to c
     public void setColor(Color c) {
         this.color = c;
+    }
+    // EFFECTS: sets the spot of the furniture to s
+    public void setSpot(int s) {
+        this.spot = s;
     }
 }
