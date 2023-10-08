@@ -2,6 +2,7 @@ package ui;
 
 import model.Dimension;
 import model.Furniture;
+import model.FurnitureType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -184,8 +185,17 @@ public class Room {
                 System.out.println("You can place a chair in: " + isThereSpaceForAChair());
                 return true;
             }
+        } else if (f.getType() == FurnitureType.SOFA) {
+            if (isThereSpaceForASofa().isEmpty()) {
+                System.out.println("Sorry, no space for a sofa anymore!");
+                return false;
+            } else {
+                System.out.println("You can place a sofa in: " + isThereSpaceForASofa());
+                return true;
+            }
+        } else {
+            return false;
         }
-        return false;
     }
 
     public List<String> isThereSpaceForAChair() {
@@ -198,6 +208,27 @@ public class Room {
                 } catch (Exception e) {
                     // nothing here!
                 }
+            }
+        }
+        return availableSpots;
+    }
+
+    public List<List<String>> isThereSpaceForASofa() {
+        List<List<String>> availableSpots = new ArrayList<>();
+
+        List<List<String>> tempList = getNumberedPlane();
+        int index = 0;
+        int maxSize = tempList.get(0).size();
+
+        if (index < maxSize) {
+            for (int i = 0; i < maxSize; i++) {
+                List<String> subList = new ArrayList<>();
+                for (int j = 0; j < tempList.size(); j++) {
+                    List<String> actualSubList = tempList.get(j);
+                    subList.add(actualSubList.get(index));
+                }
+                index++;
+                availableSpots.add(subList);
             }
         }
         return availableSpots;

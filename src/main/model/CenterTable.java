@@ -1,12 +1,12 @@
 package model;
 
 import static model.Color.WHITE;
-import static model.FurnitureType.CENTERTABLE;
+import static model.FurnitureType.CENTRETABLE;
 
 public class CenterTable extends Furniture {
 
     public CenterTable() {
-        FurnitureType type = CENTERTABLE;
-        Color color = WHITE;
+        this.type = CENTRETABLE;
+        this.color = WHITE;
     }
 }
