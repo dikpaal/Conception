@@ -1,10 +1,8 @@
 package ui;
 
-import model.Chair;
-import model.Dimension;
-import model.Furniture;
-import model.FurnitureType;
+import model.*;
 
+import java.time.chrono.IsoChronology;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -46,6 +44,7 @@ public class Room {
         room.printRoom();
         room.editRoom();
         room.printRoom();
+        System.out.println(room.getNumberedAndFurnitureList());
     }
 
     // REQUIRES: nothing
@@ -88,7 +87,13 @@ public class Room {
             System.out.print("    ");
             for (int j = 0; j < subList.size(); j++) {
                 String number = subList.get(j);
-                if (number.equals("Cv") || number.equals("Sv") || number.equals("Tv")) {
+                if (number.equals("Cv")
+                        || number.equals("Sv")
+                        || number.equals("vS")
+                        || number.equals("Sv=")
+                        || number.equals("=vS")
+                        || number.equals("Tv")) {
+
                     System.out.print(" " + number + "  ");
                 } else if (Integer.parseInt(number) < 10) {
                     System.out.print(" " + "0" + number + "  ");
@@ -353,8 +358,8 @@ public class Room {
             Furniture chair = new Chair();
             placeChair(chair);
         } else if (userChoice.equals("s")) {
-            //placeSofa();
-            //
+            Furniture sofa = new Sofa();
+            placeSofa(sofa);
         } else if (userChoice.equals("t")) {
             //placeCentreTable();
             //
@@ -394,6 +399,83 @@ public class Room {
 
         for (List<String> subNumberedList : getNumberedPlane()) {
             this.numberedAndFurnitureList.add(subNumberedList);
+        }
+    }
+
+    public void placeSofa(Furniture sofa) {
+        isThereSpaceAnyMore(sofa);
+        Scanner s = new Scanner(System.in);
+
+        System.out.println("Choose two spots: ");
+        String userChoice1 = s.nextLine();
+
+        System.out.println(getTheOtherSpot(userChoice1));
+
+        String userChoice2 = s.nextLine();
+        int spot1 = Integer.parseInt(userChoice1);
+        int spot2 = Integer.parseInt(userChoice2);
+        setSofaInNumberedAndFurnitureList(sofa, spot1, spot2);
+    }
+
+    public String getTheOtherSpot(String spot) {
+        List<List<String>> spotsInOriginalList = isThereSpaceForASofaInOriginalPlane();
+        List<List<String>> spotsInInvertedList = isThereSpaceForASofaInInvertedPlane();
+
+        List<String> listOfEligibleSpots = new ArrayList<>();
+
+        for (List<String> subList : spotsInOriginalList) {
+            String first = subList.get(0);
+            String second = subList.get(1);
+
+            if (first.equals(spot)) {
+                listOfEligibleSpots.add(second);
+            } else if (second.equals(spot)) {
+                listOfEligibleSpots.add(first);
+            }
+        }
+
+        for (List<String> subList : spotsInInvertedList) {
+            String first = subList.get(0);
+            String second = subList.get(1);
+
+            if (first.equals(spot)) {
+                listOfEligibleSpots.add(second);
+            } else if (second.equals(spot)) {
+                listOfEligibleSpots.add(first);
+            }
+        }
+        return (listOfEligibleSpots.get(0) + " or " + listOfEligibleSpots.get(1));
+    }
+
+    public void setSofaInNumberedAndFurnitureList(Furniture s, int spot1, int spot2) {
+        List<List<String>> numberedAndFurnitureList = getNumberedAndFurnitureList();
+        String stringSpot1 = Integer.toString(spot1);
+        String stringSpot2 = Integer.toString(spot2);
+
+        List<String> tempSubList = new ArrayList<>();
+        tempSubList.add(stringSpot1);
+        tempSubList.add(stringSpot2);
+
+        int count = 0;
+
+        for (int i = 0; i < numberedAndFurnitureList.size(); i++) {
+            List<String> subList = numberedAndFurnitureList.get(i);
+            for (int j = 0; j < subList.size(); j++) {
+                String str = subList.get(j);
+                for (String spot : tempSubList) {
+                    if (spot.equals(str)) {
+                        if (count == 0) {
+                            subList.set(j, "Sv");
+                            count++;
+                        } else {
+                            subList.set(j, "vS");
+                            s.setSpots(spot1, spot2);
+                            addToFurnitureList(s);
+                            setNumberedAndFurnitureList(i, subList);
+                        }
+                    }
+                }
+            }
         }
     }
 
