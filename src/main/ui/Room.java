@@ -2,13 +2,12 @@ package ui;
 
 import model.*;
 
-import java.time.chrono.IsoChronology;
+import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import static model.FurnitureType.CHAIR;
-import static model.FurnitureType.SOFA;
 
 // Represents a room
 public class Room {
@@ -361,8 +360,8 @@ public class Room {
             Furniture sofa = new Sofa();
             placeSofa(sofa);
         } else if (userChoice.equals("t")) {
-            //placeCentreTable();
-            //
+            Furniture ct = new CenterTable();
+            placeCenterTable(ct);
         } else {
             System.out.println("Invalid choice!");
         }
@@ -469,11 +468,59 @@ public class Room {
                             count++;
                         } else {
                             subList.set(j, "vS");
-                            s.setSpots(spot1, spot2);
+                            s.setSpotsForSofa(spot1, spot2);
                             addToFurnitureList(s);
                             setNumberedAndFurnitureList(i, subList);
                         }
                     }
+                }
+            }
+        }
+    }
+
+    private void placeCenterTable(Furniture ct) {
+
+        if (isThereSpaceAnyMore(ct)) {
+
+            Scanner s = new Scanner(System.in);
+            System.out.println("Do you want to place the center table here? (y) or (n): ");
+            String userChoice = s.nextLine();
+
+            if (userChoice.equals("y")) {
+                List<String> spots = isThereSpaceForACentreTable();
+                String topLeftSpot = spots.get(0);
+                setCenterTableInNumberedAndFurnitureList(ct, topLeftSpot);
+            }
+        }
+    }
+
+    public void setCenterTableInNumberedAndFurnitureList(Furniture ct, String topLeftSpot) {
+
+        int roomLength = getDimension().getLength();
+        int topLeftSpotInt = Integer.parseInt(topLeftSpot);
+        int bottomLeftSpotInt = topLeftSpotInt + (roomLength - 1);
+
+        String bottomLeftSpot = Integer.toString(bottomLeftSpotInt);
+
+        List<List<String>> numberedAndFurnitureList = getNumberedAndFurnitureList();
+
+        for (int i = 0; i < numberedAndFurnitureList.size(); i++) {
+            List<String> subList = numberedAndFurnitureList.get(i);
+            for (int j = 0; j < numberedAndFurnitureList.size(); j++) {
+                String spot = subList.get(j);
+
+                if (spot.equals(topLeftSpot)) {
+                    subList.set(j, "Tv");
+                    subList.set(j + 1, "Tv");
+                    ct.setSpotsForCenterTable(topLeftSpotInt, roomLength);
+                    addToFurnitureList(ct);
+                    setNumberedAndFurnitureList(i, subList);
+                }
+
+                if (spot.equals(bottomLeftSpot)) {
+                    subList.set(j, "Tv");
+                    subList.set(j + 1, "Tv");
+                    setNumberedAndFurnitureList(i, subList);
                 }
             }
         }

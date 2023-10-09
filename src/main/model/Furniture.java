@@ -1,6 +1,6 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public abstract class Furniture {
@@ -56,9 +56,23 @@ public abstract class Furniture {
         this.spot = s;
     }
 
-    // EFFECTS: sets the spots of the furniture to s1, s2
-    public void setSpots(int s1, int s2) {
+    // EFFECTS: sets the spots of the sofa to s1, s2
+    public void setSpotsForSofa(int s1, int s2) {
         this.spots.add(s1);
         this.spots.add(s2);
+    }
+
+    // EFFECTS: sets the spots of the center table to s1, s2
+    public void setSpotsForCenterTable(int topLeftSpot, int roomLength) {
+
+        int topLeftSpotInt = topLeftSpot;
+        int topRightSpotInt = topLeftSpotInt + 1;
+        int bottomLeftSpotInt = topLeftSpotInt + (roomLength - 1);
+        int bottomRightSpotInt = bottomLeftSpotInt + 1;
+
+        this.spots.add(topLeftSpotInt);
+        this.spots.add(topRightSpotInt);
+        this.spots.add(bottomLeftSpotInt);
+        this.spots.add(bottomRightSpotInt);
     }
 }
