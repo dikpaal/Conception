@@ -18,9 +18,9 @@ tried doing.
 
 ## User Stories
 
+- The user can *choose the dimension of the room*.
 - The user can *add* furniture in the room *in the position of their choice*. 
 given that there is space.
 - The user will also be able to *view all the furniture placed in the room so far*.
 - The user can also *delete furniture* from the room.
 - The user can *change the color of a furniture*.
-- The user can *change the dimension of the room*.

@@ -34,15 +34,47 @@ public class Room {
     public void mainUserInput() {
         introductionOfUser();
         Room room = userChoosesDimensionAndNewRoomIsCreated();
-
         List<List<String>> numberedPlane = room.createNumberedPlane();
-
         room.setNumberedPlane(numberedPlane);
-
         room.initiateNumberedAndFurnitureList();
+        System.out.println("Here is your room!");
         room.printRoom();
-        room.editRoom();
-        room.printRoom();
+        System.out.println();
+
+        while (true) {
+            Scanner s = new Scanner(System.in);
+            System.out.println("Would you like to edit your room? (y) or (n):");
+            String userChoice = s.nextLine();
+
+            if (userChoice.equals("y")) {
+                System.out.println("1. Would you like to add furniture to your room?");
+                System.out.println("2. Would you like to remove furniture from your room?");
+                System.out.println("3. Would you like to see a list of all the furniture in your room?");
+                String userChoice2 = s.nextLine();
+
+                if (userChoice2.equals("1")) {
+                    room.editRoom();
+                    System.out.println("Would you like to see your room? (y) or (n):");
+                    String userChoice3 = s.nextLine();
+
+                    if (userChoice3.equals("y")) {
+                        room.printRoom();
+                    }
+                } else if (userChoice2.equals("2")) {
+                    //
+                } else if (userChoice2.equals("3")) {
+                    System.out.println(room.getFurnitureList());
+                } else {
+                    System.out.println("invalid choice!");
+                    System.out.println("Bye!");
+                    break;
+                }
+
+            } else {
+                System.out.println("Bye!");
+                break;
+            }
+        }
     }
 
     // REQUIRES: nothing
@@ -349,20 +381,41 @@ public class Room {
     // EFFECTS: allows the user to add/remove Furniture from the Room
     public void editRoom() {
         Scanner s = new Scanner(System.in);
-        System.out.println("What would you like to place? Chair (c), Sofa (s), Centre Table (t):");
-        String userChoice = s.nextLine();
 
-        if (userChoice.equals("c")) {
-            Furniture chair = new Chair();
-            placeChair(chair);
-        } else if (userChoice.equals("s")) {
-            Furniture sofa = new Sofa();
-            placeSofa(sofa);
-        } else if (userChoice.equals("t")) {
-            Furniture ct = new CenterTable();
-            placeCenterTable(ct);
-        } else {
-            System.out.println("Invalid choice!");
+        while (true) {
+            System.out.println("What would you like to place? Chair (c), Sofa (s), Centre Table (t):");
+            String userChoice = s.nextLine();
+
+            if (userChoice.equals("c")) {
+                Furniture chair = new Chair();
+                placeChair(chair);
+                System.out.println("Would you like to add more furniture? (y) or (n): ");
+                String userChoice2 = s.nextLine();
+                if (userChoice2.equals("n")) {
+                    break;
+                }
+
+            } else if (userChoice.equals("s")) {
+                Furniture sofa = new Sofa();
+                placeSofa(sofa);
+                System.out.println("Would you like to add more furniture? (y) or (n): ");
+                String userChoice2 = s.nextLine();
+                if (userChoice2.equals("n")) {
+                    break;
+                }
+
+            } else if (userChoice.equals("t")) {
+                Furniture ct = new CenterTable();
+                placeCenterTable(ct);
+                System.out.println("Would you like to add more furniture? (y) or (n): ");
+                String userChoice2 = s.nextLine();
+                if (userChoice2.equals("n")) {
+                    break;
+                }
+            } else {
+                System.out.println("Invalid choice!");
+                break;
+            }
         }
     }
 
@@ -510,7 +563,7 @@ public class Room {
 
                 if (spot.equals(topLeftSpot)) {
                     subList.set(j, "Tv");
-                    subList.set(j + 1, "Tv");
+                    subList.set(j + 1, "vY");
                     ct.setSpotsForCenterTable(topLeftSpotInt, roomLength);
                     addToFurnitureList(ct);
                     setNumberedAndFurnitureList(i, subList);
@@ -518,7 +571,7 @@ public class Room {
 
                 if (spot.equals(bottomLeftSpot)) {
                     subList.set(j, "Tv");
-                    subList.set(j + 1, "Tv");
+                    subList.set(j + 1, "vT");
                     setNumberedAndFurnitureList(i, subList);
                 }
             }
