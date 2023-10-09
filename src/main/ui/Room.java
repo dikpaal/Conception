@@ -43,7 +43,6 @@ public class Room {
         room.printRoom();
         room.editRoom();
         room.printRoom();
-        System.out.println(room.getNumberedAndFurnitureList());
     }
 
     // REQUIRES: nothing
