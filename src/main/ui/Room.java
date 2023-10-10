@@ -137,7 +137,7 @@ public class Room {
     // EFFECTS: prints the dashes for the printRoom() method
     public void printDashes() {
         for (int k = 0; k < getDimension().getLength(); k++) {
-            System.out.print("   — ");
+            System.out.print("   - ");
         }
         System.out.println();
     }
