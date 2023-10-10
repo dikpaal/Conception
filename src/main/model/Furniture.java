@@ -35,6 +35,26 @@ public abstract class Furniture {
         return this.type;
     }
 
+    // EFFECTS: returns the spot of the furniture if it is a CHAIR
+    public Integer getSpot() {
+        return this.spot;
+    }
+
+    // EFFECTS: returns the spot of the furniture if it is a SOFA
+    public Integer getSofaSpots() {
+        return this.spots.get(0);
+    }
+
+    // EFFECTS: returns the next spot of the furniture if it is a SOFA
+    public Integer getSecondSofaSpots() {
+        return this.spots.get(1);
+    }
+
+    // EFFECTS: returns the spot of the furniture if it is a CENTRE TABLE
+    public Integer getCentreTableSpots() {
+        return this.spots.get(0);
+    }
+
     // SETTERS
 
     // EFFECTS: sets the dimension of the furniture to dim

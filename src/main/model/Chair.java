@@ -12,5 +12,4 @@ public class Chair extends Furniture {
         this.type = CHAIR;
         this.color = BEIGE;
     }
-
 }
