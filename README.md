@@ -22,5 +22,4 @@ tried doing.
 - The user can *add* furniture in the room *in the position of their choice*. 
 given that there is space.
 - The user will also be able to *view all the furniture placed in the room so far*.
-- The user can also *delete furniture* from the room.
-- The user can *change the color of a furniture*.
+- The user can also *remove furniture* from the room.

@@ -241,6 +241,8 @@ public class Room {
         for (List<String> subList : getNumberedAndFurnitureList()) {
             for (String s : subList) {
                 try {
+                    int number = Integer.parseInt(s); // required because
+                    // if s is not a number, it will still be added to availableSpots().
                     availableSpots.add(s);
                 } catch (Exception e) {
                     // nothing here!
