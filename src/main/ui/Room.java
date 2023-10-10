@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static model.FurnitureType.CHAIR;
-import static model.FurnitureType.SOFA;
+import static model.FurnitureType.*;
 
 // Represents a room
 public class Room {
@@ -446,37 +445,6 @@ public class Room {
         }
     }
 
-    public void setChairSpotInNumberedAndFurnitureList(String spot) {
-        List<List<String>> numberedList = getNumberedPlane();
-
-        int rowCount = 0;
-        int colCount = 0;
-
-        for (int i = 0; i < numberedList.size(); i++) {
-            List<String> subList = numberedList.get(i);
-            for (int j = 0; j < subList.size(); j++) {
-                String number = subList.get(j);
-
-                if (number.equals(spot)) {
-                    rowCount = i;
-                    colCount = j;
-                }
-            }
-        }
-
-        List<List<String>> numberedAndFurnitureList = getNumberedAndFurnitureList();
-
-        for (int i = 0; i < numberedAndFurnitureList.size(); i++) {
-            List<String> subList1 = numberedAndFurnitureList.get(i);
-            for (int j = 0; j < subList1.size(); j++) {
-                if ((i == rowCount) && (j == colCount)) {
-                    subList1.set(j, spot);
-                    setNumberedAndFurnitureList(i, subList1);
-                }
-            }
-        }
-    }
-
     public void initiateNumberedAndFurnitureList() {
 
         List<List<String>> tempList = new ArrayList<>();
@@ -650,7 +618,7 @@ public class Room {
                 } else {
                     System.out.println(getListOfAllTheAddedSofas());
                     String spot1 = selectSpot();
-                    String spot2 = getSpot2(spot1);
+                    String spot2 = getSpot2Sofa(spot1);
                     removeSofaFromSpot(spot1, spot2);
                     printRoom();
                 }
@@ -659,8 +627,8 @@ public class Room {
                     System.out.println("You have not added a centre table yet!");
                 } else {
                     System.out.println(getListOfAllTheAddedCentreTable());
-                    String spot1 = selectSpot();
-                    //removeCentreTablefromSpot(spot1);
+                    String spot3 = selectSpot();
+                    removeCentreTablefromSpot(spot3);
                     printRoom();
                 }
             } else {
@@ -678,7 +646,7 @@ public class Room {
             Furniture f = getFurnitureList().get(i);
             if (f.getType() == CHAIR) {
                 if (f.getSpot() == Integer.parseInt(spot)) {
-                    setChairSpotInNumberedAndFurnitureList(spot);
+                    setSingleSpotInNumberedAndFurnitureList(spot);
                     furnitureList.remove(f);
                 }
             }
@@ -691,46 +659,38 @@ public class Room {
             if (f.getType() == SOFA) {
                 if ((f.getSofaSpots() == Integer.parseInt(spot1))
                         && (f.getSecondSofaSpots() == Integer.parseInt(spot2))) {
-                    setSofaSpotsInNumberedAndFurnitureListSpot1(spot1, spot2);
+                    setSingleSpotInNumberedAndFurnitureList(spot1);
+                    setSingleSpotInNumberedAndFurnitureList(spot2);
                     furnitureList.remove(f);
                 }
             }
         }
     }
 
-    public void setSofaSpotsInNumberedAndFurnitureListSpot1(String spot1, String spot2) {
-        List<List<String>> numberedList = getNumberedPlane();
-
-        int rowCount = 0;
-        int colCount = 0;
-
-        for (int i = 0; i < numberedList.size(); i++) {
-            List<String> subList = numberedList.get(i);
-            for (int j = 0; j < subList.size(); j++) {
-                String number = subList.get(j);
-
-                if (number.equals(spot1)) {
-                    rowCount = i;
-                    colCount = j;
+    public void removeCentreTablefromSpot(String spot1) {
+        for (int i = 0; i < getFurnitureList().size(); i++) {
+            Furniture f = getFurnitureList().get(i);
+            if (f.getType() == CENTRETABLE) {
+                if (f.getCentreTableSpots() == Integer.parseInt(spot1)) {
+                    setCentreTableSpotsInNumberedAndFurnitureList(Integer.parseInt(spot1));
+                    furnitureList.remove(f);
                 }
             }
         }
-
-        List<List<String>> numberedAndFurnitureList = getNumberedAndFurnitureList();
-
-        for (int i = 0; i < numberedAndFurnitureList.size(); i++) {
-            List<String> subList1 = numberedAndFurnitureList.get(i);
-            for (int j = 0; j < subList1.size(); j++) {
-                if ((i == rowCount) && (j == colCount)) {
-                    subList1.set(j, spot1);
-                    setNumberedAndFurnitureList(i, subList1);
-                }
-            }
-        }
-        setSofaSpotsInNumberedAndFurnitureListSpot2(spot2);
     }
 
-    public void setSofaSpotsInNumberedAndFurnitureListSpot2(String spot2) {
+    public void setCentreTableSpotsInNumberedAndFurnitureList(int spot1) {
+        int spot2 = spot1 + 1;
+        int spot3 = spot1 + (getDimension().getLength() - 1);
+        int spot4 = spot3 + 1;
+
+        setSingleSpotInNumberedAndFurnitureList(Integer.toString(spot1));
+        setSingleSpotInNumberedAndFurnitureList(Integer.toString(spot2));
+        setSingleSpotInNumberedAndFurnitureList(Integer.toString(spot3));
+        setSingleSpotInNumberedAndFurnitureList(Integer.toString(spot4));
+    }
+
+    public void setSingleSpotInNumberedAndFurnitureList(String spot) {
         List<List<String>> numberedList = getNumberedPlane();
 
         int rowCount = 0;
@@ -741,7 +701,7 @@ public class Room {
             for (int j = 0; j < subList.size(); j++) {
                 String number = subList.get(j);
 
-                if (number.equals(spot2)) {
+                if (number.equals(spot)) {
                     rowCount = i;
                     colCount = j;
                 }
@@ -754,7 +714,7 @@ public class Room {
             List<String> subList1 = numberedAndFurnitureList.get(i);
             for (int j = 0; j < subList1.size(); j++) {
                 if ((i == rowCount) && (j == colCount)) {
-                    subList1.set(j, spot2);
+                    subList1.set(j, spot);
                     setNumberedAndFurnitureList(i, subList1);
                 }
             }
@@ -770,7 +730,7 @@ public class Room {
     }
 
     // EFFECTS: returns the second spot of the sofa
-    public String getSpot2(String spot1) {
+    public String getSpot2Sofa(String spot1) {
         List<Furniture> furnitureList = getFurnitureList();
 
         String spot2 = "";
