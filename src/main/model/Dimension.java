@@ -29,15 +29,15 @@ public class Dimension {
 
     // setter
 
-    // REQUIRES: l > 0 and (l is odd for room)
-    // EFFECTS: sets the length to l
-    public void setLength(int l) {
-        this.length = l;
-    }
-
-    // REQUIRES: w > 0 nad (w is odd for room)
-    // EFFECTS: sets the width to w
-    public void setWidth(int w) {
-        this.width = w;
-    }
+//    // REQUIRES: l > 0 and (l is odd for room)
+//    // EFFECTS: sets the length to l
+//    public void setLength(int l) {
+//        this.length = l;
+//    }
+//
+//    // REQUIRES: w > 0 nad (w is odd for room)
+//    // EFFECTS: sets the width to w
+//    public void setWidth(int w) {
+//        this.width = w;
+//    }
 }

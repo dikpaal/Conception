@@ -14,13 +14,14 @@ public abstract class Furniture {
     List<Integer> spots; // the spots where the furniture has been placed (only for sofa and centre table)
 
     // GETTERS
-
-    // EFFECTS: returns the dimension of the furniture
-    public Dimension getDimension() {
-        return this.dimension;
-    }
-
-    // EFFECTS: returns the direction of the furniture
+//
+//    // EFFECTS: returns the dimension of the furniture
+//    public Dimension getDimension() {
+//        return this.dimension;
+//    }
+//
+//
+    //  EFFECTS: returns the direction of the furniture
     public Direction getDirection() {
         return this.direction;
     }
@@ -55,22 +56,29 @@ public abstract class Furniture {
         return this.spots.get(0);
     }
 
+    // EFFECTS: returns all the spots of the furniture
+    public List<Integer> getAllSpots() {
+        return this.spots;
+    }
+
     // SETTERS
 
-    // EFFECTS: sets the dimension of the furniture to dim
-    public void setDimension(Dimension dim) {
-        this.dimension = dim;
-    }
+//
+//    // EFFECTS: sets the dimension of the furniture to dim
+//    public void setDimension(Dimension dim) {
+//        this.dimension = dim;
+//    }
+//
+//    // EFFECTS: sets the direction of the furniture to dir
+//    public void setDirection(Direction dir) {
+//        this.direction = dir;
+//    }
 
-    // EFFECTS: sets the direction of the furniture to dir
-    public void setDirection(Direction dir) {
-        this.direction = dir;
-    }
-
-    // EFFECTS: sets the color of the furniture to c
-    public void setColor(Color c) {
-        this.color = c;
-    }
+//    // EFFECTS: sets the color of the furniture to c
+//    public void setColor(Color c) {
+//        this.color = c;
+//    }
+//
     // EFFECTS: sets the spot of the furniture to s
     public void setSpot(int s) {
         this.spot = s;
