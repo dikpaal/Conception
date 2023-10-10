@@ -58,9 +58,25 @@ public class FurnitureTest {
     }
 
     @Test
+    void testGetDirection() {
+        assertEquals(DOWN, sofa.getDirection());
+        sofa.setDirection(NEUTRAL);
+        assertEquals(NEUTRAL, sofa.getDirection());
+    }
+
+    @Test
     public void testGetSpot() {
         chair.setSpot(10);
         assertEquals(10, chair.getSpot());
+    }
+
+    @Test
+    public void testGetAllSpots() {
+        List<Integer> tempList = new ArrayList<>();
+        tempList.add(10);
+        tempList.add(11);
+        sofa.setSpotsForSofa(10, 11);
+        assertEquals(tempList, sofa.getAllSpots());
     }
 
     @Test

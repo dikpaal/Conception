@@ -3,6 +3,8 @@ package model;
 import java.util.Iterator;
 import java.util.List;
 
+import static model.Direction.*;
+
 public abstract class Furniture {
 
     // fields
@@ -10,7 +12,7 @@ public abstract class Furniture {
     Direction direction; // the direction in which it is facing
     Color color; // the color of the chair
     FurnitureType type; // the type of the furniture
-    int spot; // the spot where the furniture has been placed
+    int spot; // the spot where the furniture (chair) has been placed
     List<Integer> spots; // the spots where the furniture has been placed (only for sofa and centre table)
 
     // GETTERS
@@ -23,7 +25,12 @@ public abstract class Furniture {
 //
     //  EFFECTS: returns the direction of the furniture
     public Direction getDirection() {
-        return this.direction;
+
+        if (this.direction == DOWN) {
+            return this.direction;
+        } else {
+            return NEUTRAL;
+        }
     }
 
     // EFFECTS: returns the color of the furniture
@@ -69,10 +76,10 @@ public abstract class Furniture {
 //        this.dimension = dim;
 //    }
 //
-//    // EFFECTS: sets the direction of the furniture to dir
-//    public void setDirection(Direction dir) {
-//        this.direction = dir;
-//    }
+    // EFFECTS: sets the direction of the furniture to dir
+    public void setDirection(Direction dir) {
+        this.direction = dir;
+    }
 
 //    // EFFECTS: sets the color of the furniture to c
 //    public void setColor(Color c) {
