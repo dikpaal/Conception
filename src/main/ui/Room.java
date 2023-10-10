@@ -61,7 +61,6 @@ public class Room {
                 } else if (userChoice2.equals("2")) {
                     room.removeFurniture();
                 } else if (userChoice2.equals("3")) {
-                    System.out.println(room.getFurnitureList());
                     System.out.println(room.getFurnitureListWithSpots());
 
                 } else {
@@ -418,6 +417,7 @@ public class Room {
         }
     }
 
+    // EFFECTS: places a chair in the spot that the user chooses
     public void placeChair(Furniture chair) {
         isThereSpaceAnyMore(chair);
         Scanner s = new Scanner(System.in);
@@ -428,6 +428,7 @@ public class Room {
         setChairInNumberedAndFurnitureList(chair, spot);
     }
 
+    // EFFECTS: sets the chair c in spot in the numberedAndFurnitureList
     public void setChairInNumberedAndFurnitureList(Furniture c, int spot) {
         List<List<String>> numberedAndFurnitureList = getNumberedAndFurnitureList();
         String stringSpot = Integer.toString(spot);
@@ -445,6 +446,7 @@ public class Room {
         }
     }
 
+    // EFFECTS: initiates/creates the numberedAndFurnitureList
     public void initiateNumberedAndFurnitureList() {
 
         List<List<String>> tempList = new ArrayList<>();
@@ -459,6 +461,7 @@ public class Room {
         this.numberedAndFurnitureList = tempList;
     }
 
+    // EFFECTS: places a sofa in the spot that the user chooses
     public void placeSofa(Furniture sofa) {
         isThereSpaceAnyMore(sofa);
         Scanner s = new Scanner(System.in);
@@ -474,6 +477,7 @@ public class Room {
         setSofaInNumberedAndFurnitureList(sofa, spot1, spot2);
     }
 
+    // EFFECTS: gets the other spot for the sofa
     public String getTheOtherSpot(String spot) {
         List<List<String>> spotsInOriginalList = isThereSpaceForASofaInOriginalPlane();
         List<List<String>> spotsInInvertedList = isThereSpaceForASofaInInvertedPlane();
@@ -504,6 +508,7 @@ public class Room {
         return (listOfEligibleSpots.get(0) + " or " + listOfEligibleSpots.get(1));
     }
 
+    // EFFECTS: sets the sofa s in spot1 and spot2 in the numberedAndFurnitureList
     public void setSofaInNumberedAndFurnitureList(Furniture s, int spot1, int spot2) {
         List<List<String>> numberedAndFurnitureList = getNumberedAndFurnitureList();
         String stringSpot1 = Integer.toString(spot1);
@@ -536,6 +541,7 @@ public class Room {
         }
     }
 
+    // EFFECTS: places a centre table ct in the spot that the user chooses
     private void placeCenterTable(Furniture ct) {
 
         if (isThereSpaceAnyMore(ct)) {
@@ -552,6 +558,8 @@ public class Room {
         }
     }
 
+    // EFFECTS: sets the centre table in the numberedAndFurnitureList in the topLeftSpot, topRightSpot,
+    //          bottomLeftSpot, and bottomRightSpot
     public void setCenterTableInNumberedAndFurnitureList(Furniture ct, String topLeftSpot) {
 
         int roomLength = getDimension().getLength();
@@ -641,6 +649,7 @@ public class Room {
         }
     }
 
+    // EFFECTS: removes the chair from the spot in the furnitureList
     public void removeChairFromSpot(String spot) {
         for (int i = 0; i < getFurnitureList().size(); i++) {
             Furniture f = getFurnitureList().get(i);
@@ -653,6 +662,7 @@ public class Room {
         }
     }
 
+    // EFFECTS: removes the sofa from spot1 and spot2 in the furnitureList
     public void removeSofaFromSpot(String spot1, String spot2) {
         for (int i = 0; i < getFurnitureList().size(); i++) {
             Furniture f = getFurnitureList().get(i);
@@ -667,6 +677,7 @@ public class Room {
         }
     }
 
+    // EFFECTS: removes the centre table from all the necessary spots based on spot1 in the furnitureList
     public void removeCentreTablefromSpot(String spot1) {
         for (int i = 0; i < getFurnitureList().size(); i++) {
             Furniture f = getFurnitureList().get(i);
@@ -679,6 +690,7 @@ public class Room {
         }
     }
 
+    // EFFECTS: resets the spot numbers in the numberedAndFUrnitureList for a centre table
     public void setCentreTableSpotsInNumberedAndFurnitureList(int spot1) {
         int spot2 = spot1 + 1;
         int spot3 = spot1 + (getDimension().getLength() - 1);
@@ -690,6 +702,7 @@ public class Room {
         setSingleSpotInNumberedAndFurnitureList(Integer.toString(spot4));
     }
 
+    // EFFECTS: resets a single spot to spot in the numberedAndFUrnitureList
     public void setSingleSpotInNumberedAndFurnitureList(String spot) {
         List<List<String>> numberedList = getNumberedPlane();
 
