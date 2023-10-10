@@ -61,7 +61,7 @@ public class Room {
                         room.printRoom();
                     }
                 } else if (userChoice2.equals("2")) {
-                    //
+                    room.removeFurniture();
                 } else if (userChoice2.equals("3")) {
                     System.out.println(room.getFurnitureList());
                 } else {
@@ -583,6 +583,31 @@ public class Room {
     // EFFECTS: add f to furnitureList
     public void addToFurnitureList(Furniture f) {
         this.furnitureList.add(f);
+    }
+
+
+    // REQUIRES: nothing
+    // MODIFIES: this
+    // EFFECTS: removes the furniture that the user wants from the room
+    public void removeFurniture() {
+        Scanner s = new Scanner(System.in);
+
+        while (true) {
+
+            System.out.println("What would you like to remove? (c) or (s) or (t): ");
+            String userChoice = s.nextLine();
+
+            if (userChoice.equals("c")) {
+                //
+            } else if (userChoice.equals("s")) {
+                //
+            } else if (userChoice.equals("t")) {
+                //
+            } else {
+                System.out.println("Invalid choice!");
+                break;
+            }
+        }
     }
 
     // GETTERS
