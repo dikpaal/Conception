@@ -17,13 +17,9 @@ public abstract class Furniture {
     List<Integer> spots; // the spots where the furniture has been placed (only for sofa and centre table)
 
     // GETTERS
-//
-//    // EFFECTS: returns the dimension of the furniture
-//    public Dimension getDimension() {
-//        return this.dimension;
-//    }
-//
-//
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
     //  EFFECTS: returns the direction of the furniture
     public Direction getDirection() {
 
@@ -34,36 +30,50 @@ public abstract class Furniture {
         }
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
     // EFFECTS: returns the color of the furniture
     public Color getColor() {
         return this.color;
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
     // EFFECTS: returns the type of the furniture
     public FurnitureType getType() {
         return this.type;
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
     // EFFECTS: returns the spot of the furniture if it is a CHAIR
     public Integer getSpot() {
         return this.spot;
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
     // EFFECTS: returns the spot of the furniture if it is a SOFA
     public Integer getSofaSpots() {
         return this.spots.get(0);
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
     // EFFECTS: returns the next spot of the furniture if it is a SOFA
     public Integer getSecondSofaSpots() {
         return this.spots.get(1);
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
     // EFFECTS: returns the spot of the furniture if it is a CENTRE TABLE
     public Integer getCentreTableSpots() {
         return this.spots.get(0);
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
     // EFFECTS: returns all the spots of the furniture
     public List<Integer> getAllSpots() {
         return this.spots;

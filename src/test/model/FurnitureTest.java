@@ -11,7 +11,7 @@ import static model.Color.*;
 import static model.FurnitureType.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-// Test class for the model classes
+// Tests for the model classes
 public class FurnitureTest {
 
     Furniture chair;

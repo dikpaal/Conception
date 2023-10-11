@@ -7,6 +7,7 @@ import static model.Color.BEIGE;
 import static model.Direction.DOWN;
 import static model.FurnitureType.SOFA;
 
+// Represent a sofa (Furniture)
 public class Sofa extends Furniture {
 
     // EFFECTS: creates a sofa facing down, type sofa, color beige, and empty spots

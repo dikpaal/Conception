@@ -1,6 +1,6 @@
 package model;
 
-// determines the dimension of the entity (Room or Furniture) with length and width
+// Represents the dimension of a Furniture or Room
 public class Dimension {
     private int length;
     private int width;
@@ -17,27 +17,17 @@ public class Dimension {
 
     // getter
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
     // EFFECTS: returns the length
     public int getLength() {
         return this.length;// stub
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
     // EFFECTS: returns the width
     public int getWidth() {
         return this.width;
     }
-
-    // setter
-
-//    // REQUIRES: l > 0 and (l is odd for room)
-//    // EFFECTS: sets the length to l
-//    public void setLength(int l) {
-//        this.length = l;
-//    }
-//
-//    // REQUIRES: w > 0 nad (w is odd for room)
-//    // EFFECTS: sets the width to w
-//    public void setWidth(int w) {
-//        this.width = w;
-//    }
 }

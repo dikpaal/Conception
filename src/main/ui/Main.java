@@ -7,7 +7,7 @@ import model.Sofa;
 
 import java.util.Scanner;
 
-// Main function that runs.
+// Represents the class with the main method that runs the app.
 public class Main {
     public static void main(String[] args) {
 
