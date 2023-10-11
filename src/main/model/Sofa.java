@@ -9,6 +9,7 @@ import static model.FurnitureType.SOFA;
 
 public class Sofa extends Furniture {
 
+    // EFFECTS: creates a sofa facing down, type sofa, color beige, and empty spots
     public Sofa() {
         this.direction = DOWN;
         this.type = SOFA;

@@ -7,6 +7,7 @@ import model.Sofa;
 
 import java.util.Scanner;
 
+// Main function that runs.
 public class Main {
     public static void main(String[] args) {
 

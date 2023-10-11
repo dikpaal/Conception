@@ -71,6 +71,7 @@ public class Room {
         printRoom();
     }
 
+    // EFFECTS: prints the room based on whether the user wants to see the room or not. If yes, then prints.
     public void userWantsToSeeTheRoomOrNot(Scanner s) {
         editRoom();
         System.out.println("Would you like to see your room? (y) or (n):");
@@ -352,7 +353,8 @@ public class Room {
         return returnAvailableSpots(availableSpots, subListWX, subListWY, subListYZ, subListXZ);
     }
 
-    // returns the available spots to the spaceForACentreTable() method
+    // REQUIRES: availableSpots, subListWX, subListWY, subListYZ, and subListXZ are not empty
+    // EFFECTS: returns the available spots to the spaceForACentreTable() method
     public List<String> returnAvailableSpots(List<String> availableSpots,
                                      List<String> subListWX,
                                      List<String> subListWY,
@@ -482,6 +484,7 @@ public class Room {
         }
     }
 
+    // REQUIRES: spot > 0 and spot in numberedList()
     // EFFECTS: sets the chair c in spot in the numberedAndFurnitureList
     public void setChairInNumberedAndFurnitureList(Furniture c, int spot) {
         List<List<String>> numberedAndFurnitureList = getNumberedAndFurnitureList();
@@ -515,6 +518,7 @@ public class Room {
         this.numberedAndFurnitureList = tempList;
     }
 
+    // REQUIRES: spot > 0 and spot in numberedList()
     // EFFECTS: gets the other spot for the sofa
     public String getTheOtherSpot(String spot) {
         List<List<String>> spotsInOriginalList = spaceForASofaInOriginalPlane();
@@ -546,6 +550,7 @@ public class Room {
         return (listOfEligibleSpots.get(0) + " or " + listOfEligibleSpots.get(1));
     }
 
+    // REQUIRES: spot1 > 0 and spot2 > 0 and spot1 and spot2 in the numberedList()
     // EFFECTS: sets the sofa s in spot1 and spot2 in the numberedAndFurnitureList
     public void setSofaInNumberedAndFurnitureList(Furniture s, int spot1, int spot2) {
         List<String> tempSubList = new ArrayList<>();
@@ -575,6 +580,7 @@ public class Room {
         }
     }
 
+    // REQUIRES: topLeftSpot != ""
     // EFFECTS: sets the centre table in the numberedAndFurnitureList in the topLeftSpot, topRightSpot,
     //          bottomLeftSpot, and bottomRightSpot
     public void setCenterTableInNumberedAndFurnitureList(Furniture ct, String topLeftSpot) {
@@ -695,6 +701,7 @@ public class Room {
         }
     }
 
+    // REQUIRES: Integer,parseInt(spot1) > 0 and Integer,parseInt(spot2) > 0 and spot1 and spot2 in numberedList()
     // EFFECTS: removes the sofa from spot1 and spot2 in the furnitureList
     public void removeSofaFromSpot(String spot1, String spot2) {
         for (int i = 0; i < getFurnitureList().size(); i++) {
@@ -710,6 +717,7 @@ public class Room {
         }
     }
 
+    // REQUIRES: Integer.parseInt(spot1) > 0 and spot1 in numberedList()
     // EFFECTS: removes the centre table from all the necessary spots based on spot1 in the furnitureList
     public void removeCentreTableFromSpot(String spot1) {
         for (int i = 0; i < getFurnitureList().size(); i++) {
@@ -723,6 +731,7 @@ public class Room {
         }
     }
 
+    // REQUIRES: spot > 0
     // EFFECTS: resets the spot numbers in the numberedAndFurnitureList for a centre table
     public void setCentreTableSpotsInNumberedAndFurnitureList(int spot1) {
         int spot2 = spot1 + 1;
@@ -735,6 +744,7 @@ public class Room {
         setSingleSpotInNumberedAndFurnitureList(Integer.toString(spot4));
     }
 
+    // REQUIRES: Integer.parseInt(spot1) > 0 and spot1 in numberedList()
     // EFFECTS: resets a single spot to spot in the numberedAndFurnitureList
     public void setSingleSpotInNumberedAndFurnitureList(String spot) {
         List<List<String>> numberedList = getNumberedPlane();
@@ -775,6 +785,7 @@ public class Room {
         return userChoice;
     }
 
+    // REQUIRES: Integer.parseInt(spot1) > 0 and spot1 in numberedList()
     // EFFECTS: returns the second spot of the sofa
     public String getSpot2Sofa(String spot1) {
         List<Furniture> furnitureList = getFurnitureList();
@@ -865,8 +876,6 @@ public class Room {
         return this.furnitureList;
     }
 
-    // REQUIRES: nothing
-    // MODIFIES: this
     // EFFECTS: returns the numberedAndFurnitureList of the room
     public List<List<String>> getNumberedAndFurnitureList() {
         return this.numberedAndFurnitureList;
@@ -881,7 +890,7 @@ public class Room {
         this.username = s;
     }
 
-    // REQUIRES: d > 0
+    // REQUIRES: d > 0 and d is odd
     // MODIFIES: this
     // EFFECTS: sets the dimension of the room to new Dimension(d, d)
     public void setDimension(int d) {
@@ -895,7 +904,7 @@ public class Room {
         this.numberedPlane = lst;
     }
 
-    // REQUIRES: subList is not empty
+    // REQUIRES:  0 <= index < numberedAndFurnitureList.size() and subList is not empty
     // MODIFIES: this
     // EFFECTS: replaces the list in the index position with subList
     public void setNumberedAndFurnitureList(int index, List<String> subList) {

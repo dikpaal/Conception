@@ -5,6 +5,7 @@ import java.util.List;
 
 import static model.Direction.*;
 
+// Represents the furniture that can either be a Chair, Sofa, or a Centre Table
 public abstract class Furniture {
 
     // fields
@@ -70,33 +71,30 @@ public abstract class Furniture {
 
     // SETTERS
 
-//
-//    // EFFECTS: sets the dimension of the furniture to dim
-//    public void setDimension(Dimension dim) {
-//        this.dimension = dim;
-//    }
-//
+    // REQUIRES: dir in [LEFT, RIGHT, UP, NEUTRAL, DOWN]
+    // MODIFIES: this
     // EFFECTS: sets the direction of the furniture to dir
     public void setDirection(Direction dir) {
         this.direction = dir;
     }
 
-//    // EFFECTS: sets the color of the furniture to c
-//    public void setColor(Color c) {
-//        this.color = c;
-//    }
-//
+    // REQUIRES: 0 <= s < getNumberedList().size()
+    // MODIFIES: this
     // EFFECTS: sets the spot of the furniture to s
     public void setSpot(int s) {
         this.spot = s;
     }
 
+    // REQUIRES: 0 <= s1 < getNumberedList().size() and 0 <= s2 < getNumberedList().size() and s1 != s2
+    // MODIFIES: this
     // EFFECTS: sets the spots of the sofa to s1, s2
     public void setSpotsForSofa(int s1, int s2) {
         this.spots.add(s1);
         this.spots.add(s2);
     }
 
+    // REQUIRES: 0 <= topLeftSpot < getNumberedList().size() and roomLength > 0
+    // MODIFIES: this
     // EFFECTS: sets the spots of the center table to s1, s2
     public void setSpotsForCenterTable(int topLeftSpot, int roomLength) {
 

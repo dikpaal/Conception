@@ -7,7 +7,7 @@ public class Dimension {
 
     // REQUIRES:
     //  - for furniture: 0 < l, w <= 4
-    //  - for room: l = w, 10 <= l,w <= 40
+    //  - for room: l = w, 3 <= l, w <= 7 (l, w are odd)
     // MODIFIES: nothing
     // EFFECTS: constructs a dimension with the given length and width
     public Dimension(int l, int w) {
