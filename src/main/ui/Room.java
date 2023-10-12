@@ -51,7 +51,7 @@ public class Room {
                 } else if (userChoice2.equals("2")) {
                     removeFurniture();
                 } else if (userChoice2.equals("3")) {
-                    System.out.println(getFurnitureListWithSpots());
+                    printListOfFurnitureSoFar();
                 } else {
                     System.out.println("Invalid choice!");
                 }
@@ -62,6 +62,18 @@ public class Room {
             } else {
                 System.out.println("Invalid choice!");
             }
+        }
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: prints "There is no furniture yet!" if getFurnitureListWithSpots() is empty,
+    //          otherwise, prints getFurnitureListWithSpots
+    public void printListOfFurnitureSoFar() {
+        if (getFurnitureListWithSpots().isEmpty()) {
+            System.out.println("There is no furniture yet!");
+        } else {
+            System.out.println(getFurnitureListWithSpots());
         }
     }
 
