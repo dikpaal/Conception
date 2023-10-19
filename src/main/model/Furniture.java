@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import static model.Direction.*;
+import static model.FurnitureType.CHAIR;
 
 // Represents the furniture that can either be a Chair, Sofa, or a Centre Table
 public abstract class Furniture {
@@ -78,6 +79,7 @@ public abstract class Furniture {
     public List<Integer> getAllSpots() {
         return this.spots;
     }
+
 
     // SETTERS
 

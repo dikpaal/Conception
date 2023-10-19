@@ -16,6 +16,10 @@ public class Room {
     List<Furniture> furnitureList; // the list of furniture placed in the room so far
     List<List<String>> numberedAndFurnitureList; // the list to be used to find remaining space for a furniture
 
+
+    // SAVING AND LOADING DATA INTO THE JSON FILE
+
+
     // REQUIRES: d > 0 and d is odd
     // MODIFIES: nothing
     // EFFECTS: constructs a room with dimension d and empty
@@ -57,7 +61,7 @@ public class Room {
                 }
 
             } else if (userChoice.equals("n")) {
-                System.out.println("Bye!");
+                System.out.println("Bye! " + getUsername());
                 break;
             } else {
                 System.out.println("Invalid choice!");
@@ -946,6 +950,8 @@ public class Room {
         }
         return tempList;
     }
+
+    // SAVING AND LOADING DATA FROM TEH JSON FILE
 
 
     // GETTERS

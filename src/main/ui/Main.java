@@ -1,10 +1,5 @@
 package ui;
 
-import model.CenterTable;
-import model.Chair;
-import model.Furniture;
-import model.Sofa;
-
 import java.util.Scanner;
 
 // Represents the class with the main method that runs the app.
@@ -30,7 +25,7 @@ public class Main {
         int dimensionInt = Integer.parseInt(dimensionString);
         r.setDimension(dimensionInt);
 
-        // THE PROGRAM STARTS HERE
+        // THE APP STARTS HERE
         r.mainUserInput();
     }
 }
