@@ -33,11 +33,7 @@ public class ConsoleUI {
                 } else if (userChoice2.equals("2")) {
                     removeFurniture(r);
                 } else if (userChoice2.equals("3")) {
-                    if (r.getFurnitureListWithSpots().isEmpty()) {
-                        System.out.println("You have not added any furniture yet!");
-                    } else {
-                        System.out.println(r.getFurnitureListWithSpots());
-                    }
+                    furnitureListWithSpotsIsEmpty(r);
                 } else {
                     System.out.println("Invalid choice!");
                 }
@@ -49,6 +45,18 @@ public class ConsoleUI {
                 System.out.println("Bye, " + r.getUsername());
                 break;
             }
+        }
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: prints out the furniture list with spots if furnitureList is not empty,
+    //          - otherwise prints a message.
+    public void furnitureListWithSpotsIsEmpty(Room r) {
+        if (r.getFurnitureListWithSpots().isEmpty()) {
+            System.out.println("You have not added any furniture yet!");
+        } else {
+            System.out.println(r.getFurnitureListWithSpots());
         }
     }
 
