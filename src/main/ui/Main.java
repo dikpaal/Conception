@@ -1,9 +1,6 @@
 package ui;
 
-import model.CenterTable;
-import model.Chair;
-import model.Furniture;
-import model.Sofa;
+import model.Room;
 
 import java.util.Scanner;
 
@@ -19,7 +16,6 @@ public class Main {
         System.out.println();
 
         Room r = new Room(3);
-
         r.setUsername(username);
         System.out.println("Hello, " + r.getUsername());
 
@@ -31,6 +27,7 @@ public class Main {
         r.setDimension(dimensionInt);
 
         // THE PROGRAM STARTS HERE
-        r.mainUserInput();
+        ConsoleUI consoleUI = new ConsoleUI();
+        consoleUI.mainUserInput(r);
     }
 }
