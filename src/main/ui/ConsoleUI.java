@@ -33,7 +33,11 @@ public class ConsoleUI {
                 } else if (userChoice2.equals("2")) {
                     removeFurniture(r);
                 } else if (userChoice2.equals("3")) {
-                    System.out.println(r.getFurnitureListWithSpots());
+                    if (r.getFurnitureListWithSpots().isEmpty()) {
+                        System.out.println("You have not added any furniture yet!");
+                    } else {
+                        System.out.println(r.getFurnitureListWithSpots());
+                    }
                 } else {
                     System.out.println("Invalid choice!");
                 }
