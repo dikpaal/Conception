@@ -8,41 +8,20 @@ import static model.FurnitureType.*;
 // Represents a room
 public class Room {
 
-    String username;
-    Dimension dimension;
+    String username; // the name of the user
+    Dimension dimension; // the dimension of the room
     List<List<String>> numberedPlane; // the numbered plane showcasing the numbers of each block
     List<Furniture> furnitureList; // the list of furniture placed in the room so far
     List<List<String>> numberedAndFurnitureList; // the list to be used to find remaining space for a furniture
 
     // REQUIRES: d > 0 and d is odd
     // MODIFIES: nothing
-    // EFFECTS: constructs a room with dimension d and empty
+    // EFFECTS: constructs a room with dimension d and empty numberedPlane, furnitureList, and numberedAndFurnitureList
     public Room(int d) {
         this.dimension = new Dimension(d, d);
         this.numberedPlane = new ArrayList<>();
         this.furnitureList = new ArrayList<>();
         this.numberedAndFurnitureList = new ArrayList<>();
-    }
-
-    // REQUIRES: nothing
-    // MODIFIES: nothing
-    // EFFECTS: prints out a list of furniture so far with the names of the furniture and the spots at which they are
-    //          placed
-    public List<String> getFurnitureListWithSpots() {
-        List<String> tempList = new ArrayList<>();
-
-        for (int i = 0; i < getFurnitureList().size(); i++) {
-            Furniture f = getFurnitureList().get(i);
-
-            if (f.getType() == CHAIR) {
-                tempList.add("C in spot " + f.getSpot());
-            } else if (f.getType() == SOFA) {
-                tempList.add("S in spot " + f.getSofaSpots());
-            } else {
-                tempList.add("T in spot " + f.getCentreTableSpots());
-            }
-        }
-        return tempList;
     }
 
     // REQUIRES: nothing
@@ -93,6 +72,27 @@ public class Room {
 
     // REQUIRES: nothing
     // MODIFIES: nothing
+    // EFFECTS: prints out a list of furniture so far with the names of the furniture and the spots at which they are
+    //          placed
+    public List<String> getFurnitureListWithSpots() {
+        List<String> tempList = new ArrayList<>();
+
+        for (int i = 0; i < getFurnitureList().size(); i++) {
+            Furniture f = getFurnitureList().get(i);
+
+            if (f.getType() == CHAIR) {
+                tempList.add("C in spot " + f.getSpot());
+            } else if (f.getType() == SOFA) {
+                tempList.add("S in spot " + f.getSofaSpots());
+            } else {
+                tempList.add("T in spot " + f.getCentreTableSpots());
+            }
+        }
+        return tempList;
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
     // EFFECTS: returns true, if f can be placed in the room (is there space for it or not),
     //          otherwise returns false
     public boolean isThereSpaceAnyMore(Furniture f) {
@@ -100,10 +100,8 @@ public class Room {
             return isThereSpaceAnymoreForAChair();
         } else if (f.getType() == FurnitureType.SOFA) {
             return isThereSpaceAnymoreForASofa();
-        } else if (f.getType() == FurnitureType.CENTRETABLE) {
-            return isThereSpaceAnymoreForACentreTable();
         } else {
-            return false;
+            return isThereSpaceAnymoreForACentreTable();
         }
     }
 
@@ -457,7 +455,6 @@ public class Room {
     public void addToFurnitureList(Furniture f) {
         this.furnitureList.add(f);
     }
-
 
     // REQUIRES: nothing
     // MODIFIES: nothing

@@ -22,12 +22,7 @@ public abstract class Furniture {
     // MODIFIES: nothing
     //  EFFECTS: returns the direction of the furniture
     public Direction getDirection() {
-
-        if (this.direction == DOWN) {
-            return this.direction;
-        } else {
-            return NEUTRAL;
-        }
+        return this.direction;
     }
 
     // REQUIRES: nothing
@@ -86,6 +81,13 @@ public abstract class Furniture {
     // EFFECTS: sets the direction of the furniture to dir
     public void setDirection(Direction dir) {
         this.direction = dir;
+    }
+
+    // REQUIRES: c in [BROWN, BLACK, WHITE, BEIGE]
+    // MODIFIES: this
+    // EFFECTS: sets the color of the furniture to c
+    public void setColor(Color c) {
+        this.color = c;
     }
 
     // REQUIRES: 0 <= s < getNumberedList().size()
