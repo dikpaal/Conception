@@ -83,8 +83,20 @@ public class JsonReader {
         Color color = Color.valueOf(jsonObject.getString("color"));
         FurnitureType type = FurnitureType.valueOf(jsonObject.getString("type"));
 
-        Furniture furniture;
+        Furniture furniture = setSpotOrSpots(jsonObject, type);
 
+        furniture.setDimension(dimension);
+        furniture.setDirection(direction);
+        furniture.setColor(color);
+        furniture.setType(type);
+
+        return furniture;
+    }
+
+    // EFFECTS: if type is CHAIR, then sets spot and leaves out spots,
+    //          otherwise, sets spots and leaves out spot
+    private Furniture setSpotOrSpots(JSONObject jsonObject, FurnitureType type) {
+        Furniture furniture;
         if (type == CHAIR) {
             int spot = Integer.parseInt(jsonObject.getString("spot"));
             furniture = new Chair();
@@ -98,11 +110,6 @@ public class JsonReader {
             furniture = new CenterTable();
             furniture.setSpots(spots);
         }
-
-        furniture.setDimension(dimension);
-        furniture.setDirection(direction);
-        furniture.setColor(color);
-        furniture.setType(type);
 
         return furniture;
     }
