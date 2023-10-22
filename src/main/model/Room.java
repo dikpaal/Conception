@@ -203,7 +203,6 @@ public class Room {
                 } catch (Exception e) {
                     // nothing here!
                 }
-
             }
         }
         return availableSpots;

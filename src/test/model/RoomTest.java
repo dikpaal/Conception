@@ -417,6 +417,19 @@ public class RoomTest {
         tempRoom.addToFurnitureList(sofa);
         tempRoom.removeSofaFromSpot("1", "2");
 
+
+        List<List<String>> tempList1 = new ArrayList<>();
+        List<String> tempSubList1 = new ArrayList<>();
+        List<String> tempSubList2 = new ArrayList<>();
+        tempSubList1.add("1");
+        tempSubList1.add("2");
+        tempSubList2.add("3");
+        tempSubList2.add("4");
+        tempList1.add(tempSubList1);
+        tempList1.add(tempSubList2);
+
+        assertEquals(tempList1, tempRoom.spaceForASofaInOriginalPlane());
+
         List<List<String>> tempList = new ArrayList<>();
         List<String> subList1 = new ArrayList<>();
         List<String> subList2 = new ArrayList<>();
