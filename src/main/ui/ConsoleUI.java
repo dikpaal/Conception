@@ -1,25 +1,41 @@
 package ui;
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 // Represents a console UI
 public class ConsoleUI {
+    private static final String JSON_STORE = "./data/workroom.json";
+    private Room room;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: constructs the consoleUI
+    public ConsoleUI() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+    }
 
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: simulates a user interface which accepts input from the user
-    public void mainUserInput(Room r) {
-        setup(r);
-        menu(r);
+    public void mainUserInput() {
+        setup();
+        menu();
     }
 
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: simulates the main menu of the app
-    public void menu(Room r) {
+    public void menu() {
         while (true) {
             Scanner s = new Scanner(System.in);
             System.out.println("Would you like to edit your room? (y) or (n):");
@@ -29,20 +45,20 @@ public class ConsoleUI {
                 String userChoice2 = printChoices(s);
 
                 if (userChoice2.equals("1")) {
-                    userWantsToSeeTheRoomOrNot(r, s);
+                    userWantsToSeeTheRoomOrNot(s);
                 } else if (userChoice2.equals("2")) {
-                    removeFurniture(r);
+                    removeFurniture();
                 } else if (userChoice2.equals("3")) {
-                    furnitureListWithSpotsIsEmpty(r);
+                    furnitureListWithSpotsIsEmpty();
                 } else {
                     System.out.println("Invalid choice!");
                 }
 
             } else if (userChoice.equals("n")) {
                 System.out.println("Okay, here's your final room!!");
-                System.out.println();
-                printRoom(r);
-                System.out.println("Bye, " + r.getUsername());
+                printRoom();
+                saveRoom();
+                System.out.println("Bye, " + room.getUsername());
                 break;
             }
         }
@@ -52,35 +68,36 @@ public class ConsoleUI {
     // MODIFIES: nothing
     // EFFECTS: prints out the furniture list with spots if furnitureList is not empty,
     //          - otherwise prints a message.
-    public void furnitureListWithSpotsIsEmpty(Room r) {
-        if (r.getFurnitureListWithSpots().isEmpty()) {
+    public void furnitureListWithSpotsIsEmpty() {
+        if (room.getFurnitureListWithSpots().isEmpty()) {
             System.out.println("You have not added any furniture yet!");
         } else {
-            System.out.println(r.getFurnitureListWithSpots());
+            System.out.println(room.getFurnitureListWithSpots());
         }
     }
 
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: calls to create a numberedPlane, initiate a numberedAndFurnitureList, and prints the room
-    public void setup(Room r) {
-        List<List<String>> numberedPlane = r.createNumberedPlane();
-        r.setNumberedPlane(numberedPlane);
-        r.initiateNumberedAndFurnitureList();
+    public void setup() {
+        List<List<String>> numberedPlane = room.createNumberedPlane();
+        room.setNumberedPlane(numberedPlane);
+        room.initiateNumberedAndFurnitureList();
+        loadRoom();
         System.out.println("Here's your room!");
-        printRoom(r);
+        printRoom();
     }
 
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: prints the room based on whether the user wants to see the room or not.
     //          If "y", then prints, otherwise doesn't
-    public void userWantsToSeeTheRoomOrNot(Room r, Scanner s) {
-        editRoom(r);
+    public void userWantsToSeeTheRoomOrNot(Scanner s) {
+        editRoom();
         System.out.println("Would you like to see your room? (y) or (n):");
         String userChoice3 = s.nextLine();
         if (userChoice3.equals("y")) {
-            printRoom(r);
+            printRoom();
         }
     }
 
@@ -98,11 +115,11 @@ public class ConsoleUI {
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: prints the room to the console
-    public void printRoom(Room r) {
-        List<List<String>> numberedAndFurnitureList = r.getNumberedAndFurnitureList();
+    public void printRoom() {
+        List<List<String>> numberedAndFurnitureList = room.getNumberedAndFurnitureList();
         for (int i = 0; i < numberedAndFurnitureList.size(); i++) {
             List<String> subList = numberedAndFurnitureList.get(i);
-            printDashes(r);
+            printDashes();
             System.out.print("    ");
             for (int j = 0; j < subList.size(); j++) {
                 String number = subList.get(j);
@@ -120,15 +137,15 @@ public class ConsoleUI {
             }
             System.out.println();
         }
-        printDashes(r);
+        printDashes();
         System.out.println();
     }
 
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: prints the dashes for the printRoom() method
-    public void printDashes(Room r) {
-        for (int k = 0; k < r.getDimension().getLength(); k++) {
+    public void printDashes() {
+        for (int k = 0; k < room.getDimension().getLength(); k++) {
             System.out.print("   - ");
         }
         System.out.println();
@@ -137,7 +154,7 @@ public class ConsoleUI {
     // REQUIRES: nothing
     // MODIFIES: this
     // EFFECTS: allows the user to add/remove Furniture from the Room
-    public void editRoom(Room r) {
+    public void editRoom() {
         Scanner s = new Scanner(System.in);
         while (true) {
             System.out.println("What would you like to place? Chair (c), Sofa (s), Centre Table (t):");
@@ -145,12 +162,12 @@ public class ConsoleUI {
             String userChoice2;
 
             if (userChoice.equals("c")) {
-                userChoice2 = userWantsToPlaceAChair(r, s);
+                userChoice2 = userWantsToPlaceAChair(s);
 
             } else if (userChoice.equals("s")) {
-                userChoice2 = userWantsToPlaceASofa(r, s);
+                userChoice2 = userWantsToPlaceASofa(s);
             } else if (userChoice.equals("t")) {
-                userChoice2 = userWantsToPlaceACentreTable(r, s);
+                userChoice2 = userWantsToPlaceACentreTable(s);
             } else {
                 System.out.println("Invalid choice!");
                 break;
@@ -164,9 +181,9 @@ public class ConsoleUI {
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: places a chair and returns whether the user wants to add any more furniture
-    public String userWantsToPlaceAChair(Room r, Scanner s) {
+    public String userWantsToPlaceAChair(Scanner s) {
         Furniture chair = new Chair();
-        placeChair(r, chair);
+        placeChair(chair);
         System.out.println("Would you like to add more furniture? (y) or (n): ");
         String userChoice2 = s.nextLine();
         return userChoice2;
@@ -175,9 +192,9 @@ public class ConsoleUI {
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: places a sofa and returns whether the user wants to add any more furniture
-    public String userWantsToPlaceASofa(Room r, Scanner s) {
+    public String userWantsToPlaceASofa(Scanner s) {
         Furniture sofa = new Sofa();
-        placeSofa(r, sofa);
+        placeSofa(sofa);
         System.out.println("Would you like to add more furniture? (y) or (n): ");
         String userChoice2 = s.nextLine();
         return userChoice2;
@@ -186,9 +203,9 @@ public class ConsoleUI {
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: places a centre table and returns whether the user wants to add any more furniture
-    public String userWantsToPlaceACentreTable(Room r, Scanner s) {
+    public String userWantsToPlaceACentreTable(Scanner s) {
         Furniture ct = new CenterTable();
-        placeCenterTable(r, ct);
+        placeCenterTable(ct);
         System.out.println("Would you like to add more furniture? (y) or (n): ");
         String userChoice2 = s.nextLine();
         return userChoice2;
@@ -197,49 +214,49 @@ public class ConsoleUI {
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: places a chair in the spot that the user chooses
-    public void placeChair(Room r, Furniture chair) {
-        r.isThereSpaceAnyMore(chair);
+    public void placeChair(Furniture chair) {
+        room.isThereSpaceAnyMore(chair);
         Scanner s = new Scanner(System.in);
 
         System.out.println("Choose a spot: ");
         String userChoice = s.nextLine();
         int spot = Integer.parseInt(userChoice);
-        r.setChairInNumberedAndFurnitureList(chair, spot);
+        room.setChairInNumberedAndFurnitureList(chair, spot);
     }
 
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: places a sofa in the spot that the user chooses
-    public void placeSofa(Room r, Furniture sofa) {
-        r.isThereSpaceAnyMore(sofa);
+    public void placeSofa(Furniture sofa) {
+        room.isThereSpaceAnyMore(sofa);
         Scanner s = new Scanner(System.in);
 
         System.out.println("Choose two spots: ");
         String userChoice1 = s.nextLine();
 
-        System.out.println(r.getTheOtherSpot(userChoice1));
+        System.out.println(room.getTheOtherSpot(userChoice1));
 
         String userChoice2 = s.nextLine();
         int spot1 = Integer.parseInt(userChoice1);
         int spot2 = Integer.parseInt(userChoice2);
-        r.setSofaInNumberedAndFurnitureList(sofa, spot1, spot2);
+        room.setSofaInNumberedAndFurnitureList(sofa, spot1, spot2);
     }
 
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: places a centre table ct in the spot that the user chooses
-    public void placeCenterTable(Room r, Furniture ct) {
+    public void placeCenterTable(Furniture ct) {
 
-        if (r.isThereSpaceAnyMore(ct)) {
+        if (room.isThereSpaceAnyMore(ct)) {
 
             Scanner s = new Scanner(System.in);
             System.out.println("Do you want to place the center table here? (y) or (n): ");
             String userChoice = s.nextLine();
 
             if (userChoice.equals("y")) {
-                List<String> spots = r.spaceForACentreTable();
+                List<String> spots = room.spaceForACentreTable();
                 String topLeftSpot = spots.get(0);
-                r.setCenterTableInNumberedAndFurnitureList(ct, topLeftSpot);
+                room.setCenterTableInNumberedAndFurnitureList(ct, topLeftSpot);
             }
         }
     }
@@ -247,7 +264,7 @@ public class ConsoleUI {
     // REQUIRES: nothing
     // MODIFIES: this
     // EFFECTS: removes the furniture that the user wants from the room
-    public void removeFurniture(Room r) {
+    public void removeFurniture() {
         Scanner s = new Scanner(System.in);
 
         while (true) {
@@ -256,11 +273,11 @@ public class ConsoleUI {
             String userChoice = s.nextLine();
 
             if (userChoice.equals("c")) {
-                userWantsToRemoveAChair(r);
+                userWantsToRemoveAChair();
             } else if (userChoice.equals("s")) {
-                userWantsToRemoveASofa(r);
+                userWantsToRemoveASofa();
             } else if (userChoice.equals("t")) {
-                userWantsToRemoveACentreTable(r);
+                userWantsToRemoveACentreTable();
             } else {
                 System.out.println("Invalid choice!");
             }
@@ -274,14 +291,14 @@ public class ConsoleUI {
     // MODIFIES: nothing
     // EFFECTS: checks if there are any chairs in the furnitureList.
     //          If there are chairs, then allows the user to remove a chair
-    public void userWantsToRemoveAChair(Room r) {
-        if (r.getListOfAllTheAddedChairs().isEmpty()) {
+    public void userWantsToRemoveAChair() {
+        if (room.getListOfAllTheAddedChairs().isEmpty()) {
             System.out.println("You have not added any chairs yet!");
         } else {
-            System.out.println(r.getListOfAllTheAddedChairs());
+            System.out.println(room.getListOfAllTheAddedChairs());
             String spot = selectSpot();
-            r.removeChairFromSpot(spot);
-            printRoom(r);
+            room.removeChairFromSpot(spot);
+            printRoom();
         }
     }
 
@@ -289,15 +306,15 @@ public class ConsoleUI {
     // MODIFIES: nothing
     // EFFECTS: checks if there are any sofas in the furnitureList.
     //          If there are sofas, then allows the user to remove a sofa
-    public void userWantsToRemoveASofa(Room r) {
-        if (r.getListOfAllTheAddedSofas().isEmpty()) {
+    public void userWantsToRemoveASofa() {
+        if (room.getListOfAllTheAddedSofas().isEmpty()) {
             System.out.println("You have not added any sofas yet!");
         } else {
-            System.out.println(r.getListOfAllTheAddedSofas());
+            System.out.println(room.getListOfAllTheAddedSofas());
             String spot1 = selectSpot();
-            String spot2 = r.getSpot2Sofa(spot1);
-            r.removeSofaFromSpot(spot1, spot2);
-            printRoom(r);
+            String spot2 = room.getSpot2Sofa(spot1);
+            room.removeSofaFromSpot(spot1, spot2);
+            printRoom();
         }
     }
 
@@ -305,14 +322,14 @@ public class ConsoleUI {
     // MODIFIES: nothing
     // EFFECTS: checks if there are any centre tables in the furnitureList.
     //          If there are centre tables, then allows the user to remove a centre table
-    public void userWantsToRemoveACentreTable(Room r) {
-        if (r.getListOfAllTheAddedCentreTable().isEmpty()) {
+    public void userWantsToRemoveACentreTable() {
+        if (room.getListOfAllTheAddedCentreTable().isEmpty()) {
             System.out.println("You have not added a centre table yet!");
         } else {
-            System.out.println(r.getListOfAllTheAddedCentreTable());
+            System.out.println(room.getListOfAllTheAddedCentreTable());
             String spot3 = selectSpot();
-            r.removeCentreTableFromSpot(spot3);
-            printRoom(r);
+            room.removeCentreTableFromSpot(spot3);
+            printRoom();
         }
     }
 
@@ -343,4 +360,66 @@ public class ConsoleUI {
         }
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: this
+    // EFFECTS: sets the room to r
+    public void setRoom(Room r) {
+        this.room = r;
+    }
+
+    // SAVING DATA
+
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: saves the room to the file
+    private void saveRoom() {
+
+        Scanner s = new Scanner(System.in);
+        while (true) {
+            System.out.println("Would you like to save the room?");
+            String userChoice = s.nextLine();
+
+            if (userChoice.equals("y")) {
+                try {
+                    jsonWriter.open();
+                    jsonWriter.write(room);
+                    jsonWriter.close();
+                    System.out.println("Saved " + room.getUsername() + " to " + JSON_STORE);
+                    System.out.println("Bye, " + room.getUsername());
+                } catch (FileNotFoundException e) {
+                    System.out.println("Unable to write to file: " + JSON_STORE);
+                }
+                break;
+            } else if (userChoice.equals("n")) {
+                System.out.println("Bye, " + room.getUsername());
+                break;
+            }
+        }
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: this
+    // EFFECTS: loads room from file
+    private void loadRoom() {
+
+        Scanner s = new Scanner(System.in);
+        while (true) {
+            System.out.println("Would you like to load your previous room?");
+            String userChoice = s.nextLine();
+
+            if (userChoice.equals("y")) {
+                try {
+                    room = jsonReader.read();
+                    System.out.println("Loaded " + room.getUsername() + "'s room from " + JSON_STORE);
+                } catch (IOException e) {
+                    System.out.println("Unable to read from file: " + JSON_STORE);
+                }
+                break;
+            } else if (userChoice.equals("n")) {
+                System.out.println("Okay!");
+                break;
+            }
+        }
+    }
 }

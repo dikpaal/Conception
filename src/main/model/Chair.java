@@ -12,6 +12,7 @@ public class Chair extends Furniture {
     // MODIFIES: nothing
     // EFFECTS: creates a chair facing down, type chair, and color beige
     public Chair() {
+        setDimension(new Dimension(1, 1));
         this.direction = DOWN;
         this.type = CHAIR;
         this.color = BEIGE;

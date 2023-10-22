@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -325,7 +328,7 @@ public class Room {
                     subList.set(j, "Cv");
                     c.setSpot(spot);
                     addToFurnitureList(c);
-                    setNumberedAndFurnitureList(i, subList);
+                    setNumberedAndFurnitureListSubListAtGivenIndex(i, subList);
                 }
             }
         }
@@ -404,7 +407,7 @@ public class Room {
                             subList.set(j, "vS");
                             s.setSpotsForSofa(spot1, spot2);
                             addToFurnitureList(s);
-                            setNumberedAndFurnitureList(i, subList);
+                            setNumberedAndFurnitureListSubListAtGivenIndex(i, subList);
                         }
                     }
                 }
@@ -436,13 +439,13 @@ public class Room {
                     subList.set(j + 1, "vT");
                     ct.setSpotsForCenterTable(topLeftSpotInt, roomLength);
                     addToFurnitureList(ct);
-                    setNumberedAndFurnitureList(i, subList);
+                    setNumberedAndFurnitureListSubListAtGivenIndex(i, subList);
                 }
 
                 if (spot.equals(bottomLeftSpot)) {
                     subList.set(j, "Tv");
                     subList.set(j + 1, "vT");
-                    setNumberedAndFurnitureList(i, subList);
+                    setNumberedAndFurnitureListSubListAtGivenIndex(i, subList);
                 }
             }
         }
@@ -544,7 +547,7 @@ public class Room {
             for (int j = 0; j < subList1.size(); j++) {
                 if ((i == rowCount) && (j == colCount)) {
                     subList1.set(j, spot);
-                    setNumberedAndFurnitureList(i, subList1);
+                    setNumberedAndFurnitureListSubListAtGivenIndex(i, subList1);
                 }
             }
         }
@@ -610,6 +613,82 @@ public class Room {
         return tempList;
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: returns the json data of the room
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", this.username);
+        json.put("dimension", Integer.toString(this.dimension.getLength()));
+        json.put("furnitureList", furnitureListToJson());
+        json.put("numberedAndFurnitureList", numberedAndFurnitureListToJsonArray());
+        return json;
+    }
+
+    public JSONArray furnitureListToJson() {
+        JSONArray jsonArray = new JSONArray();
+        Object furnitureObject;
+
+        for (Furniture f : furnitureList) {
+            furnitureObject = furnitureToJson(f);
+            jsonArray.put(furnitureObject);
+        }
+        return jsonArray;
+    }
+
+    // EFFECTS: returns the json data of f
+    public JSONObject furnitureToJson(Furniture f) {
+        JSONObject furnitureObject = new JSONObject();
+
+        furnitureObject.put("dimension", Integer.toString(f.getDimension().getLength()));
+        furnitureObject.put("direction", f.getDirection().name());
+        furnitureObject.put("color", f.getColor().name());
+        furnitureObject.put("type", f.getType().name());
+        if (f.getType() == CHAIR) {
+            furnitureObject.put("spot", Integer.toString(f.getSpot()));
+        } else {
+            furnitureObject.put("spots", spotsToJsonArray(f.getAllSpots()));
+        }
+        return furnitureObject;
+    }
+
+    // EFFECTS: returns the json data of spots
+    public JSONArray spotsToJsonArray(List<Integer> spots) {
+
+        JSONArray jsonArray = new JSONArray();
+
+        for (int spot : spots) {
+            String spotString = Integer.toString(spot);
+            jsonArray.put(spotString);
+        }
+        return jsonArray;
+    }
+
+    // EFFECTS: returns the json data of the numberedAndFurnitureList
+    public JSONObject numberedAndFurnitureListToJsonArray() {
+
+        JSONObject jsonObject = new JSONObject();
+
+        for (int i = 0; i < numberedAndFurnitureList.size(); i++) {
+            String key = Integer.toString(i);
+            List<String> subList = numberedAndFurnitureList.get(i);
+            jsonObject.put(key, parseSubList(subList));
+        }
+
+        return jsonObject;
+    }
+
+    // EFFECTS: returns the json data of the subList
+    public JSONArray parseSubList(List<String> subList) {
+
+        JSONArray jsonArray = new JSONArray();
+
+        for (String s : subList) {
+            jsonArray.put(s);
+        }
+        return jsonArray;
+    }
+
     // GETTERS
 
     // REQUIRES: nothing
@@ -673,7 +752,21 @@ public class Room {
     // REQUIRES:  0 <= index < numberedAndFurnitureList.size() and subList is not empty
     // MODIFIES: this
     // EFFECTS: replaces the list in the index position with subList
-    public void setNumberedAndFurnitureList(int index, List<String> subList) {
+    public void setNumberedAndFurnitureListSubListAtGivenIndex(int index, List<String> subList) {
         this.numberedAndFurnitureList.set(index, subList);
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: this
+    // EFFECTS: sets the numberedAndFurnitureList to numberedAndFurnitureList
+    public void setNumberedAndFurnitureList(List<List<String>> numberedAndFurnitureList) {
+        this.numberedAndFurnitureList = numberedAndFurnitureList;
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: this
+    // EFFECTS: sets the furnitureList to furnitureList
+    public void setFurnitureList(List<Furniture> furnitureList) {
+        this.furnitureList = furnitureList;
     }
 }

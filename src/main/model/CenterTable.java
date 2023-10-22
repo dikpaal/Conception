@@ -13,6 +13,7 @@ public class CenterTable extends Furniture {
     // MODIFIES: nothing
     // EFFECTS: creates a centre table facing down, type centre table, color white, and empty spots
     public CenterTable() {
+        setDimension(new Dimension(2, 2));
         this.direction = DOWN;
         this.type = CENTRETABLE;
         this.color = WHITE;

@@ -28,6 +28,7 @@ public class Main {
 
         // THE PROGRAM STARTS HERE
         ConsoleUI consoleUI = new ConsoleUI();
-        consoleUI.mainUserInput(r);
+        consoleUI.setRoom(r);
+        consoleUI.mainUserInput();
     }
 }
