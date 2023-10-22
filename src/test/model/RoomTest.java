@@ -270,12 +270,12 @@ public class RoomTest {
         tempRoom.setNumberedPlane(tempRoom.createNumberedPlane());
         tempRoom.initiateNumberedAndFurnitureList();
         Furniture sofa2 = new Sofa();
-        sofa.setSpotsForSofa(1, 2);
-        sofa2.setSpotsForSofa(3, 4);
+        sofa.setSpotsForSofa(1, 3);
+        sofa2.setSpotsForSofa(2, 4);
         tempRoom.addToFurnitureList(sofa);
-        tempRoom.setSofaInNumberedAndFurnitureList(sofa, 1, 2);
+        tempRoom.setSofaInNumberedAndFurnitureList(sofa, 1, 3);
         tempRoom.addToFurnitureList(sofa2);
-        tempRoom.setSofaInNumberedAndFurnitureList(sofa2, 3, 4);
+        tempRoom.setSofaInNumberedAndFurnitureList(sofa2, 2, 4);
 
         try {
             tempRoom.spaceForASofaInInvertedPlane();
