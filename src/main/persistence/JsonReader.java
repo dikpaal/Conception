@@ -1,6 +1,5 @@
 package persistence;
 
-import com.sun.jdi.request.MonitorContendedEnteredRequest;
 import model.*;
 
 import java.io.IOException;
@@ -49,15 +48,32 @@ public class JsonReader {
     private Room parseRoom(JSONObject jsonObject) {
         String username = jsonObject.getString("name");
         int dimension = Integer.parseInt(jsonObject.getString("dimension"));
+        List<List<String>> numberedPlane = parseNumberedPlane(jsonObject.getJSONObject("numberedPlane"));
         List<Furniture> furnitureList = parseFurnitureList(jsonObject.getJSONArray("furnitureList"));
         List<List<String>> numberedAndFurnitureList =
                 parseNumberedAndFurnitureList(jsonObject.getJSONObject("numberedAndFurnitureList"));
 
         Room r = new Room(dimension);
         r.setUsername(username);
+        r.setNumberedPlane(numberedPlane);
         r.setFurnitureList(furnitureList);
         r.setNumberedAndFurnitureList(numberedAndFurnitureList);
         return r;
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: parses the jsonObject and returns a numberedPlane
+    private List<List<String>> parseNumberedPlane(JSONObject jsonObject) {
+
+        List<List<String>> tempList = new ArrayList<>();
+        List<String> tempSubList;
+
+        for (int i = 0; i < jsonObject.length(); i++) {
+            tempSubList = parseSubList(jsonObject.getJSONArray(Integer.toString(i)));
+            tempList.add(tempSubList);
+        }
+        return tempList;
     }
 
     // REQUIRES: nothing
@@ -138,7 +154,7 @@ public class JsonReader {
         List<String> tempSubList;
 
         for (int i = 0; i < jsonObject.length(); i++) {
-            tempSubList = parseSubNumberedAndFurnitureList(jsonObject.getJSONArray(Integer.toString(i)));
+            tempSubList = parseSubList(jsonObject.getJSONArray(Integer.toString(i)));
             tempList.add(tempSubList);
         }
         return tempList;
@@ -146,16 +162,15 @@ public class JsonReader {
 
     // REQUIRES: nothing
     // MODIFIES: nothing
-    // EFFECTS: parses the jsonArray and returns a subNumberedAndFurnitureList
-    private List<String> parseSubNumberedAndFurnitureList(JSONArray jsonArray) {
+    // EFFECTS: parses the jsonArray and returns a subList
+    private List<String> parseSubList(JSONArray jsonArray) {
 
         List<String> tempList = new ArrayList<>();
 
         for (Object o : jsonArray) {
-            String numberOrFurnitureString = o.toString();
-            tempList.add(numberOrFurnitureString);
+            String string = o.toString();
+            tempList.add(string);
         }
         return tempList;
-
     }
 }

@@ -385,7 +385,7 @@ public class ConsoleUI {
                     jsonWriter.open();
                     jsonWriter.write(room);
                     jsonWriter.close();
-                    System.out.println("Saved " + room.getUsername() + " to " + JSON_STORE);
+                    System.out.println("Saved " + room.getUsername() + "'s room to " + JSON_STORE);
                     System.out.println("Bye, " + room.getUsername());
                 } catch (FileNotFoundException e) {
                     System.out.println("Unable to write to file: " + JSON_STORE);
@@ -412,6 +412,8 @@ public class ConsoleUI {
                 try {
                     room = jsonReader.read();
                     System.out.println("Loaded " + room.getUsername() + "'s room from " + JSON_STORE);
+                    System.out.println(room.getNumberedAndFurnitureList());
+                    System.out.println(room.getFurnitureList());
                 } catch (IOException e) {
                     System.out.println("Unable to read from file: " + JSON_STORE);
                 }

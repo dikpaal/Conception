@@ -620,11 +620,27 @@ public class Room {
         JSONObject json = new JSONObject();
         json.put("name", this.username);
         json.put("dimension", Integer.toString(this.dimension.getLength()));
+        json.put("numberedPlane", numberedPlaneToJson());
         json.put("furnitureList", furnitureListToJson());
         json.put("numberedAndFurnitureList", numberedAndFurnitureListToJsonArray());
         return json;
     }
 
+    // EFFECTS: returns the json data of the numberedPlane
+    public JSONObject numberedPlaneToJson() {
+
+        JSONObject jsonObject = new JSONObject();
+
+        for (int i = 0; i < numberedPlane.size(); i++) {
+            String key = Integer.toString(i);
+            List<String> subList = numberedPlane.get(i);
+            jsonObject.put(key, parseSubList(subList));
+        }
+
+        return jsonObject;
+    }
+
+    // EFFECTS: returns the json data of the furniture list
     public JSONArray furnitureListToJson() {
         JSONArray jsonArray = new JSONArray();
         Object furnitureObject;
