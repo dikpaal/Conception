@@ -20,6 +20,24 @@
         ]
     },
     "name": "Dikpaal",
-    "furnitureList": [],
+    "furnitureList": [
+        {
+            "color": "BEIGE",
+            "spot": "1",
+            "type": "CHAIR",
+            "dimension": "1",
+            "direction": "DOWN"
+        },
+        {
+            "color": "BEIGE",
+            "spots": [
+                "3",
+                "4"
+            ],
+            "type": "SOFA",
+            "dimension": "2",
+            "direction": "DOWN"
+        }
+    ],
     "dimension": "3"
 }
