@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static model.FurnitureType.CHAIR;
 import static org.junit.jupiter.api.Assertions.*;
 
 // Represents a class that tests the Room class
@@ -21,7 +24,7 @@ public class RoomTest {
     public void setup() {
 
         // Room
-        room = new Room(5);
+        room = new Room(3);
         // Furniture
         chair = new Chair();
         sofa = new Sofa();
@@ -535,4 +538,14 @@ public class RoomTest {
         room.setDimension(5);
         assertEquals(5, room.getDimension().getLength());
     }
+
+    @Test
+    public void testToJson() {
+        room.setNumberedPlane(room.createNumberedPlane());
+        room.initiateNumberedAndFurnitureList();
+        room.setUsername("Dikpaal");
+        JSONObject json = room.toJson();
+        assertEquals(room.getUsername(), json.get("name"));
+    }
+
 }

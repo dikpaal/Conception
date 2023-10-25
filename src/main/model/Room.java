@@ -627,7 +627,7 @@ public class Room {
     }
 
     // EFFECTS: returns the json data of the numberedPlane
-    public JSONObject numberedPlaneToJson() {
+    private JSONObject numberedPlaneToJson() {
 
         JSONObject jsonObject = new JSONObject();
 
@@ -641,7 +641,7 @@ public class Room {
     }
 
     // EFFECTS: returns the json data of the furniture list
-    public JSONArray furnitureListToJson() {
+    private JSONArray furnitureListToJson() {
         JSONArray jsonArray = new JSONArray();
         Object furnitureObject;
 
@@ -653,7 +653,7 @@ public class Room {
     }
 
     // EFFECTS: returns the json data of f
-    public JSONObject furnitureToJson(Furniture f) {
+    private JSONObject furnitureToJson(Furniture f) {
         JSONObject furnitureObject = new JSONObject();
 
         furnitureObject.put("dimension", Integer.toString(f.getDimension().getLength()));
@@ -669,7 +669,7 @@ public class Room {
     }
 
     // EFFECTS: returns the json data of spots
-    public JSONArray spotsToJsonArray(List<Integer> spots) {
+    private JSONArray spotsToJsonArray(List<Integer> spots) {
 
         JSONArray jsonArray = new JSONArray();
 
@@ -681,7 +681,7 @@ public class Room {
     }
 
     // EFFECTS: returns the json data of the numberedAndFurnitureList
-    public JSONObject numberedAndFurnitureListToJsonArray() {
+    private JSONObject numberedAndFurnitureListToJsonArray() {
 
         JSONObject jsonObject = new JSONObject();
 
@@ -695,7 +695,7 @@ public class Room {
     }
 
     // EFFECTS: returns the json data of the subList
-    public JSONArray parseSubList(List<String> subList) {
+    private JSONArray parseSubList(List<String> subList) {
 
         JSONArray jsonArray = new JSONArray();
 
