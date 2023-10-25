@@ -63,6 +63,14 @@ public class RoomTest {
     }
 
     @Test
+    public void testCreateInvertedPlane() {
+        room.setNumberedPlane(room.createNumberedPlane());
+        room.initiateNumberedAndFurnitureList();
+        List<List<String>> invertedList2 = room.createInvertedPlane();
+        assertEquals(2, invertedList2.size());
+    }
+
+    @Test
     public void testGetFurnitureListWithSpotsForChair() {
         List<String> tempList = new ArrayList<>();
         chair.setSpot(1);

@@ -52,7 +52,7 @@ public class Room {
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: returns the inverted numberedAndFurnitureList
-    private List<List<String>> createInvertedPlane() {
+    public List<List<String>> createInvertedPlane() {
         List<List<String>> availableSpots = new ArrayList<>();
 
         List<List<String>> tempList = getNumberedAndFurnitureList();
@@ -69,8 +69,10 @@ public class Room {
                 index++;
                 availableSpots.add(subList);
             }
+            return availableSpots;
+        } else {
+            return availableSpots;
         }
-        return availableSpots;
     }
 
     // REQUIRES: nothing
