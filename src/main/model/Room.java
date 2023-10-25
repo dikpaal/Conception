@@ -69,10 +69,8 @@ public class Room {
                 index++;
                 availableSpots.add(subList);
             }
-            return availableSpots;
-        } else {
-            return availableSpots;
         }
+        return availableSpots;
     }
 
     // REQUIRES: nothing
