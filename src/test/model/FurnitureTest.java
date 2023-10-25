@@ -103,4 +103,20 @@ public class FurnitureTest {
         chair.setColor(BROWN);
         assertEquals(BROWN, chair.getColor());
     }
+
+    @Test
+    public void testSetType() {
+        chair.setType(CHAIR);
+        assertEquals(CHAIR, chair.getType());
+    }
+
+    @Test
+    public void testSetSpots() {
+        List<Integer> spots = new ArrayList<>();
+        spots.add(1);
+        spots.add(2);
+        sofa.setSpots(spots);
+        assertEquals(1, sofa.getSofaSpots());
+        assertEquals(2, sofa.getSecondSofaSpots());
+    }
 }

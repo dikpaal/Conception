@@ -9,7 +9,10 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static model.Color.BEIGE;
+import static model.Direction.DOWN;
 import static model.FurnitureType.CHAIR;
+import static model.FurnitureType.SOFA;
 import static org.junit.jupiter.api.Assertions.*;
 
 // Represents a class that tests the Room class
@@ -525,6 +528,66 @@ public class RoomTest {
         assertEquals(tempList, room.getListOfAllTheAddedCentreTable());
     }
 
+    @Test
+    public void testToJson() {
+        room.setNumberedPlane(room.createNumberedPlane());
+        room.initiateNumberedAndFurnitureList();
+        room.setUsername("Dikpaal");
+        JSONObject json = room.toJson();
+        assertEquals(room.getUsername(), json.get("name"));
+    }
+
+    @Test
+    public void testFurnitureToJson() {
+        room.setNumberedPlane(room.createNumberedPlane());
+        room.initiateNumberedAndFurnitureList();
+
+        chair.setSpot(2);
+        sofa.setSpotsForSofa(3, 4);
+
+        JSONObject chairObject = room.furnitureToJson(chair);
+        JSONObject sofaObject = room.furnitureToJson(sofa);
+
+        assertEquals("1", chairObject.get("dimension"));
+        assertEquals("DOWN", chairObject.get("direction"));
+        assertEquals("BEIGE", chairObject.get("color"));
+        assertEquals("CHAIR", chairObject.get("type"));
+        assertEquals("2", chairObject.get("spot"));
+
+        assertEquals("2", sofaObject.get("dimension"));
+        assertEquals("DOWN", sofaObject.get("direction"));
+        assertEquals("BEIGE", sofaObject.get("color"));
+        assertEquals("SOFA", sofaObject.get("type"));
+    }
+
+    @Test
+    public void testFurnitureListToJson() {
+        room.setNumberedPlane(room.createNumberedPlane());
+        room.initiateNumberedAndFurnitureList();
+
+        chair.setSpot(2);
+        sofa.setSpotsForSofa(3, 4);
+
+        room.addToFurnitureList(chair);
+        room.addToFurnitureList(sofa);
+
+        JSONArray furnitureListJsonArray = room.furnitureListToJson();
+
+        JSONObject chairObject = furnitureListJsonArray.getJSONObject(0);
+        JSONObject sofaObject = furnitureListJsonArray.getJSONObject(1);
+
+        assertEquals("1", chairObject.get("dimension"));
+        assertEquals("DOWN", chairObject.get("direction"));
+        assertEquals("BEIGE", chairObject.get("color"));
+        assertEquals("CHAIR", chairObject.get("type"));
+        assertEquals("2", chairObject.get("spot"));
+
+        assertEquals("2", sofaObject.get("dimension"));
+        assertEquals("DOWN", sofaObject.get("direction"));
+        assertEquals("BEIGE", sofaObject.get("color"));
+        assertEquals("SOFA", sofaObject.get("type"));
+    }
+
     // TESTS FOR UNTESTED GETTER AND SETTER METHODS
 
     @Test
@@ -540,12 +603,37 @@ public class RoomTest {
     }
 
     @Test
-    public void testToJson() {
-        room.setNumberedPlane(room.createNumberedPlane());
-        room.initiateNumberedAndFurnitureList();
-        room.setUsername("Dikpaal");
-        JSONObject json = room.toJson();
-        assertEquals(room.getUsername(), json.get("name"));
+    public void testSetNumberedAndFurnitureList() {
+        List<List<String>> numberedAndFurnitureList = new ArrayList<>();
+        List<String> subList1 = new ArrayList<>();
+        List<String> subList2 = new ArrayList<>();
+
+        subList1.add("1");
+        subList1.add("2");
+        subList2.add("3");
+        subList2.add("4");
+
+        numberedAndFurnitureList.add(subList1);
+        numberedAndFurnitureList.add(subList2);
+
+        room.setNumberedAndFurnitureList(numberedAndFurnitureList);
+
+        assertEquals(numberedAndFurnitureList, room.getNumberedAndFurnitureList());
+
+
     }
 
+    @Test
+    public void testSetFurnitureList() {
+        List<Furniture> furnitureList = new ArrayList<>();
+
+        furnitureList.add(chair);
+        furnitureList.add(sofa);
+
+        room.setFurnitureList(furnitureList);
+
+        assertEquals(furnitureList, room.getFurnitureList());
+
+
+    }
 }

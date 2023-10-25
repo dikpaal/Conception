@@ -641,7 +641,7 @@ public class Room {
     }
 
     // EFFECTS: returns the json data of the furniture list
-    private JSONArray furnitureListToJson() {
+    public JSONArray furnitureListToJson() {
         JSONArray jsonArray = new JSONArray();
         Object furnitureObject;
 
@@ -653,7 +653,7 @@ public class Room {
     }
 
     // EFFECTS: returns the json data of f
-    private JSONObject furnitureToJson(Furniture f) {
+    public JSONObject furnitureToJson(Furniture f) {
         JSONObject furnitureObject = new JSONObject();
 
         furnitureObject.put("dimension", Integer.toString(f.getDimension().getLength()));
@@ -669,7 +669,7 @@ public class Room {
     }
 
     // EFFECTS: returns the json data of spots
-    private JSONArray spotsToJsonArray(List<Integer> spots) {
+    public JSONArray spotsToJsonArray(List<Integer> spots) {
 
         JSONArray jsonArray = new JSONArray();
 
