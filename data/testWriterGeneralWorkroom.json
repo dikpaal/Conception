@@ -1,0 +1,21 @@
+{
+    "numberedPlane": {},
+    "numberedAndFurnitureList": {},
+    "furnitureList": [
+        {
+            "color": "BEIGE",
+            "spot": "0",
+            "type": "CHAIR",
+            "dimension": "1",
+            "direction": "DOWN"
+        },
+        {
+            "color": "BEIGE",
+            "spots": [],
+            "type": "SOFA",
+            "dimension": "2",
+            "direction": "DOWN"
+        }
+    ],
+    "dimension": "3"
+}

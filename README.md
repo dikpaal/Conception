@@ -23,3 +23,5 @@ tried doing.
 given that there is space.
 - The user will also be able to *view all the furniture placed in the room so far*.
 - The user can also *remove furniture* from the room.
+- The user can *save* their progress at the end.
+- The user can *load* their previous progress at the beginning.
