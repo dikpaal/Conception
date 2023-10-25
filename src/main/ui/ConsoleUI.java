@@ -292,10 +292,10 @@ public class ConsoleUI {
     // EFFECTS: checks if there are any chairs in the furnitureList.
     //          If there are chairs, then allows the user to remove a chair
     public void userWantsToRemoveAChair() {
-        if (room.getListOfAllTheAddedChairs().isEmpty()) {
+        if (room.getListOfAllTheAddedFurniture("CHAIR").isEmpty()) {
             System.out.println("You have not added any chairs yet!");
         } else {
-            System.out.println(room.getListOfAllTheAddedChairs());
+            System.out.println(room.getListOfAllTheAddedFurniture("CHAIR"));
             String spot = selectSpot();
             room.removeChairFromSpot(spot);
             printRoom();
@@ -307,10 +307,10 @@ public class ConsoleUI {
     // EFFECTS: checks if there are any sofas in the furnitureList.
     //          If there are sofas, then allows the user to remove a sofa
     public void userWantsToRemoveASofa() {
-        if (room.getListOfAllTheAddedSofas().isEmpty()) {
+        if (room.getListOfAllTheAddedFurniture("SOFA").isEmpty()) {
             System.out.println("You have not added any sofas yet!");
         } else {
-            System.out.println(room.getListOfAllTheAddedSofas());
+            System.out.println(room.getListOfAllTheAddedFurniture("SOFA"));
             String spot1 = selectSpot();
             String spot2 = room.getSpot2Sofa(spot1);
             room.removeSofaFromSpot(spot1, spot2);
@@ -323,10 +323,10 @@ public class ConsoleUI {
     // EFFECTS: checks if there are any centre tables in the furnitureList.
     //          If there are centre tables, then allows the user to remove a centre table
     public void userWantsToRemoveACentreTable() {
-        if (room.getListOfAllTheAddedCentreTable().isEmpty()) {
+        if (room.getListOfAllTheAddedFurniture("CT").isEmpty()) {
             System.out.println("You have not added a centre table yet!");
         } else {
-            System.out.println(room.getListOfAllTheAddedCentreTable());
+            System.out.println(room.getListOfAllTheAddedFurniture("CT"));
             String spot3 = selectSpot();
             room.removeCentreTableFromSpot(spot3);
             printRoom();

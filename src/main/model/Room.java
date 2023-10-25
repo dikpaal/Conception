@@ -52,7 +52,7 @@ public class Room {
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: returns the inverted numberedAndFurnitureList
-    public List<List<String>> createInvertedPlane() {
+    private List<List<String>> createInvertedPlane() {
         List<List<String>> availableSpots = new ArrayList<>();
 
         List<List<String>> tempList = getNumberedAndFurnitureList();
@@ -183,7 +183,7 @@ public class Room {
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: returns the list of available spots FOR A SOFA in the original plane
-    public List<List<String>> spaceForASofaInOriginalPlane() {
+    private List<List<String>> spaceForASofaInOriginalPlane() {
         List<List<String>> availableSpots = new ArrayList<>();
         List<List<String>> originalPlane = getNumberedAndFurnitureList();
         String acc;
@@ -214,7 +214,7 @@ public class Room {
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: returns the list of available spots FOR A SOFA in the inverted plane
-    public List<List<String>> spaceForASofaInInvertedPlane() {
+    private List<List<String>> spaceForASofaInInvertedPlane() {
         List<List<String>> availableSpots = new ArrayList<>();
         List<List<String>> invertedPlane = createInvertedPlane();
         String acc;
@@ -573,41 +573,28 @@ public class Room {
 
     // REQUIRES: nothing
     // MODIFIES: nothing
-    // EFFECTS: returns a list of all the chairs that has been added so far
-    public List<String> getListOfAllTheAddedChairs() {
+    // EFFECTS: returns a list of all the furniture of type that has been added so far
+    public List<String> getListOfAllTheAddedFurniture(String type) {
         List<String> lst = getFurnitureListWithSpots();
         List<String> tempList = new ArrayList<>();
-        for (String s : lst) {
-            if (Character.toString(s.charAt(0)).equals("C")) {
-                tempList.add(s);
-            }
-        }
-        return tempList;
-    }
 
-    // REQUIRES: nothing
-    // MODIFIES: nothing
-    // EFFECTS: returns a list of all sofas that has been added so far
-    public List<String> getListOfAllTheAddedSofas() {
-        List<String> lst = getFurnitureListWithSpots();
-        List<String> tempList = new ArrayList<>();
-        for (String s : lst) {
-            if (Character.toString(s.charAt(0)).equals("S")) {
-                tempList.add(s);
+        if (type.equals("CHAIR")) {
+            for (String s : lst) {
+                if (Character.toString(s.charAt(0)).equals("C")) {
+                    tempList.add(s);
+                }
             }
-        }
-        return tempList;
-    }
-
-    // REQUIRES: nothing
-    // MODIFIES: nothing
-    // EFFECTS: returns a list of the centre table that has been added so far
-    public List<String> getListOfAllTheAddedCentreTable() {
-        List<String> lst = getFurnitureListWithSpots();
-        List<String> tempList = new ArrayList<>();
-        for (String s : lst) {
-            if (Character.toString(s.charAt(0)).equals("T")) {
-                tempList.add(s);
+        } else if (type.equals("SOFA")) {
+            for (String s : lst) {
+                if (Character.toString(s.charAt(0)).equals("S")) {
+                    tempList.add(s);
+                }
+            }
+        } else if (type.equals("CT")) {
+            for (String s : lst) {
+                if (Character.toString(s.charAt(0)).equals("T")) {
+                    tempList.add(s);
+                }
             }
         }
         return tempList;

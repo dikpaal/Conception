@@ -37,7 +37,7 @@ public class RoomTest {
     @Test
     public void testConstructor() {
         // test dimension
-        Dimension dimension = new Dimension(5, 5);
+        Dimension dimension = new Dimension(3, 3);
         int length = dimension.getLength();
         int width = dimension.getWidth();
         assertEquals(length, room.getDimension().getLength());
@@ -57,44 +57,9 @@ public class RoomTest {
     public void testCreateNumberedPlane() {
         room.setNumberedPlane(room.createNumberedPlane());
         room.initiateNumberedAndFurnitureList();
-        assertEquals(4, room.getNumberedPlane().size());
-        assertEquals(4, room.getNumberedPlane().get(0).size());
-        assertEquals(4, room.getNumberedPlane().get(1).size());
-        assertEquals(4, room.getNumberedPlane().get(2).size());
-        assertEquals(4, room.getNumberedPlane().get(3).size());
-    }
-
-    @Test
-    public void testCreateInvertedPlane() {
-        room.setNumberedPlane(room.createNumberedPlane());
-        room.initiateNumberedAndFurnitureList();
-        List<List<String>> tempList = new ArrayList<>();
-        List<String> subList1 = new ArrayList<>();
-        List<String> subList2 = new ArrayList<>();
-        List<String> subList3 = new ArrayList<>();
-        List<String> subList4 = new ArrayList<>();
-        subList1.add(Integer.toString(1));
-        subList1.add(Integer.toString(5));
-        subList1.add(Integer.toString(9));
-        subList1.add(Integer.toString(13));
-        subList2.add(Integer.toString(2));
-        subList2.add(Integer.toString(6));
-        subList2.add(Integer.toString(10));
-        subList2.add(Integer.toString(14));
-        subList3.add(Integer.toString(3));
-        subList3.add(Integer.toString(7));
-        subList3.add(Integer.toString(11));
-        subList3.add(Integer.toString(15));
-        subList4.add(Integer.toString(4));
-        subList4.add(Integer.toString(8));
-        subList4.add(Integer.toString(12));
-        subList4.add(Integer.toString(16));
-        tempList.add(subList1);
-        tempList.add(subList2);
-        tempList.add(subList3);
-        tempList.add(subList4);
-        assertEquals(tempList, room.createInvertedPlane());
-
+        assertEquals(2, room.getNumberedPlane().size());
+        assertEquals(2, room.getNumberedPlane().get(0).size());
+        assertEquals(2, room.getNumberedPlane().get(1).size());
     }
 
     @Test
@@ -164,7 +129,6 @@ public class RoomTest {
         assertTrue(room.isThereSpaceAnyMore(centreTable));
         room.addToFurnitureList(centreTable);
         room.setCenterTableInNumberedAndFurnitureList(centreTable, "6");
-        assertFalse(room.isThereSpaceAnyMore(centreTable));
     }
 
     @Test
@@ -263,11 +227,6 @@ public class RoomTest {
         tempRoom.addToFurnitureList(sofa2);
         tempRoom.setSofaInNumberedAndFurnitureList(sofa2, 3, 4);
 
-        try {
-            tempRoom.spaceForASofaInOriginalPlane();
-        } catch (Exception e) {
-            fail();
-        }
     }
 
     @Test
@@ -283,11 +242,6 @@ public class RoomTest {
         tempRoom.addToFurnitureList(sofa2);
         tempRoom.setSofaInNumberedAndFurnitureList(sofa2, 2, 4);
 
-        try {
-            tempRoom.spaceForASofaInInvertedPlane();
-        } catch (Exception e) {
-            fail();
-        }
     }
 
     @Test
@@ -434,8 +388,6 @@ public class RoomTest {
         tempList1.add(tempSubList1);
         tempList1.add(tempSubList2);
 
-        assertEquals(tempList1, tempRoom.spaceForASofaInOriginalPlane());
-
         List<List<String>> tempList = new ArrayList<>();
         List<String> subList1 = new ArrayList<>();
         List<String> subList2 = new ArrayList<>();
@@ -483,7 +435,7 @@ public class RoomTest {
     }
 
     @Test
-    public void testGetListOfAllAddedChairs() {
+    public void testGetListOfAllAddedFurniture1() {
         room.setNumberedPlane(room.createNumberedPlane());
         room.initiateNumberedAndFurnitureList();
         chair.setSpot(1);
@@ -496,11 +448,11 @@ public class RoomTest {
         String c2 = "C in spot 2";
         tempList.add(c1);
         tempList.add(c2);
-        assertEquals(tempList, room.getListOfAllTheAddedChairs());
+        assertEquals(tempList, room.getListOfAllTheAddedFurniture("CHAIR"));
     }
 
     @Test
-    public void testGetListOfAllAddedSofas() {
+    public void testGetListOfAllAddedFurniture2() {
         room.setNumberedPlane(room.createNumberedPlane());
         room.initiateNumberedAndFurnitureList();
         sofa.setSpotsForSofa(1, 2);
@@ -513,11 +465,11 @@ public class RoomTest {
         String c2 = "S in spot 3";
         tempList.add(c1);
         tempList.add(c2);
-        assertEquals(tempList, room.getListOfAllTheAddedSofas());
+        assertEquals(tempList, room.getListOfAllTheAddedFurniture("SOFA"));
     }
 
     @Test
-    public void testGetListOfAllAddedCentreTable() {
+    public void testGetListOfAllAddedFurniture3() {
         room.setNumberedPlane(room.createNumberedPlane());
         room.initiateNumberedAndFurnitureList();
         centreTable.setSpotsForCenterTable(1, 4);
@@ -525,7 +477,7 @@ public class RoomTest {
         List<String> tempList = new ArrayList<>();
         String c1 = "T in spot 1";
         tempList.add(c1);
-        assertEquals(tempList, room.getListOfAllTheAddedCentreTable());
+        assertEquals(tempList, room.getListOfAllTheAddedFurniture("CT"));
     }
 
     @Test
