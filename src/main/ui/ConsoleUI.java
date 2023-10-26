@@ -6,8 +6,11 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static model.FurnitureType.*;
 
 // Represents a console UI
 public class ConsoleUI {
@@ -30,6 +33,137 @@ public class ConsoleUI {
     public void mainUserInput() {
         setup();
         menu();
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: returns the list of available spots FOR A SOFA in the inverted plane
+    private List<List<String>> spaceForASofaInInvertedPlane() {
+        List<List<String>> availableSpots = new ArrayList<>();
+        List<List<String>> invertedPlane = createInvertedPlane();
+        String acc;
+
+        for (int i = 0; i < invertedPlane.size(); i++) {
+            List<String> subList = invertedPlane.get(i);
+            for (int j = 1; j < subList.size(); j++) {
+                List<String> tempSubList = new ArrayList<>();
+                acc = subList.get(j - 1);
+                String curr = subList.get(j);
+                try {
+                    int numberAcc = Integer.parseInt(acc);
+                    int numberCurr = Integer.parseInt(curr);
+
+                    if (numberCurr == numberAcc + (room.getDimension().getLength() - 1)) {
+                        tempSubList.add(acc);
+                        tempSubList.add(curr);
+                        availableSpots.add(tempSubList);
+                    }
+                } catch (Exception e) {
+                    // nothing here!
+                }
+            }
+        }
+        return availableSpots;
+    }
+
+    // REQUIRES: spot > 0 and spot in numberedList()
+    // MODIFIES: nothing
+    // EFFECTS: gets the other spot for the sofa from the original and inverted plane and returns the spots
+    public String getTheOtherSpot(String spot) {
+        List<List<String>> spotsInOriginalList = spaceForASofaInOriginalPlane();
+        List<List<String>> spotsInInvertedList = spaceForASofaInInvertedPlane();
+
+        List<String> listOfEligibleSpots = new ArrayList<>();
+
+        for (List<String> subList : spotsInOriginalList) {
+            String first = subList.get(0);
+            String second = subList.get(1);
+
+            if (first.equals(spot)) {
+                listOfEligibleSpots.add(second);
+            } else if (second.equals(spot)) {
+                listOfEligibleSpots.add(first);
+            }
+        }
+
+        for (List<String> subList : spotsInInvertedList) {
+            String first = subList.get(0);
+            String second = subList.get(1);
+
+            if (first.equals(spot)) {
+                listOfEligibleSpots.add(second);
+            } else if (second.equals(spot)) {
+                listOfEligibleSpots.add(first);
+            }
+        }
+        return (listOfEligibleSpots.get(0) + " or " + listOfEligibleSpots.get(1));
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: returns the spots where a sofa can be placed
+    public List<List<String>> spaceForASofa() {
+        List<List<String>> availableSpotsInOriginalPlane = spaceForASofaInOriginalPlane();
+        List<List<String>> availableSpotsInInvertedPlane = spaceForASofaInInvertedPlane();
+
+        return room.mergeLists(availableSpotsInOriginalPlane, availableSpotsInInvertedPlane);
+    }
+
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: returns the list of available spots FOR A SOFA in the original plane
+    public List<List<String>> spaceForASofaInOriginalPlane() {
+        List<List<String>> availableSpots = new ArrayList<>();
+        List<List<String>> originalPlane = room.getNumberedAndFurnitureList();
+        String acc;
+
+        for (int i = 0; i < originalPlane.size(); i++) {
+            List<String> subList = originalPlane.get(i);
+            for (int j = 1; j < subList.size(); j++) {
+                List<String> tempSubList = new ArrayList<>();
+                acc = subList.get(j - 1);
+                String curr = subList.get(j);
+                try {
+                    int numberAcc = Integer.parseInt(acc);
+                    int numberCurr = Integer.parseInt(curr);
+
+                    if (numberCurr == numberAcc + 1) {
+                        tempSubList.add(acc);
+                        tempSubList.add(curr);
+                        availableSpots.add(tempSubList);
+                    }
+                } catch (Exception e) {
+                    // nothing here!
+                }
+            }
+        }
+        return availableSpots;
+    }
+
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: returns the inverted numberedAndFurnitureList
+    public List<List<String>> createInvertedPlane() {
+        List<List<String>> availableSpots = new ArrayList<>();
+
+        List<List<String>> tempList = room.getNumberedAndFurnitureList();
+        int index = 0;
+        int maxSize = tempList.get(0).size();
+
+        if (index < maxSize) {
+            for (int i = 0; i < maxSize; i++) {
+                List<String> subList = new ArrayList<>();
+                for (int j = 0; j < tempList.size(); j++) {
+                    List<String> actualSubList = tempList.get(j);
+                    subList.add(actualSubList.get(index));
+                }
+                index++;
+                availableSpots.add(subList);
+            }
+        }
+        return availableSpots;
     }
 
     // REQUIRES: nothing
@@ -215,7 +349,7 @@ public class ConsoleUI {
     // MODIFIES: nothing
     // EFFECTS: places a chair in the spot that the user chooses
     public void placeChair(Furniture chair) {
-        room.isThereSpaceAnyMore(chair);
+        isThereSpaceAnyMore(chair);
         Scanner s = new Scanner(System.in);
 
         System.out.println("Choose a spot: ");
@@ -228,13 +362,13 @@ public class ConsoleUI {
     // MODIFIES: nothing
     // EFFECTS: places a sofa in the spot that the user chooses
     public void placeSofa(Furniture sofa) {
-        room.isThereSpaceAnyMore(sofa);
+        isThereSpaceAnyMore(sofa);
         Scanner s = new Scanner(System.in);
 
         System.out.println("Choose two spots: ");
         String userChoice1 = s.nextLine();
 
-        System.out.println(room.getTheOtherSpot(userChoice1));
+        System.out.println(getTheOtherSpot(userChoice1));
 
         String userChoice2 = s.nextLine();
         int spot1 = Integer.parseInt(userChoice1);
@@ -247,14 +381,14 @@ public class ConsoleUI {
     // EFFECTS: places a centre table ct in the spot that the user chooses
     public void placeCenterTable(Furniture ct) {
 
-        if (room.isThereSpaceAnyMore(ct)) {
+        if (isThereSpaceAnyMore(ct)) {
 
             Scanner s = new Scanner(System.in);
             System.out.println("Do you want to place the center table here? (y) or (n): ");
             String userChoice = s.nextLine();
 
             if (userChoice.equals("y")) {
-                List<String> spots = room.spaceForACentreTable();
+                List<String> spots = spaceForACentreTable();
                 String topLeftSpot = spots.get(0);
                 room.setCenterTableInNumberedAndFurnitureList(ct, topLeftSpot);
             }
@@ -292,12 +426,12 @@ public class ConsoleUI {
     // EFFECTS: checks if there are any chairs in the furnitureList.
     //          If there are chairs, then allows the user to remove a chair
     public void userWantsToRemoveAChair() {
-        if (room.getListOfAllTheAddedFurniture("CHAIR").isEmpty()) {
+        if (getListOfAllTheAddedFurniture(room, "CHAIR").isEmpty()) {
             System.out.println("You have not added any chairs yet!");
         } else {
-            System.out.println(room.getListOfAllTheAddedFurniture("CHAIR"));
+            System.out.println(getListOfAllTheAddedFurniture(room, "CHAIR"));
             String spot = selectSpot();
-            room.removeChairFromSpot(spot);
+            removeChairFromSpot(room, spot);
             printRoom();
         }
     }
@@ -307,14 +441,175 @@ public class ConsoleUI {
     // EFFECTS: checks if there are any sofas in the furnitureList.
     //          If there are sofas, then allows the user to remove a sofa
     public void userWantsToRemoveASofa() {
-        if (room.getListOfAllTheAddedFurniture("SOFA").isEmpty()) {
+        if (getListOfAllTheAddedFurniture(room, "SOFA").isEmpty()) {
             System.out.println("You have not added any sofas yet!");
         } else {
-            System.out.println(room.getListOfAllTheAddedFurniture("SOFA"));
+            System.out.println(getListOfAllTheAddedFurniture(room, "SOFA"));
             String spot1 = selectSpot();
-            String spot2 = room.getSpot2Sofa(spot1);
-            room.removeSofaFromSpot(spot1, spot2);
+            String spot2 = getSpot2Sofa(room, spot1);
+            removeSofaFromSpot(room, spot1, spot2);
             printRoom();
+        }
+    }
+
+    // REQUIRES: Integer,parseInt(spot1) > 0 and Integer,parseInt(spot2) > 0 and spot1 and spot2 in numberedList()
+    // MODIFIES: nothing
+    // EFFECTS: removes the sofa from spot1 and spot2 in the furnitureList
+    public void removeSofaFromSpot(Room r, String spot1, String spot2) {
+        for (int i = 0; i < r.getFurnitureList().size(); i++) {
+            Furniture f = r.getFurnitureList().get(i);
+            if (f.getType() == SOFA) {
+                if ((f.getSofaSpots() == Integer.parseInt(spot1))
+                        && (f.getSecondSofaSpots() == Integer.parseInt(spot2))) {
+                    r.setSingleSpotInNumberedAndFurnitureList(spot1);
+                    r.setSingleSpotInNumberedAndFurnitureList(spot2);
+                    r.removeFromFurnitureList(f);
+                }
+            }
+        }
+    }
+
+    // REQUIRES: Integer.parseInt(spot1) > 0 and spot1 in numberedList()
+    // MODIFIES: nothing
+    // EFFECTS: removes the centre table from all the necessary spots based on spot1 in the furnitureList
+    public void removeCentreTableFromSpot(Room r, String spot1) {
+        for (int i = 0; i < r.getFurnitureList().size(); i++) {
+            Furniture f = r.getFurnitureList().get(i);
+            if (f.getType() == CENTRETABLE) {
+                if (f.getCentreTableSpots() == Integer.parseInt(spot1)) {
+                    r.setCentreTableSpotsInNumberedAndFurnitureList(Integer.parseInt(spot1));
+                    r.removeFromFurnitureList(f);
+                }
+            }
+        }
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: removes the chair from the spot in the furnitureList
+    public void removeChairFromSpot(Room r, String spot) {
+        for (int i = 0; i < r.getFurnitureList().size(); i++) {
+            Furniture f = r.getFurnitureList().get(i);
+            if (f.getType() == CHAIR) {
+                if (f.getSpot() == Integer.parseInt(spot)) {
+                    r.setSingleSpotInNumberedAndFurnitureList(spot);
+                    r.removeFromFurnitureList(f);
+                }
+            }
+        }
+    }
+
+    // REQUIRES: Integer.parseInt(spot1) > 0 and spot1 in numberedList()
+    // MODIFIES: nothing
+    // EFFECTS: returns the second spot of the sofa
+    public String getSpot2Sofa(Room r, String spot1) {
+        List<Furniture> furnitureList = r.getFurnitureList();
+
+        String spot2 = "";
+
+        for (Furniture f : furnitureList) {
+            if (f.getType() == SOFA) {
+                if (f.getSofaSpots() == Integer.parseInt(spot1)) {
+                    spot2 = Integer.toString(f.getSecondSofaSpots());
+                }
+            }
+        }
+        return spot2;
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: returns true, if f can be placed in the room (is there space for it or not),
+    //          otherwise returns false
+    public boolean isThereSpaceAnyMore(Furniture f) {
+        if (f.getType() == CHAIR) {
+            return room.isThereSpaceAnymoreForAChair();
+        } else if (f.getType() == FurnitureType.SOFA) {
+            return isThereSpaceAnymoreForASofa();
+        } else {
+            return isThereSpaceAnymoreForACentreTable();
+        }
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: returns true, if centre table f can be placed in the room (is there space for it or not),
+    //          otherwise returns false
+    public boolean isThereSpaceAnymoreForACentreTable() {
+        if (spaceForACentreTable().isEmpty()) {
+            System.out.println("Sorry, no space for a centre table anymore!");
+            return false;
+        } else {
+            System.out.println("You can place a centre table in between: " + spaceForACentreTable());
+            return true;
+        }
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: returns true, if sofa f can be placed in the room (is there space for it or not),
+    //          otherwise returns false
+    public boolean isThereSpaceAnymoreForASofa() {
+        if (spaceForASofa().isEmpty()) {
+            System.out.println("Sorry, no space for a sofa anymore!");
+            return false;
+        } else {
+            System.out.println("You can place a sofa in: " + spaceForASofa());
+            return true;
+        }
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: returns the spots where a centre table can be placed
+    public List<String> spaceForACentreTable() {
+        Dimension d = room.getDimension();
+        int w = (((d.getLength() - 1) / 2) * d.getLength()) - (d.getLength() - 1);
+        int x = w + 1;
+        int y = w + (d.getLength() - 1);
+        int z = y + 1;
+
+        List<String> subListWX = new ArrayList<>();
+        subListWX.add(Integer.toString(w));
+        subListWX.add(Integer.toString(x));
+
+        List<String> subListWY = new ArrayList<>();
+        subListWY.add(Integer.toString(w));
+        subListWY.add(Integer.toString(y));
+
+        List<String> subListYZ = new ArrayList<>();
+        subListYZ.add(Integer.toString(y));
+        subListYZ.add(Integer.toString(z));
+
+        List<String> subListXZ = new ArrayList<>();
+        subListXZ.add(Integer.toString(x));
+        subListXZ.add(Integer.toString(z));
+
+        List<String> availableSpots = new ArrayList<>();
+        availableSpots.add(Integer.toString(w));
+        availableSpots.add(Integer.toString(x));
+        availableSpots.add(Integer.toString(y));
+        availableSpots.add(Integer.toString(z));
+
+        return returnAvailableSpots(availableSpots, subListWX, subListWY, subListYZ, subListXZ);
+    }
+
+    // REQUIRES: availableSpots, subListWX, subListWY, subListYZ, and subListXZ are not empty
+    // MODIFIES: nothing
+    // EFFECTS: returns the available spots to the spaceForACentreTable() method
+    public List<String> returnAvailableSpots(List<String> availableSpots,
+                                              List<String> subListWX,
+                                              List<String> subListWY,
+                                              List<String> subListYZ,
+                                              List<String> subListXZ) {
+        List<String> emptyList = new ArrayList<>();
+        List<List<String>> sofaList = spaceForASofa();
+
+        if (sofaList.contains(subListWX) && sofaList.contains(subListWY) && sofaList.contains(subListYZ)
+                && sofaList.contains(subListXZ)) {
+            return availableSpots;
+        } else {
+            return emptyList;
         }
     }
 
@@ -323,14 +618,43 @@ public class ConsoleUI {
     // EFFECTS: checks if there are any centre tables in the furnitureList.
     //          If there are centre tables, then allows the user to remove a centre table
     public void userWantsToRemoveACentreTable() {
-        if (room.getListOfAllTheAddedFurniture("CT").isEmpty()) {
+        if (getListOfAllTheAddedFurniture(room, "CT").isEmpty()) {
             System.out.println("You have not added a centre table yet!");
         } else {
-            System.out.println(room.getListOfAllTheAddedFurniture("CT"));
+            System.out.println(getListOfAllTheAddedFurniture(room, "CT"));
             String spot3 = selectSpot();
-            room.removeCentreTableFromSpot(spot3);
+            removeCentreTableFromSpot(room, spot3);
             printRoom();
         }
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: returns a list of all the furniture of type that has been added so far
+    public List<String> getListOfAllTheAddedFurniture(Room room, String type) {
+        List<String> lst = room.getFurnitureListWithSpots();
+        List<String> tempList = new ArrayList<>();
+
+        if (type.equals("CHAIR")) {
+            for (String s : lst) {
+                if (Character.toString(s.charAt(0)).equals("C")) {
+                    tempList.add(s);
+                }
+            }
+        } else if (type.equals("SOFA")) {
+            for (String s : lst) {
+                if (Character.toString(s.charAt(0)).equals("S")) {
+                    tempList.add(s);
+                }
+            }
+        } else if (type.equals("CT")) {
+            for (String s : lst) {
+                if (Character.toString(s.charAt(0)).equals("T")) {
+                    tempList.add(s);
+                }
+            }
+        }
+        return tempList;
     }
 
     // REQUIRES: nothing
