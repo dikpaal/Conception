@@ -321,6 +321,67 @@ public class RoomTest {
         assertEquals("SOFA", sofaObject.get("type"));
     }
 
+    @Test
+    public void testRemoveFromFurnitureList() {
+        room.addToFurnitureList(chair);
+        room.addToFurnitureList(sofa);
+        assertEquals(2, room.getFurnitureList().size());
+        room.removeFromFurnitureList(chair);
+        assertEquals(1, room.getFurnitureList().size());
+        room.removeFromFurnitureList(sofa);
+        assertEquals(0, room.getFurnitureList().size());
+
+    }
+
+    // TESTS FOR UNTESTED GETTER AND SETTER METHODS
+
+    @Test
+    public void testGetUsername() {
+        room.setUsername("Dikpaal");
+        assertEquals("Dikpaal", room.getUsername());
+    }
+
+    @Test
+    public void testSetDimension() {
+        room.setDimension(5);
+        assertEquals(5, room.getDimension().getLength());
+    }
+
+    @Test
+    public void testSetNumberedAndFurnitureList() {
+        List<List<String>> numberedAndFurnitureList = new ArrayList<>();
+        List<String> subList1 = new ArrayList<>();
+        List<String> subList2 = new ArrayList<>();
+
+        subList1.add("1");
+        subList1.add("2");
+        subList2.add("3");
+        subList2.add("4");
+
+        numberedAndFurnitureList.add(subList1);
+        numberedAndFurnitureList.add(subList2);
+
+        room.setNumberedAndFurnitureList(numberedAndFurnitureList);
+
+        assertEquals(numberedAndFurnitureList, room.getNumberedAndFurnitureList());
+
+
+    }
+
+    @Test
+    public void testSetFurnitureList() {
+        List<Furniture> furnitureList = new ArrayList<>();
+
+        furnitureList.add(chair);
+        furnitureList.add(sofa);
+
+        room.setFurnitureList(furnitureList);
+
+        assertEquals(furnitureList, room.getFurnitureList());
+
+
+    }
+
 //
 //    @Test
 //    public void testCreateNumberedPlane() {
@@ -695,53 +756,4 @@ public class RoomTest {
 //        assertEquals("BEIGE", sofaObject.get("color"));
 //        assertEquals("SOFA", sofaObject.get("type"));
 //    }
-
-    // TESTS FOR UNTESTED GETTER AND SETTER METHODS
-
-    @Test
-    public void testGetUsername() {
-        room.setUsername("Dikpaal");
-        assertEquals("Dikpaal", room.getUsername());
-    }
-
-    @Test
-    public void testSetDimension() {
-        room.setDimension(5);
-        assertEquals(5, room.getDimension().getLength());
-    }
-
-    @Test
-    public void testSetNumberedAndFurnitureList() {
-        List<List<String>> numberedAndFurnitureList = new ArrayList<>();
-        List<String> subList1 = new ArrayList<>();
-        List<String> subList2 = new ArrayList<>();
-
-        subList1.add("1");
-        subList1.add("2");
-        subList2.add("3");
-        subList2.add("4");
-
-        numberedAndFurnitureList.add(subList1);
-        numberedAndFurnitureList.add(subList2);
-
-        room.setNumberedAndFurnitureList(numberedAndFurnitureList);
-
-        assertEquals(numberedAndFurnitureList, room.getNumberedAndFurnitureList());
-
-
-    }
-
-    @Test
-    public void testSetFurnitureList() {
-        List<Furniture> furnitureList = new ArrayList<>();
-
-        furnitureList.add(chair);
-        furnitureList.add(sofa);
-
-        room.setFurnitureList(furnitureList);
-
-        assertEquals(furnitureList, room.getFurnitureList());
-
-
-    }
 }
