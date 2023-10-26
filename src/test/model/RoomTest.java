@@ -253,51 +253,6 @@ public class RoomTest {
     }
 
     @Test
-    public void testReturnAvailableSpots() {
-        room.setNumberedPlane(room.createNumberedPlane());
-        room.initiateNumberedAndFurnitureList();
-        centreTable.setSpotsForCenterTable(6, 5);
-        room.addToFurnitureList(centreTable);
-        room.setCentreTableSpotsInNumberedAndFurnitureList(6);
-        room.setCenterTableInNumberedAndFurnitureList(centreTable, "6");
-        List<String> emptyList = new ArrayList<>();
-        List<String> availableSpots = new ArrayList<>();
-        List<List<String>> sofaList = new ArrayList<>();
-        List<String> subListWX = new ArrayList<>();
-        List<String> subListWY = new ArrayList<>();
-        List<String> subListYZ = new ArrayList<>();
-        List<String> subListXZ = new ArrayList<>();
-
-        availableSpots.add("6");
-        availableSpots.add("7");
-        availableSpots.add("10");
-        availableSpots.add("11");
-
-        subListWX.add("6");
-        subListWX.add("7");
-        subListWY.add("6");
-        subListWY.add("11");
-        subListYZ.add("10");
-        subListYZ.add("11");
-        subListXZ.add("7");
-        subListXZ.add("11");
-
-        sofaList.add(subListWX);
-        sofaList.add(subListWY);
-        sofaList.add(subListYZ);
-        sofaList.add(subListXZ);
-
-        assertTrue(sofaList.contains(subListWX));
-        assertTrue(sofaList.contains(subListWY));
-        assertTrue(sofaList.contains(subListXZ));
-        assertTrue(sofaList.contains(subListYZ));
-        assertEquals(emptyList, room.returnAvailableSpots(availableSpots,
-                subListWX, subListWY, subListYZ, subListXZ));
-        assertEquals(emptyList, room.returnAvailableSpots(emptyList, subListWX, subListWY, subListYZ, subListXZ));
-
-    }
-
-    @Test
     public void testSetChairInNumberedAndFurnitureList() {
         Room tempRoom = new Room(3);
         tempRoom.setNumberedPlane(tempRoom.createNumberedPlane());

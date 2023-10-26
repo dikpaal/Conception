@@ -280,7 +280,7 @@ public class Room {
     // REQUIRES: availableSpots, subListWX, subListWY, subListYZ, and subListXZ are not empty
     // MODIFIES: nothing
     // EFFECTS: returns the available spots to the spaceForACentreTable() method
-    public List<String> returnAvailableSpots(List<String> availableSpots,
+    private List<String> returnAvailableSpots(List<String> availableSpots,
                                              List<String> subListWX,
                                              List<String> subListWY,
                                              List<String> subListYZ,
