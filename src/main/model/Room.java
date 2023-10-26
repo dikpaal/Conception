@@ -288,9 +288,7 @@ public class Room {
         List<String> emptyList = new ArrayList<>();
         List<List<String>> sofaList = spaceForASofa();
 
-        if (sofaList.contains(subListWX)
-                && sofaList.contains(subListWY)
-                && sofaList.contains(subListYZ)
+        if (sofaList.contains(subListWX) && sofaList.contains(subListWY) && sofaList.contains(subListYZ)
                 && sofaList.contains(subListXZ)) {
             return availableSpots;
         } else {
