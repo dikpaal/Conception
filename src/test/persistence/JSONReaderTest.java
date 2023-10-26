@@ -6,6 +6,7 @@ import model.Room;
 import model.Sofa;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ui.ConsoleUI;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,8 +21,10 @@ class JsonReaderTest {
     void testReaderNonExistentFile() {
         Room r = new Room(3);
         r.setUsername("Dikpaal");
-        r.setNumberedPlane(r.createNumberedPlane());
-        r.initiateNumberedAndFurnitureList();
+        ConsoleUI consoleUI = new ConsoleUI();
+        consoleUI.setRoom(r);
+        r.setNumberedPlane(consoleUI.createNumberedPlane());
+        consoleUI.initiateNumberedAndFurnitureList();
 
         JsonWriter writer = new JsonWriter("./data/noSuchFile.json");
         try {
@@ -45,8 +48,10 @@ class JsonReaderTest {
     void testReaderEmptyRoom() {
         Room r = new Room(3);
         r.setUsername("Dikpaal");
-        r.setNumberedPlane(r.createNumberedPlane());
-        r.initiateNumberedAndFurnitureList();
+        ConsoleUI consoleUI = new ConsoleUI();
+        consoleUI.setRoom(r);
+        r.setNumberedPlane(consoleUI.createNumberedPlane());
+        consoleUI.initiateNumberedAndFurnitureList();
 
         JsonWriter writer = new JsonWriter("./data/testReaderEmptyRoom.json");
         try {
@@ -71,8 +76,10 @@ class JsonReaderTest {
     void testReaderGeneralWorkRoom() {
         Room r = new Room(3);
         r.setUsername("Dikpaal");
-        r.setNumberedPlane(r.createNumberedPlane());
-        r.initiateNumberedAndFurnitureList();
+        ConsoleUI consoleUI = new ConsoleUI();
+        consoleUI.setRoom(r);
+        r.setNumberedPlane(consoleUI.createNumberedPlane());
+        consoleUI.initiateNumberedAndFurnitureList();
 
         Furniture chair = new Chair();
         chair.setSpot(1);
