@@ -4,77 +4,163 @@
             "1",
             "2",
             "3",
-            "4"
+            "4",
+            "5",
+            "6"
         ],
         "1": [
-            "5",
-            "6",
             "7",
-            "8"
-        ],
-        "2": [
+            "8",
             "9",
             "10",
             "11",
             "12"
         ],
-        "3": [
+        "2": [
             "13",
             "14",
             "15",
-            "16"
+            "16",
+            "17",
+            "18"
+        ],
+        "3": [
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24"
+        ],
+        "4": [
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30"
+        ],
+        "5": [
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36"
         ]
     },
     "numberedAndFurnitureList": {
         "0": [
-            "1",
+            "Cv",
             "2",
-            "Sv",
-            "vS"
+            "3",
+            "4",
+            "5",
+            "6"
         ],
         "1": [
-            "5",
-            "Tv",
-            "vT",
-            "8"
-        ],
-        "2": [
+            "7",
+            "8",
             "9",
-            "Tv",
-            "vT",
+            "Cv",
+            "11",
             "12"
         ],
-        "3": [
+        "2": [
             "13",
-            "14",
-            "15",
-            "16"
+            "Sv",
+            "Tv",
+            "vT",
+            "Sv",
+            "18"
+        ],
+        "3": [
+            "19",
+            "vS",
+            "Tv",
+            "vT",
+            "vS",
+            "24"
+        ],
+        "4": [
+            "25",
+            "26",
+            "Cv",
+            "Cv",
+            "29",
+            "30"
+        ],
+        "5": [
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36"
         ]
     },
     "name": "Dikpaal",
     "furnitureList": [
         {
+            "color": "WHITE",
+            "spots": [
+                "15",
+                "16",
+                "21",
+                "22"
+            ],
+            "type": "CENTRETABLE",
+            "dimension": "2",
+            "direction": "DOWN"
+        },
+        {
             "color": "BEIGE",
             "spots": [
-                "3",
-                "4"
+                "20",
+                "14"
             ],
             "type": "SOFA",
             "dimension": "2",
             "direction": "DOWN"
         },
         {
-            "color": "WHITE",
+            "color": "BEIGE",
             "spots": [
-                "6",
-                "7",
-                "10",
-                "11"
+                "23",
+                "17"
             ],
-            "type": "CENTRETABLE",
+            "type": "SOFA",
             "dimension": "2",
+            "direction": "DOWN"
+        },
+        {
+            "color": "BEIGE",
+            "spot": "10",
+            "type": "CHAIR",
+            "dimension": "1",
+            "direction": "DOWN"
+        },
+        {
+            "color": "BEIGE",
+            "spot": "27",
+            "type": "CHAIR",
+            "dimension": "1",
+            "direction": "DOWN"
+        },
+        {
+            "color": "BEIGE",
+            "spot": "28",
+            "type": "CHAIR",
+            "dimension": "1",
+            "direction": "DOWN"
+        },
+        {
+            "color": "BEIGE",
+            "spot": "1",
+            "type": "CHAIR",
+            "dimension": "1",
             "direction": "DOWN"
         }
     ],
-    "dimension": "5"
+    "dimension": "7"
 }

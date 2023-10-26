@@ -963,7 +963,6 @@ public class ConsoleUI {
                 }
                 break;
             } else if (userChoice.equals("n")) {
-                System.out.println("Bye, " + room.getUsername());
                 break;
             }
         }
@@ -982,9 +981,6 @@ public class ConsoleUI {
             if (userChoice.equals("y")) {
                 try {
                     room = jsonReader.read();
-                    System.out.println("Loaded " + room.getUsername() + "'s room from " + JSON_STORE);
-                    System.out.println(room.getNumberedAndFurnitureList());
-                    System.out.println(room.getFurnitureList());
                 } catch (IOException e) {
                     System.out.println("Unable to read from file: " + JSON_STORE);
                 }
