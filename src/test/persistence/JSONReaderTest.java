@@ -15,6 +15,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Represents a class that tests the JsonReader
 class JsonReaderTest {
 
     @Test

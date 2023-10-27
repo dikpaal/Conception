@@ -16,7 +16,7 @@ import org.json.*;
 import static model.FurnitureType.CHAIR;
 import static model.FurnitureType.SOFA;
 
-// Represents a reader that reads workroom from JSON data stored in file
+// Represents a reader that reads room from JSON data stored in file
 public class JsonReader {
     private String source;
 
