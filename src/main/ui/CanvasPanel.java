@@ -6,7 +6,7 @@ import java.awt.*;
 public class CanvasPanel extends PanelGUI {
 
     public CanvasPanel(int x, int y, int w, int h) {
-        this.setBackground(Color.yellow);
+        this.setBackground(Color.white);
         this.setBounds(x, y, w, h);
     }
 }

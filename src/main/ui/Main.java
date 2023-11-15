@@ -34,13 +34,15 @@ public class Main {
         FrameGUI guiFrame = new FrameGUI();
 
         // The button panel that contains all the buttons
-        PanelGUI buttonPanel = new ButtonPanel(guiFrame.getWidth(), guiFrame.getHeight() / 20);
+        PanelGUI buttonPanel = new ButtonPanel(guiFrame.getWidth(), guiFrame.getHeight() / 10);
 
         // The canvas panel that contains the canvas in which the designing takes place
         PanelGUI canvasPanel = new CanvasPanel(0,
-                guiFrame.getHeight() / 20,
+                guiFrame.getHeight() / 10,
                 guiFrame.getWidth(),
-                guiFrame.getHeight() * 19 / 20);
+                guiFrame.getHeight() * 9 / 10);
+
+        canvasPanel.add(new Canvas(5));
 
         guiFrame.add(buttonPanel);
         guiFrame.add(canvasPanel);
