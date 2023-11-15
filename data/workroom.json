@@ -27,7 +27,7 @@
     },
     "numberedAndFurnitureList": {
         "0": [
-            "1",
+            "Cv",
             "2",
             "3",
             "4"
@@ -52,6 +52,12 @@
         ]
     },
     "name": "Dikpaal",
-    "furnitureList": [],
+    "furnitureList": [{
+        "color": "BEIGE",
+        "spot": "1",
+        "type": "CHAIR",
+        "dimension": "1",
+        "direction": "DOWN"
+    }],
     "dimension": "5"
 }
