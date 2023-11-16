@@ -1,5 +1,7 @@
 package ui;
 
+import model.Room;
+
 import javax.swing.*;
 import java.awt.*;
 

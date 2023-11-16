@@ -39,22 +39,23 @@ public class Main {
         // The main GUI Frame
         FrameGUI guiFrame = new FrameGUI(username);
 
+        // The canvas that is a grid and represents the room
+        Canvas canvas = new Canvas(r);
+
+        // The message panel that contains the messages for the user
+        MessagePanel messagePanel = new MessagePanel(0, 440, 400, 50, r);
+
         // The button panel that contains all the buttons
-        PanelGUI buttonPanel = new ButtonPanel(guiFrame.getWidth(), 40);
+        PanelGUI buttonPanel = new ButtonPanel(guiFrame.getWidth(), 40, canvas, messagePanel);
 
         // The canvas panel that contains the canvas in which the designing takes place
         PanelGUI canvasPanel = new CanvasPanel(0, 40, 400, 400);
 
-        // The message panel that contains the messages for the user
-        PanelGUI messagePanel = new MessagePanel(0, 440, 400, 50);
-
-        canvasPanel.add(new Canvas(dimensionInt));
+        canvasPanel.add(canvas);
 
         guiFrame.add(buttonPanel);
         guiFrame.add(canvasPanel);
         guiFrame.add(messagePanel);
         guiFrame.setVisible(true); // makes the frame visible
-
-
     }
 }
