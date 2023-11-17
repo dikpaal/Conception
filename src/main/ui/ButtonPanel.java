@@ -1,8 +1,12 @@
 package ui;
 
+import model.Chair;
+import model.Furniture;
+
 import javax.swing.*;
+import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 
 public class ButtonPanel extends PanelGUI {
 
@@ -51,14 +55,20 @@ public class ButtonPanel extends PanelGUI {
     }
 
     public void chairButtonPressed() {
-        this.messagePanel.getLabel().setText("Chair selected");
+        this.messagePanel.getLabel().setText("Chair selected. Now select a spot...");
+        createNewChair();
+
     }
 
     public void sofaButtonPressed() {
-        this.messagePanel.getLabel().setText("Sofa selected");
+        this.messagePanel.getLabel().setText("Sofa selected. Now select a spot...");
     }
 
     public void centreTableButtonPressed() {
-        this.messagePanel.getLabel().setText("Centre table selected");
+        this.messagePanel.getLabel().setText("Centre table selected. Now select a spot...");
+    }
+
+    private void createNewChair() {
+        Furniture chair = new Chair();
     }
 }

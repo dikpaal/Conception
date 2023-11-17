@@ -3,6 +3,7 @@ package ui;
 import model.Room;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Scanner;
 
@@ -23,10 +24,10 @@ public class Main {
 
         // USER SELECTS THE DIMENSION OF THE ROOM
         System.out.println();
-        System.out.println("What would the dimension of your room be? (Select an odd number only) ");
+        System.out.println("What would the dimension of your room be? (Select an even number only)");
         String dimensionString = s.nextLine();
         int dimensionInt = Integer.parseInt(dimensionString);
-        r.setDimension(dimensionInt);
+        r.setDimension(dimensionInt + 1);
 
         // THE PROGRAM STARTS HERE
         ConsoleUI consoleUI = new ConsoleUI();
@@ -39,11 +40,11 @@ public class Main {
         // The main GUI Frame
         FrameGUI guiFrame = new FrameGUI(username);
 
-        // The canvas that is a grid and represents the room
-        Canvas canvas = new Canvas(r);
-
         // The message panel that contains the messages for the user
         MessagePanel messagePanel = new MessagePanel(0, 440, 400, 50, r);
+
+        // The canvas that is a grid and represents the room
+        Canvas canvas = new Canvas(r, messagePanel);
 
         // The button panel that contains all the buttons
         PanelGUI buttonPanel = new ButtonPanel(guiFrame.getWidth(), 40, canvas, messagePanel);

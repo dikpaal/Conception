@@ -117,6 +117,10 @@ public class JsonReader {
             int spot = Integer.parseInt(jsonObject.getString("spot"));
             furniture = new Chair();
             furniture.setSpot(spot);
+        } else if (type == SOFA) {
+            List<Integer> spots = parseSpots(jsonObject.getJSONArray("spots"));
+            furniture = new Sofa();
+            furniture.setSpots(spots);
         } else {
             List<Integer> spots = parseSpots(jsonObject.getJSONArray("spots"));
             furniture = new CenterTable();
