@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static model.FurnitureType.CENTRETABLE;
 import static model.FurnitureType.SOFA;
 
 public class Canvas extends PanelGUI {
@@ -55,6 +56,7 @@ public class Canvas extends PanelGUI {
     public void drawRoom() {
         List<List<String>> numberedAndFurnitureList = room.getNumberedAndFurnitureList();
         int count = 0;
+        boolean centreTablePlaced = false;
         for (int i = 0; i < numberedAndFurnitureList.size(); i++) {
             List<String> subList = numberedAndFurnitureList.get(i);
             for (int j = 0; j < subList.size(); j++) {
@@ -126,6 +128,32 @@ public class Canvas extends PanelGUI {
                                 break;
                             }
                         }
+                    }
+                } else if (number.equals("Tv")) {
+                    if (!centreTablePlaced) {
+                        List<Furniture> furnitureList = room.getFurnitureList();
+                        for (Furniture f : furnitureList) {
+                            if (f.getType() == CENTRETABLE) {
+                                ImageIcon squareIconCentreTable = new ImageIcon("src/main/ui/images/centretable.png");
+                                Image squareImgCentreTable = squareIconCentreTable.getImage();
+                                Image newSquareImgCentreTable = squareImgCentreTable.getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH);
+                                ImageIcon newSquareIconCentreTable = new ImageIcon(newSquareImgCentreTable);
+                                Button squareButtonCentreTable = new Button(count, FurnitureType.CENTRETABLE);
+                                squareButtonCentreTable.setIcon(newSquareIconCentreTable);
+                                squareButtonCentreTable.setPreferredSize(new Dimension(80, 80));
+                                squareButtonCentreTable.setBackground(Color.white);
+                                squareButtonCentreTable.setForeground(Color.black);
+                                squareButtonCentreTable.setFocusable(false);
+                                gbc.gridx = j;
+                                gbc.gridy = i;
+                                gbc.gridheight = 2;
+                                gbc.gridwidth = 2;
+                                this.add(squareButtonCentreTable, gbc);
+                                centreTablePlaced = true;
+                            }
+                        }
+                    } else {
+                        // do nothing
                     }
                 } else {
                     ImageIcon squareIcon = new ImageIcon("src/main/ui/images/square.png");
