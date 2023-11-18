@@ -34,32 +34,25 @@
         ],
         "1": [
             "Sv",
-            "Tv",
-            "vT",
+            "6",
+            "7",
             "8"
         ],
         "2": [
             "vS",
-            "Tv",
-            "vT",
+            "10",
+            "11",
             "12"
         ],
         "3": [
             "13",
             "14",
             "15",
-            "Cv"
+            "16"
         ]
     },
     "name": "sdf",
     "furnitureList": [
-        {
-            "color": "BEIGE",
-            "spot": "16",
-            "type": "CHAIR",
-            "dimension": "1",
-            "direction": "DOWN"
-        },
         {
             "color": "BEIGE",
             "spots": [
@@ -67,18 +60,6 @@
                 "3"
             ],
             "type": "SOFA",
-            "dimension": "2",
-            "direction": "DOWN"
-        },
-        {
-            "color": "WHITE",
-            "spots": [
-                "6",
-                "7",
-                "10",
-                "11"
-            ],
-            "type": "CENTRETABLE",
             "dimension": "2",
             "direction": "DOWN"
         },

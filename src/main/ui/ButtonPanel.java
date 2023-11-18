@@ -2,16 +2,23 @@ package ui;
 
 import model.Chair;
 import model.Furniture;
+import model.FurnitureType;
 
+import javax.accessibility.AccessibleValue;
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ButtonPanel extends PanelGUI {
 
-    Canvas canvas;
-    MessagePanel messagePanel;
+    private Canvas canvas;
+    private MessagePanel messagePanel;
+    private boolean chairButtonSelected = false;
+    private boolean sofaButtonSelected = false;
+    private boolean centreTableButtonSelected = false;
 
 
     public ButtonPanel(int w, int h, Canvas canvas, MessagePanel messagePanel) {
@@ -55,20 +62,58 @@ public class ButtonPanel extends PanelGUI {
     }
 
     public void chairButtonPressed() {
-        this.messagePanel.getLabel().setText("Chair selected. Now select a spot...");
-        createNewChair();
 
+
+        if (!chairButtonSelected) {
+            chairButtonSelected = true;
+            canvas.revertHighlighting();
+            canvas.highlightAllAvailableSpotsForChair();
+            this.messagePanel.getLabel().setText("Chair selected. Now select a spot...");
+        } else {
+            chairButtonSelected = false;
+            canvas.revertHighlighting();
+            this.messagePanel.getLabel().setText("Nothing selected.");
+        }
+
+        sofaButtonSelected = false;
+        centreTableButtonSelected = false;
     }
 
     public void sofaButtonPressed() {
-        this.messagePanel.getLabel().setText("Sofa selected. Now select a spot...");
+
+        if (!sofaButtonSelected) {
+            sofaButtonSelected = true;
+            canvas.revertHighlighting();
+            canvas.highlightAllAvailableSpotsForSofa();
+            this.messagePanel.getLabel().setText("Sofa selected. Now select a spot...");
+
+        } else {
+            sofaButtonSelected = false;
+            canvas.revertHighlighting();
+            this.messagePanel.getLabel().setText("Nothing selected.");
+
+        }
+
+        chairButtonSelected = false;
+        centreTableButtonSelected = false;
     }
 
     public void centreTableButtonPressed() {
-        this.messagePanel.getLabel().setText("Centre table selected. Now select a spot...");
-    }
 
-    private void createNewChair() {
-        Furniture chair = new Chair();
+        if (!centreTableButtonSelected) {
+            centreTableButtonSelected = true;
+            canvas.revertHighlighting();
+            canvas.highlightAllAvailableSpotsForCentreTable();
+            this.messagePanel.getLabel().setText("Centre table selected. Now select a spot...");
+
+        } else {
+            centreTableButtonSelected = false;
+            canvas.revertHighlighting();
+            this.messagePanel.getLabel().setText("Nothing selected.");
+
+        }
+
+        chairButtonSelected = false;
+        sofaButtonSelected = false;
     }
 }

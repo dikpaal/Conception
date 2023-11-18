@@ -380,7 +380,12 @@ public class Room {
                 listOfEligibleSpots.add(first);
             }
         }
-        return (listOfEligibleSpots.get(0) + " or " + listOfEligibleSpots.get(1));
+
+        if (listOfEligibleSpots.size() == 1) {
+            return listOfEligibleSpots.get(0);
+        } else {
+            return (listOfEligibleSpots.get(0) + " or " + listOfEligibleSpots.get(1));
+        }
     }
 
     // REQUIRES: spot1 > 0 and spot2 > 0 and spot1 and spot2 in the numberedList()
