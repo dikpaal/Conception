@@ -29,17 +29,17 @@
         "0": [
             "1",
             "2",
-            "Sv",
-            "vS"
+            "3",
+            "4"
         ],
         "1": [
-            "Sv",
+            "5",
             "6",
             "7",
             "8"
         ],
         "2": [
-            "vS",
+            "9",
             "10",
             "11",
             "12"
@@ -52,27 +52,6 @@
         ]
     },
     "name": "sdf",
-    "furnitureList": [
-        {
-            "color": "BEIGE",
-            "spots": [
-                "4",
-                "3"
-            ],
-            "type": "SOFA",
-            "dimension": "2",
-            "direction": "DOWN"
-        },
-        {
-            "color": "BEIGE",
-            "spots": [
-                "5",
-                "9"
-            ],
-            "type": "SOFA",
-            "dimension": "2",
-            "direction": "DOWN"
-        }
-    ],
+    "furnitureList": [],
     "dimension": "5"
 }

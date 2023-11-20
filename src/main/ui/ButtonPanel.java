@@ -63,6 +63,8 @@ public class ButtonPanel extends PanelGUI {
 
     public void chairButtonPressed() {
 
+        sofaButtonSelected = false;
+        centreTableButtonSelected = false;
 
         if (!chairButtonSelected) {
             chairButtonSelected = true;
@@ -74,12 +76,13 @@ public class ButtonPanel extends PanelGUI {
             canvas.revertHighlighting();
             this.messagePanel.getLabel().setText("Nothing selected.");
         }
-
-        sofaButtonSelected = false;
-        centreTableButtonSelected = false;
     }
 
     public void sofaButtonPressed() {
+
+        chairButtonSelected = false;
+        centreTableButtonSelected = false;
+
 
         if (!sofaButtonSelected) {
             sofaButtonSelected = true;
@@ -94,11 +97,12 @@ public class ButtonPanel extends PanelGUI {
 
         }
 
-        chairButtonSelected = false;
-        centreTableButtonSelected = false;
     }
 
     public void centreTableButtonPressed() {
+
+        chairButtonSelected = false;
+        sofaButtonSelected = false;
 
         if (!centreTableButtonSelected) {
             centreTableButtonSelected = true;
@@ -113,7 +117,17 @@ public class ButtonPanel extends PanelGUI {
 
         }
 
-        chairButtonSelected = false;
-        sofaButtonSelected = false;
+    }
+
+    public boolean isChairButtonSelected() {
+        return chairButtonSelected;
+    }
+
+    public boolean isSofaButtonSelected() {
+        return sofaButtonSelected;
+    }
+
+    public boolean isCentreTableButtonSelected() {
+        return centreTableButtonSelected;
     }
 }

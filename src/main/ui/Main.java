@@ -43,14 +43,15 @@ public class Main {
         // The message panel that contains the messages for the user
         MessagePanel messagePanel = new MessagePanel(0, 440, 400, 50, r);
 
+        // The canvas panel that contains the canvas in which the designing takes place
+        PanelGUI canvasPanel = new CanvasPanel(0, 40, 400, 400);
+
         // The canvas that is a grid and represents the room
         Canvas canvas = new Canvas(r, messagePanel);
 
         // The button panel that contains all the buttons
         PanelGUI buttonPanel = new ButtonPanel(guiFrame.getWidth(), 40, canvas, messagePanel);
 
-        // The canvas panel that contains the canvas in which the designing takes place
-        PanelGUI canvasPanel = new CanvasPanel(0, 40, 400, 400);
 
         canvasPanel.add(canvas);
 
