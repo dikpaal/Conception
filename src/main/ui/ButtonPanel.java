@@ -20,11 +20,19 @@ public class ButtonPanel extends PanelGUI {
     private boolean sofaButtonSelected = false;
     private boolean centreTableButtonSelected = false;
 
-
     public ButtonPanel(int w, int h, Canvas canvas, MessagePanel messagePanel) {
 
         this.canvas = canvas;
         this.messagePanel = messagePanel;
+
+        ImageIcon saveIcon = new ImageIcon("src/main/ui/images/save.png");
+        Image saveImg = saveIcon.getImage();
+        Image newSaveImg = saveImg.getScaledInstance(25, 20,  java.awt.Image.SCALE_SMOOTH);
+        ImageIcon newSaveIcon = new ImageIcon(newSaveImg);
+        JButton saveButton = new JButton();
+        saveButton.setBounds(15, h / 3, 25, 20);
+        saveButton.setIcon(newSaveIcon);
+        saveButton.addActionListener(e -> saveButtonPressed());
 
         ImageIcon chairIcon = new ImageIcon("src/main/ui/images/chair.png");
         Image chairImg = chairIcon.getImage();
@@ -54,11 +62,24 @@ public class ButtonPanel extends PanelGUI {
         centreTableButton.addActionListener(e -> centreTableButtonPressed());
 
         this.setLayout(null);
+        this.add(saveButton);
         this.add(chairButton);
         this.add(sofaButton);
         this.add(centreTableButton);
         this.setBackground(Color.white);
         this.setBounds(0, 0, w, h);
+    }
+
+    public void saveButtonPressed() {
+        chairButtonSelected = false;
+        sofaButtonSelected = false;
+        centreTableButtonSelected = false;
+
+        System.out.println(canvas.getRoom().getUsername());
+        System.out.println(canvas.getRoom().getFurnitureList());
+        System.out.println(canvas.getRoom().getNumberedAndFurnitureList());
+        canvas.saveRoom();
+
     }
 
     public void chairButtonPressed() {

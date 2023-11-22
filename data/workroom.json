@@ -27,22 +27,22 @@
     },
     "numberedAndFurnitureList": {
         "0": [
-            "1",
-            "2",
-            "3",
-            "4"
+            "Cv",
+            "Sv",
+            "vS",
+            "Sv"
         ],
         "1": [
             "5",
-            "6",
-            "7",
-            "8"
+            "Tv",
+            "vT",
+            "vS"
         ],
         "2": [
             "9",
-            "10",
-            "11",
-            "12"
+            "Tv",
+            "vT",
+            "Cv"
         ],
         "3": [
             "13",
@@ -51,7 +51,54 @@
             "16"
         ]
     },
-    "name": "sdf",
-    "furnitureList": [],
+    "name": "Dikpaal",
+    "furnitureList": [
+        {
+            "color": "BEIGE",
+            "spots": [
+                "4",
+                "8"
+            ],
+            "type": "SOFA",
+            "dimension": "2",
+            "direction": "DOWN"
+        },
+        {
+            "color": "BEIGE",
+            "spot": "1",
+            "type": "CHAIR",
+            "dimension": "1",
+            "direction": "DOWN"
+        },
+        {
+            "color": "WHITE",
+            "spots": [
+                "6",
+                "7",
+                "10",
+                "11"
+            ],
+            "type": "CENTRETABLE",
+            "dimension": "2",
+            "direction": "DOWN"
+        },
+        {
+            "color": "BEIGE",
+            "spot": "12",
+            "type": "CHAIR",
+            "dimension": "1",
+            "direction": "DOWN"
+        },
+        {
+            "color": "BEIGE",
+            "spots": [
+                "2",
+                "3"
+            ],
+            "type": "SOFA",
+            "dimension": "2",
+            "direction": "DOWN"
+        }
+    ],
     "dimension": "5"
 }
