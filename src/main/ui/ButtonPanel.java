@@ -101,10 +101,6 @@ public class ButtonPanel extends PanelGUI {
         chairButtonSelected = false;
         sofaButtonSelected = false;
         centreTableButtonSelected = false;
-
-        System.out.println(canvas.getRoom().getUsername());
-        System.out.println(canvas.getRoom().getFurnitureList());
-        System.out.println(canvas.getRoom().getNumberedAndFurnitureList());
         canvas.saveRoom();
 
     }
@@ -129,11 +125,6 @@ public class ButtonPanel extends PanelGUI {
 
     // EFFECTS: Action Listener of the sofa button
     public void sofaButtonPressed() {
-
-        for (Button b : canvas.allButtons) {
-            System.out.println(b.getType() + " " + b.getIds() + " " + b.getId());
-        }
-
         chairButtonSelected = false;
         centreTableButtonSelected = false;
 

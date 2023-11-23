@@ -17,10 +17,12 @@ import static model.FurnitureType.*;
 
 // Represents the canvas all the furniture can be placed in or removed from
 public class Canvas extends PanelGUI {
-    Room room;
-    List<Button> allButtons;
-    MessagePanel messagePanel;
-    GridBagConstraints gbc;
+    private Room room;
+    private ConsoleUI consoleUI;
+
+    private List<Button> allButtons;
+    private MessagePanel messagePanel;
+    private GridBagConstraints gbc;
     private int firstSofaSpot;
 
     private boolean chairPositionBeingSelected = false;
@@ -33,8 +35,10 @@ public class Canvas extends PanelGUI {
     private JsonReader jsonReader;
 
     // EFFECTS: constructs the canvas with load, r, messagePanel
-    public Canvas(Boolean load, Room r, MessagePanel messagePanel) {
+    public Canvas(Boolean load, Room r, MessagePanel messagePanel, ConsoleUI consoleUI) {
         this.room = r;
+        this.consoleUI = consoleUI;
+
         this.messagePanel = messagePanel;
         allButtons = new ArrayList<>();
 
@@ -49,10 +53,12 @@ public class Canvas extends PanelGUI {
     // MODIFIES: nothing
     // EFFECTS: calls to create a numberedPlane, initiate a numberedAndFurnitureList, and prints the room
     public void setup(Boolean load) {
-        List<List<String>> numberedPlane = room.createNumberedPlane();
+//        List<List<String>> numberedPlane = room.createNumberedPlane();
+        List<List<String>> numberedPlane = consoleUI.createNumberedPlane();
         room.setNumberedPlane(numberedPlane);
-        room.initiateNumberedAndFurnitureList();
-
+//        consoleUI.setNumberedPlane(numberedPlane);
+//        room.initiateNumberedAndFurnitureList();
+        consoleUI.initiateNumberedAndFurnitureList();
         if (load) {
             loadRoom();
             drawRoom();
@@ -282,7 +288,8 @@ public class Canvas extends PanelGUI {
         firstSofaPositionBeingSelected = true;
         centreTablePositionBeingSelected = false;
 
-        List<List<String>> availableSpots = this.getRoom().spaceForASofa();
+//        List<List<String>> availableSpots = this.getRoom().spaceForASofa();
+        List<List<String>> availableSpots = consoleUI.spaceForASofa();
 
         List<Integer> firstSpots = new ArrayList<>();
         List<Integer> secondSpots = new ArrayList<>();
@@ -298,8 +305,6 @@ public class Canvas extends PanelGUI {
     // MODIFIES: nothing
     // EFFECTS: parses through allButtons and highlights all the spots where a sofa can be placed
     private void parseAndHighlightFirstSofaSpot(List<Integer> firstSpots, List<Integer> secondSpots) {
-
-        System.out.println();
 
         for (Button button : this.getAllButtons()) {
             if (button.getType() == FurnitureType.SQUARE) {
@@ -329,7 +334,9 @@ public class Canvas extends PanelGUI {
         firstSofaPositionBeingSelected = false;
         centreTablePositionBeingSelected = true;
 
-        List<String> spots = room.spaceForACentreTable();
+//        List<String> spots = room.spaceForACentreTable();
+        List<String> spots = consoleUI.spaceForACentreTable();
+
 
         if (spots.isEmpty()) {
             //
@@ -379,7 +386,9 @@ public class Canvas extends PanelGUI {
         chairPositionBeingSelected = false;
         firstSofaPositionBeingSelected = false;
         secondSofaPositionBeingSelected = true;
-        String spots = this.getRoom().getTheOtherSpot(Integer.toString(spot));
+//        String spots = this.getRoom().getTheOtherSpot(Integer.toString(spot));
+
+        String spots = consoleUI.getTheOtherSpot(Integer.toString(spot));
 
         int spot1;
         int spot2;
@@ -616,7 +625,8 @@ public class Canvas extends PanelGUI {
     // EFFECTS: adds the chair to the canvas and to the furniture list
     public void addChair(Button b) {
         Furniture chair = new Chair();
-        room.setChairInNumberedAndFurnitureList(chair, b.getId());
+//        room.setChairInNumberedAndFurnitureList(chair, b.getId());
+        consoleUI.setChairInNumberedAndFurnitureList(chair, b.getId());
         b.setType(CHAIR);
         ImageIcon squareIcon = new ImageIcon("src/main/ui/images/chair.png");
         Image squareImg = squareIcon.getImage();
@@ -714,13 +724,15 @@ public class Canvas extends PanelGUI {
 
         Furniture sofa = new Sofa();
         if (getFirstSofaSpot() < button.getId()) {
-            room.setSofaInNumberedAndFurnitureList(sofa, getFirstSofaSpot(), button.getId());
+//            room.setSofaInNumberedAndFurnitureList(sofa, getFirstSofaSpot(), button.getId());
+            consoleUI.setSofaInNumberedAndFurnitureList(sofa, getFirstSofaSpot(), button.getId());
             setSofaInFirstSpot(spotList, button);
 
         } else if (getFirstSofaSpot() > button.getId()) {
             spotList.add(button.getId());
             spotList.add(getFirstSofaSpot());
-            room.setSofaInNumberedAndFurnitureList(sofa, button.getId(), getFirstSofaSpot());
+//            room.setSofaInNumberedAndFurnitureList(sofa, button.getId(), getFirstSofaSpot());
+            consoleUI.setSofaInNumberedAndFurnitureList(sofa, button.getId(), getFirstSofaSpot());
             setSofaInSecondSpot(button);
         } else {
             revertHighlighting();
@@ -733,7 +745,8 @@ public class Canvas extends PanelGUI {
     public void addCentreTable(Button b) {
 
         Furniture centreTable = new CenterTable();
-        room.setCenterTableInNumberedAndFurnitureList(centreTable, Integer.toString(b.getId()));
+//        room.setCenterTableInNumberedAndFurnitureList(centreTable, Integer.toString(b.getId()));
+        consoleUI.setCenterTableInNumberedAndFurnitureList(centreTable, Integer.toString(b.getId()));
         b.setType(CENTRETABLE);
 
         List<Button> buttonList = new ArrayList<>();
@@ -847,6 +860,11 @@ public class Canvas extends PanelGUI {
         return this.room;
     }
 
+    // returns the consoleUI
+    public ConsoleUI getConsoleUI() {
+        return this.consoleUI;
+    }
+
     public MessagePanel getMessagePanel() {
         return this.messagePanel;
     }
@@ -914,6 +932,7 @@ public class Canvas extends PanelGUI {
     public void loadRoom() {
         try {
             room = jsonReader.read();
+            consoleUI.setRoom(room);
             System.out.println("Loaded " + room.getUsername() + "'s room from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);

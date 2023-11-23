@@ -12,14 +12,16 @@ public class GUI {
     // EFFECTS: constructs a GUI object
     public GUI() {
 
-        Canvas c = new Canvas(loadRoom, new Room(5), new MessagePanel(1, 1, 1, 1, new Room(5)));
+        Room r = new Room(5);
+        ConsoleUI consoleUI = new ConsoleUI();
+        consoleUI.setRoom(r);
+        Canvas c = new Canvas(loadRoom, r, new MessagePanel(1, 1, 1, 1, r), consoleUI);
 
         try {
             c.loadRoom();
             JFrame loadRoomOrNewRoomFrame = new JFrame();
             loadRoomOrNewRoom(loadRoomOrNewRoomFrame);
         } catch (Exception e) {
-            System.out.println(c.room.getNumberedAndFurnitureList());
             JFrame onlyNewRoomFrame = new JFrame();
             onlyNewRoom(onlyNewRoomFrame);
         }
@@ -109,7 +111,6 @@ public class GUI {
     // EFFECTS: Action listener for the Done button
     private void getUsername(JTextField textField, JFrame frame) {
         textField.getText();
-        System.out.println(textField.getText());
         frame.setVisible(false);
         getRoomFromUser(textField.getText());
     }
@@ -140,7 +141,6 @@ public class GUI {
     // EFFECTS: Action listener for the Done button
     private void getRoom(JTextField textField, JFrame frame, String username) {
         textField.getText();
-        System.out.println(textField.getText());
         frame.setVisible(false);
 
         Room r = new Room(Integer.parseInt(textField.getText()));
@@ -161,8 +161,11 @@ public class GUI {
         // The canvas panel that contains the canvas in which the designing takes place
         PanelGUI canvasPanel = new CanvasPanel(0, 40, 400, 400);
 
+        ConsoleUI consoleUI = new ConsoleUI();
+        consoleUI.setRoom(r);
+
         // The canvas that is a grid and represents the room
-        Canvas canvas = new Canvas(load, r, messagePanel);
+        Canvas canvas = new Canvas(load, r, messagePanel, consoleUI);
 
         // The button panel that contains all the buttons
         PanelGUI buttonPanel = new ButtonPanel(guiFrame.getWidth(), 40, canvas, messagePanel);

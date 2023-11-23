@@ -55,10 +55,12 @@ public class Button extends JButton {
     // EFFECTS: removes the chair from the canvas
     public void removeChair() {
         if (canvas.chairPositionBeingSelected()) {
-            canvas.getRoom().removeChairFromSpot(Integer.toString(this.id));
+//            canvas.getRoom().removeChairFromSpot(Integer.toString(this.id));
+            canvas.getConsoleUI().removeChairFromSpot(Integer.toString(this.id));
             changeToGreenSquare();
         } else {
-            canvas.getRoom().removeChairFromSpot(Integer.toString(this.id));
+//            canvas.getRoom().removeChairFromSpot(Integer.toString(this.id));
+            canvas.getConsoleUI().removeChairFromSpot(Integer.toString(this.id));
             changeToSquare();
         }
     }
@@ -71,7 +73,8 @@ public class Button extends JButton {
         int smallerId = canvas.getSmallerId(this.ids.get(0), this.ids.get(1));
         int largerId = canvas.getLargerId(smallerId, this.ids.get(0), this.ids.get(1));
 
-        canvas.getRoom().removeSofaFromSpot(Integer.toString(smallerId), Integer.toString(largerId));
+//        canvas.getRoom().removeSofaFromSpot(Integer.toString(smallerId), Integer.toString(largerId));
+        canvas.getConsoleUI().removeSofaFromSpot(Integer.toString(smallerId), Integer.toString(largerId));
 
         changeToSquaresSofa(smallerId, largerId);
     }
@@ -80,7 +83,9 @@ public class Button extends JButton {
     // MODIFIES: this
     // EFFECTS: removes the centre table from the canvas
     public void removeCentreTable() {
-        canvas.getRoom().removeCentreTableFromSpot(Integer.toString(this.ids.get(0)));
+//        canvas.getRoom().removeCentreTableFromSpot(Integer.toString(this.ids.get(0)));
+        canvas.getConsoleUI().removeCentreTableFromSpot(Integer.toString(this.ids.get(0)));
+
         canvas.revertGbcOfCentreTableButton(this);
     }
 
