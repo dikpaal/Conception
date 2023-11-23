@@ -10,10 +10,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import static model.FurnitureType.*;
 
@@ -34,6 +32,7 @@ public class Canvas extends PanelGUI {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
+    // EFFECTS: constructs the canvas with load, r, messagePanel
     public Canvas(Boolean load, Room r, MessagePanel messagePanel) {
         this.room = r;
         this.messagePanel = messagePanel;
@@ -45,7 +44,6 @@ public class Canvas extends PanelGUI {
         gbc = new GridBagConstraints();
         setup(load);
     }
-
 
     // REQUIRES: nothing
     // MODIFIES: nothing
@@ -70,10 +68,8 @@ public class Canvas extends PanelGUI {
         int count = 0;
         boolean centreTablePlaced = false;
         for (int i = 0; i < room.getNumberedAndFurnitureList().size(); i++) {
-//            List<String> subList = room.getNumberedAndFurnitureList().get(i);
             for (int j = 0; j < room.getNumberedAndFurnitureList().get(i).size(); j++) {
                 count++;
-//                String number = subList.get(j);
                 if (room.getNumberedAndFurnitureList().get(i).get(j).equals("Cv")) {
                     drawChair(count, j, i);
                 } else if (room.getNumberedAndFurnitureList().get(i).get(j).equals("Sv")) {
@@ -235,7 +231,7 @@ public class Canvas extends PanelGUI {
         Image squareImg = squareIcon.getImage();
         Image newSquareImg = squareImg.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
         ImageIcon newSquareIcon = new ImageIcon(newSquareImg);
-        Button squareButton = new Button(count, null, FurnitureType.SQUARE, this, j, i);
+        Button squareButton = new Button(count, new ArrayList<>(), FurnitureType.SQUARE, this, j, i);
         squareButton.setIcon(newSquareIcon);
         squareButton.setPreferredSize(new Dimension(40, 40));
         squareButton.setBackground(Color.white);
@@ -250,7 +246,9 @@ public class Canvas extends PanelGUI {
         allButtons.add(squareButton);
     }
 
-    // highlights all the available spots for a chair
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: highlights all the available spots for a chair
     public void highlightAllAvailableSpotsForChair() {
         chairPositionBeingSelected = true;
         firstSofaPositionBeingSelected = false;
@@ -276,7 +274,9 @@ public class Canvas extends PanelGUI {
         }
     }
 
-    // highlights all the available spots for a sofa
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: highlights all the available spots for a sofa
     public void highlightAllAvailableSpotsForSofa() {
         chairPositionBeingSelected = false;
         firstSofaPositionBeingSelected = true;
@@ -294,8 +294,13 @@ public class Canvas extends PanelGUI {
         parseAndHighlightFirstSofaSpot(firstSpots, secondSpots);
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
     // EFFECTS: parses through allButtons and highlights all the spots where a sofa can be placed
     private void parseAndHighlightFirstSofaSpot(List<Integer> firstSpots, List<Integer> secondSpots) {
+
+        System.out.println();
+
         for (Button button : this.getAllButtons()) {
             if (button.getType() == FurnitureType.SQUARE) {
                 for (int spot : firstSpots) {
@@ -315,7 +320,9 @@ public class Canvas extends PanelGUI {
         }
     }
 
-    // highlights all the available spots for a centre table
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: highlights all the available spots for a centre table
     public void highlightAllAvailableSpotsForCentreTable() {
 
         chairPositionBeingSelected = false;
@@ -341,7 +348,9 @@ public class Canvas extends PanelGUI {
         }
     }
 
-    // reverts the highlighting of the canvas squares
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: reverts the highlighting of the canvas squares
     public void revertHighlighting() {
         chairPositionBeingSelected = false;
         firstSofaPositionBeingSelected = false;
@@ -363,7 +372,9 @@ public class Canvas extends PanelGUI {
         }
     }
 
-    // highlights the other spot for a sofa
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: highlights the other spot for a sofa
     public void highlightTheOtherSpotsForSofa(int spot) {
         chairPositionBeingSelected = false;
         firstSofaPositionBeingSelected = false;
@@ -392,6 +403,8 @@ public class Canvas extends PanelGUI {
         parseAndHighlight(spot1, spot2);
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
     // EFFECTS: preses through allButtons and highlights the necessary squares
     private void parseAndHighlight(int spot1, int spot2) {
         for (Button button : this.getAllButtons()) {
@@ -403,6 +416,9 @@ public class Canvas extends PanelGUI {
         }
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: changes firstSofaPositionBeingSelected and secondSofaPositionBeingSelected to the opposite boolean value
     public void alterSofaPositionBeingSelected() {
         if (firstSofaPositionBeingSelected) {
             firstSofaPositionBeingSelected = false;
@@ -413,6 +429,9 @@ public class Canvas extends PanelGUI {
         }
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: changes the gbc of b to make it a horizontal sofa
     public void changeGbcOfSofaButtonHorizontal(Button b, GridBagConstraints gbc) {
         int smallerId;
 
@@ -425,13 +444,8 @@ public class Canvas extends PanelGUI {
         int row = smallerId / (room.getDimension().getLength() - 1) + 1;
         int col = smallerId % (room.getDimension().getLength() - 1);
 
-        System.out.println("Row" + row + " " + "Col" + col);
-
         b.setGridX(col - 1);
         b.setGridY(row - 1);
-
-        System.out.println(b.getGridX());
-        System.out.println(b.getGridY());
 
         gbc.gridx = b.getGridX();
         gbc.gridy = b.getGridY();
@@ -443,13 +457,11 @@ public class Canvas extends PanelGUI {
 
         revalidate();
         repaint();
-//
-//        for (Button b : allButtons) {
-//            System.out.println();
-//        }
-
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: changes the gbc of b to make it a vertical sofa
     public void changeGbcOfSofaButtonVertical(Button b, GridBagConstraints gbc) {
         int smallerId = getSmallerId(b.getIds().get(0), b.getIds().get(1));
 
@@ -481,6 +493,65 @@ public class Canvas extends PanelGUI {
         repaint();
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: reverts back the gbc of b to 1x1
+    public void revertGbcOfSofaButtonHorizontal(Button b) {
+        int smallerId = b.getId();
+
+        int row = smallerId / (room.getDimension().getLength() - 1) + 1;
+        int col = smallerId % (room.getDimension().getLength() - 1);
+
+        b.setGridX(col - 1);
+        b.setGridY(row - 1);
+
+        gbc.gridx = b.getGridX();
+        gbc.gridy = b.getGridY();
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+
+        ((GridBagLayout) getLayout()).setConstraints(b, gbc);
+
+        revalidate();
+        repaint();
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: reverts back the gbc of b to 1x1
+    public void revertGbcOfSofaButtonVertical(Button b) {
+        int smallerId = b.getId();
+
+        int row = smallerId / (room.getDimension().getLength() - 1) + 1;
+        int col = smallerId % (room.getDimension().getLength() - 1);
+
+        if (row == 2 && col == 0) {
+            col = room.getDimension().getLength() - 1;
+            row--;
+        } else if (row == room.getDimension().getLength() - 1 && col == 0) {
+            col = room.getDimension().getLength() - 1;
+            row--;
+        } else if (col == 0) {
+            col = ((row * (room.getDimension().getLength() - 1)) / 2) - 2;
+            row--;
+        }
+
+        b.setGridX(col - 1);
+        b.setGridY(row - 1);
+
+        gbc.gridx = b.getGridX();
+        gbc.gridy = b.getGridY();
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+
+        ((GridBagLayout) getLayout()).setConstraints(b, gbc);
+        revalidate();
+        repaint();
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: changes the gbc of b to make it a 2x2 centre table
     public void changeGbcOfCentreTableButton(Button b, GridBagConstraints gbc) {
         int smallerId;
 
@@ -493,13 +564,8 @@ public class Canvas extends PanelGUI {
         int row = smallerId / (room.getDimension().getLength() - 1) + 1;
         int col = smallerId % (room.getDimension().getLength() - 1);
 
-        System.out.println("Row" + row + " " + "Col" + col);
-
         b.setGridX(col - 1);
         b.setGridY(row - 1);
-
-        System.out.println(b.getGridX());
-        System.out.println(b.getGridY());
 
         gbc.gridx = b.getGridX();
         gbc.gridy = b.getGridY();
@@ -511,11 +577,38 @@ public class Canvas extends PanelGUI {
 
         revalidate();
         repaint();
-//
-//        for (Button b : allButtons) {
-//            System.out.println();
-//        }
+    }
 
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: reverts back the gbc of b to 1x1
+    public void revertGbcOfCentreTableButton(Button b) {
+        int smallerId;
+
+        if (b.getIds().get(0) < b.getIds().get(1)) {
+            smallerId = b.getIds().get(0);
+        } else {
+            smallerId = b.getIds().get(1);
+        }
+
+        int row = smallerId / (room.getDimension().getLength() - 1) + 1;
+        int col = smallerId % (room.getDimension().getLength() - 1);
+
+        b.setGridX(col - 1);
+        b.setGridY(row - 1);
+
+        gbc.gridx = b.getGridX();
+        gbc.gridy = b.getGridY();
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+
+        ((GridBagLayout) getLayout()).setConstraints(b, gbc);
+
+        revalidate();
+        repaint();
+        b.changeToSquare();
+        b.setId(b.getIds().get(0));
+        b.setIds(new ArrayList<>());
     }
 
     // REQUIRES: b.getType != CHAIR
@@ -567,7 +660,6 @@ public class Canvas extends PanelGUI {
         List<Button> buttonList = new ArrayList<>();
 
         for (Button b : getAllButtons()) {
-            int spot1 = spotList.get(0);
 
             if (b.getIds().size() != 0) {
 
@@ -575,15 +667,15 @@ public class Canvas extends PanelGUI {
                 int id2 = b.getIds().get(1);
                 int smallerId = getSmallerId(id1, id2);
 
-                if (spot1 == smallerId) {
+                if (spotList.get(0) == smallerId) {
                     int largerId = getLargerId(smallerId, id1, id2);
 
                     if (largerId == smallerId + 1) {
                         // HORIZONTAL SOFA
-                        makeHorizontalSofa(buttonList, b);
+                        buttonList = makeHorizontalSofa(buttonList, b);
                     } else if (largerId == smallerId + room.getDimension().getLength() - 1) {
                         // VERTICAL SOFA
-                        makeVerticalSofa(buttonList, b);
+                        buttonList = makeVerticalSofa(buttonList, b);
                     }
                 }
             } else {
@@ -592,13 +684,13 @@ public class Canvas extends PanelGUI {
         }
 
         revertHighlighting();
-        setAllButtons(buttonList);
+        setAllButtons(allButtons);
     }
 
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: returns min(id1, id2)
-    private int getSmallerId(int id1, int id2) {
+    public int getSmallerId(int id1, int id2) {
         if (id1 < id2) {
             return id1;
         } else {
@@ -609,7 +701,7 @@ public class Canvas extends PanelGUI {
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: returns max(id1, id2)
-    private int getLargerId(int smallerId, int id1, int id2) {
+    public int getLargerId(int smallerId, int id1, int id2) {
         if (smallerId == id1) {
             return id2;
         } else {
@@ -671,7 +763,7 @@ public class Canvas extends PanelGUI {
     // REQUIRES: nothing
     // MODIFIES: this, b
     // EFFECTS: makes a horizontal sofa to be placed in the canvas
-    public void makeHorizontalSofa(List<Button> buttonList, Button b) {
+    public List<Button> makeHorizontalSofa(List<Button> buttonList, Button b) {
         b.setType(SOFA);
         ImageIcon squareIcon = new ImageIcon("src/main/ui/images/sofa.png");
         Image squareImg = squareIcon.getImage();
@@ -685,12 +777,14 @@ public class Canvas extends PanelGUI {
         buttonList.add(b);
         revertHighlighting();
         changeGbcOfSofaButtonHorizontal(b, gbc);
+
+        return buttonList;
     }
 
     // REQUIRES: nothing
     // MODIFIES: this, b
     // EFFECTS: makes a vertical sofa to be placed in the canvas
-    public void makeVerticalSofa(List<Button> buttonList, Button b) {
+    public List<Button> makeVerticalSofa(List<Button> buttonList, Button b) {
         b.setType(SOFA);
         ImageIcon squareIcon = new ImageIcon("src/main/ui/images/sofaTilted.png");
         Image squareImg = squareIcon.getImage();
@@ -704,6 +798,9 @@ public class Canvas extends PanelGUI {
         buttonList.add(b);
         revertHighlighting();
         changeGbcOfSofaButtonVertical(b, gbc);
+
+
+        return buttonList;
     }
 
     // REQUIRES: nothing
@@ -743,9 +840,7 @@ public class Canvas extends PanelGUI {
         alterSofaPositionBeingSelected();
     }
 
-    public GridBagConstraints getGBC() {
-        return this.gbc;
-    }
+    // GETTERS AND SETTERS
 
     // returns the room
     public Room getRoom() {
@@ -781,20 +876,22 @@ public class Canvas extends PanelGUI {
         return this.centreTablePositionBeingSelected;
     }
 
+    // returns first sofa spot
     public int getFirstSofaSpot() {
         return this.firstSofaSpot;
     }
 
+    // sets first sofa spot to s
     public void setFirstSofaSpot(int s) {
         this.firstSofaSpot = s;
     }
 
+    // sets allButtons to list
     public void setAllButtons(List<Button> list) {
         this.allButtons = list;
     }
 
     // JSON
-
 
     // REQUIRES: nothing
     // MODIFIES: nothing

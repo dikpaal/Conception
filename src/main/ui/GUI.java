@@ -12,7 +12,7 @@ public class GUI {
     // EFFECTS: constructs a GUI object
     public GUI() {
 
-        Canvas c = new Canvas(loadRoom, new Room(5), new MessagePanel(1, 1, 1, 1, new Room(3)));
+        Canvas c = new Canvas(loadRoom, new Room(5), new MessagePanel(1, 1, 1, 1, new Room(5)));
 
         try {
             c.loadRoom();
@@ -25,6 +25,7 @@ public class GUI {
         }
     }
 
+    // EFFECTS: creates a new room button and adds it to the frame
     private void onlyNewRoom(JFrame frame) {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // exits the app on hitting close
         frame.setResizable(false); // prevent frame from being resized
@@ -42,6 +43,7 @@ public class GUI {
         frame.setVisible(true);
     }
 
+    // EFFECTS: creates a new room button and a load room button and adds them to the frame
     private void loadRoomOrNewRoom(JFrame frame) {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // exits the app on hitting close
         frame.setResizable(false); // prevent frame from being resized
@@ -66,6 +68,7 @@ public class GUI {
         frame.setVisible(true);
     }
 
+    // EFFECTS: Action listener for the load button
     private void loadRoomButtonPressed(JFrame frame) {
         loadRoom = true;
         frame.setVisible(false);
@@ -73,12 +76,14 @@ public class GUI {
 
     }
 
+    // EFFECTS: Action listener for the new button
     private void newRoomButtonPressed(JFrame frame) {
         loadRoom = false;
         frame.setVisible(false);
         getUsernameFromUser();
     }
 
+    // EFFECTS: Takes in the username from the user
     private void getUsernameFromUser() {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // exits the app on hitting close
@@ -101,6 +106,7 @@ public class GUI {
         frame.setVisible(true);
     }
 
+    // EFFECTS: Action listener for the Done button
     private void getUsername(JTextField textField, JFrame frame) {
         textField.getText();
         System.out.println(textField.getText());
@@ -108,6 +114,7 @@ public class GUI {
         getRoomFromUser(textField.getText());
     }
 
+    // EFFECTS: Takes in the username from the user
     private void getRoomFromUser(String username) {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // exits the app on hitting close
@@ -130,6 +137,7 @@ public class GUI {
         frame.setVisible(true);
     }
 
+    // EFFECTS: Action listener for the Done button
     private void getRoom(JTextField textField, JFrame frame, String username) {
         textField.getText();
         System.out.println(textField.getText());
@@ -141,6 +149,7 @@ public class GUI {
         createNewCanvas(loadRoom, username, r);
     }
 
+    // EFFECTS: creates a new canvas that the user can begin editing
     private void createNewCanvas(boolean load, String username, Room r) {
 
         // The main GUI Frame
@@ -165,9 +174,4 @@ public class GUI {
         guiFrame.add(messagePanel);
         guiFrame.setVisible(true); // makes the frame visible
     }
-
-    private void windowClosing() {
-
-    }
-
 }

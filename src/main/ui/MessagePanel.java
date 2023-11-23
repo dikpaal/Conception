@@ -5,12 +5,14 @@ import model.Room;
 import javax.swing.*;
 import java.awt.*;
 
+// Represents a message panel
 public class MessagePanel extends PanelGUI {
 
     String message;
     Room room;
     JLabel label;
 
+    // EFFECTS: constructs a message panel object with an x, y, w, h, and room r
     public MessagePanel(int x, int y, int w, int h, Room r) {
 
         this.room = r;
@@ -32,10 +34,12 @@ public class MessagePanel extends PanelGUI {
         this.add(label);
     }
 
+    // EFFECTS: returns the message
     public String getMessage() {
         return this.message;
     }
 
+    // EFFECTS: returns the label
     public JLabel getLabel() {
         return this.label;
     }

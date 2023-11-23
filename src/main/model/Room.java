@@ -800,7 +800,8 @@ public class Room {
 //
 //    // REQUIRES: d > 0 and d is odd
 //    // MODIFIES: nothing
-//    // EFFECTS: constructs a room with dimension d and empty numberedPlane, furnitureList, and numberedAndFurnitureList
+//    // EFFECTS: constructs a room with dimension d and empty numberedPlane, furnitureList,
+//    and numberedAndFurnitureList
 //    public Room(int d) {
 //        this.dimension = new Dimension(d, d);
 //        this.numberedPlane = new ArrayList<>();
