@@ -381,6 +381,13 @@ public class Room {
             }
         }
 
+        return returnEligibleSpots(listOfEligibleSpots);
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: returns the eligible spots
+    private String returnEligibleSpots(List<String> listOfEligibleSpots) {
         if (listOfEligibleSpots.size() == 1) {
             return listOfEligibleSpots.get(0);
         } else {
