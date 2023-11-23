@@ -124,7 +124,7 @@ public class GUI {
         frame.setLayout(null);
         frame.setResizable(false);
 
-        JTextField textField = new JTextField("Enter the dimension", 30);
+        JTextField textField = new JTextField("Enter dimension (odd number)", 30);
         textField.setBounds(10, 30, 180, 30);
         frame.add(textField);
 

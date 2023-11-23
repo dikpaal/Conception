@@ -23,5 +23,26 @@ tried doing.
 given that there is space.
 - The user will also be able to *view all the furniture placed in the room so far*.
 - The user can also *remove furniture* from the room.
-- The user can *save* their progress at the end.
-- The user can *load* their previous progress at the beginning.
+- The user can *save* their progress.
+- The user can *load* their previous progress at the start.
+
+## Instructions for Grader
+
+- When there's no room to load, at the start, the user is prompted with just one option to create a new room.
+  - When the user selects this option, they are then prompted to enter their "username" and "dimension" of their intended room.
+- When there is a room to load, at the start, the user is prompted with two options -- to create a new room or to load the room.
+  - When the user selects either option, they are then prompted to enter their "username" and "dimension" of their intended room.
+- If the user selected to create a new room, then a room of "dimension" of the choice of the user is created.
+- If the user selected to load room, then the saved room is loaded.
+- Now, if the user wants to place a chair in the canvas, then the user has to first select the chair button in the button panel.
+  - After selecting the chair button from the button panel, all the available spots in the canvas will turn green. On clicking
+    a green square, a chair will be placed at that spot.
+- If the suer wants to place a sofa in the canvas, then the user has to select the sofa button in the button panel.
+  - After selecting the sofa button from the button panel, all the available spots in the canvas will turn green. On clicking 
+    a green square, the second available spots for the sofa will now turn red. 
+  - On selecting one of the red squares, a sofa will be placed with according alignment (vertical or horizontal).
+- If the user wants to place a centre table in the canvas, then the user has to select the centre table button in the button panel.
+  - After selecting the centre table button from the button panel, a green square represents the top left spot of the centre table. 
+    On selecting the green square, a centre table will be placed all the required spots.
+- Now, if the user wants to remove a furniture from the canvas, then the user needs to click on the furniture that they wish to remove.
+- Finally, to save the progress, the user can press the save button in the left-most side of the button panel.
