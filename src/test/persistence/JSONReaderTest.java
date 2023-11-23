@@ -1,9 +1,6 @@
 package persistence;
 
-import model.Chair;
-import model.Furniture;
-import model.Room;
-import model.Sofa;
+import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ui.ConsoleUI;
@@ -75,7 +72,7 @@ class JsonReaderTest {
 
     @Test
     void testReaderGeneralWorkRoom() {
-        Room r = new Room(3);
+        Room r = new Room(5);
         r.setUsername("Dikpaal");
         ConsoleUI consoleUI = new ConsoleUI();
         consoleUI.setRoom(r);
@@ -88,8 +85,12 @@ class JsonReaderTest {
         Furniture sofa = new Sofa();
         sofa.setSpotsForSofa(3, 4);
 
+        Furniture centerTable = new CenterTable();
+        centerTable.setSpotsForCenterTable(6, 5);
+
         r.addToFurnitureList(chair);
         r.addToFurnitureList(sofa);
+        r.addToFurnitureList(centerTable);
 
         JsonWriter writer = new JsonWriter("./data/testReaderGeneralRoom.json");
         try {
@@ -103,9 +104,9 @@ class JsonReaderTest {
         JsonReader reader = new JsonReader("./data/testReaderGeneralRoom.json");
         try {
             r = reader.read();
-            assertEquals(3, r.getDimension().getLength());
+            assertEquals(5, r.getDimension().getLength());
             List<Furniture> furnitureList = r.getFurnitureList();
-            assertEquals(2, furnitureList.size());
+            assertEquals(3, furnitureList.size());
 
 
             assertEquals(1, r.getFurnitureList().get(0).getSpot());
@@ -114,7 +115,14 @@ class JsonReaderTest {
             spots.add(3);
             spots.add(4);
 
+            List<Integer> spots2 = new ArrayList<>();
+            spots2.add(6);
+            spots2.add(7);
+            spots2.add(10);
+            spots2.add(11);
+
             assertEquals(spots, r.getFurnitureList().get(1).getAllSpots());
+            assertEquals(spots2, r.getFurnitureList().get(2).getAllSpots());
 
 
         } catch (IOException e) {
