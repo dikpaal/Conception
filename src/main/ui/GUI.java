@@ -20,9 +20,11 @@ public class GUI {
         try {
             c.loadRoom();
             JFrame loadRoomOrNewRoomFrame = new JFrame();
+            loadRoomOrNewRoomFrame.setLocationRelativeTo(null);
             loadRoomOrNewRoom(loadRoomOrNewRoomFrame);
         } catch (Exception e) {
             JFrame onlyNewRoomFrame = new JFrame();
+            onlyNewRoomFrame.setLocationRelativeTo(null);
             onlyNewRoom(onlyNewRoomFrame);
         }
     }
@@ -88,6 +90,7 @@ public class GUI {
     // EFFECTS: Takes in the username from the user
     private void getUsernameFromUser() {
         JFrame frame = new JFrame();
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // exits the app on hitting close
         frame.setResizable(false); // prevent frame from being resized
         frame.setSize(300, 200); // sets the x and y dimension of the frame
@@ -118,6 +121,7 @@ public class GUI {
     // EFFECTS: Takes in the username from the user
     private void getRoomFromUser(String username) {
         JFrame frame = new JFrame();
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // exits the app on hitting close
         frame.setResizable(false); // prevent frame from being resized
         frame.setSize(300, 200); // sets the x and y dimension of the frame
