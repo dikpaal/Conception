@@ -13,5 +13,6 @@ public class FrameGUI extends JFrame {
         this.setResizable(true); // prevent frame from being resized
         this.setSize(400, 490); // sets the x and y dimension of the frame
         this.setLayout(null);
+        this.setLocationRelativeTo(null);
     }
 }

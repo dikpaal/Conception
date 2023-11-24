@@ -31,13 +31,13 @@ public class GUI {
     private void onlyNewRoom(JFrame frame) {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // exits the app on hitting close
         frame.setResizable(false); // prevent frame from being resized
-        frame.setSize(200, 200); // sets the x and y dimension of the frame
+        frame.setSize(300, 200); // sets the x and y dimension of the frame
         frame.setLayout(null);
         frame.setResizable(false);
 
         JButton newUserButton = new JButton();
         newUserButton.setText("New Room");
-        newUserButton.setBounds(10, 30, 180, 80);
+        newUserButton.setBounds(10, 30, 280, 80);
         newUserButton.setFocusable(false);
         newUserButton.addActionListener(e -> newRoomButtonPressed(frame));
 
@@ -49,19 +49,19 @@ public class GUI {
     private void loadRoomOrNewRoom(JFrame frame) {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // exits the app on hitting close
         frame.setResizable(false); // prevent frame from being resized
-        frame.setSize(200, 200); // sets the x and y dimension of the frame
+        frame.setSize(300, 200); // sets the x and y dimension of the frame
         frame.setLayout(null);
         frame.setResizable(false);
 
         JButton newUserButton = new JButton();
         newUserButton.setText("New Room");
-        newUserButton.setBounds(10, 10, 180, 80);
+        newUserButton.setBounds(10, 10, 280, 80);
         newUserButton.setFocusable(false);
         newUserButton.addActionListener(e -> newRoomButtonPressed(frame));
 
         JButton oldUserButton = new JButton();
         oldUserButton.setText("Load Room");
-        oldUserButton.setBounds(10, 85, 180, 80);
+        oldUserButton.setBounds(10, 85, 280, 80);
         oldUserButton.setFocusable(false);
         oldUserButton.addActionListener(e -> loadRoomButtonPressed(frame));
 
@@ -90,18 +90,18 @@ public class GUI {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // exits the app on hitting close
         frame.setResizable(false); // prevent frame from being resized
-        frame.setSize(200, 200); // sets the x and y dimension of the frame
+        frame.setSize(300, 200); // sets the x and y dimension of the frame
         frame.setLayout(null);
         frame.setResizable(false);
 
         JTextField textField = new JTextField("Enter username", 30);
-        textField.setBounds(10, 30, 180, 30);
+        textField.setBounds(10, 30, 280, 30);
         frame.add(textField);
 
         JButton button = new JButton();
         button.setText("Done");
         button.setFocusable(false);
-        button.setBounds(55, 80, 90, 40);
+        button.setBounds(55, 80, 190, 40);
 
         button.addActionListener(e -> getUsername(textField, frame));
         frame.add(button);
@@ -120,18 +120,18 @@ public class GUI {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // exits the app on hitting close
         frame.setResizable(false); // prevent frame from being resized
-        frame.setSize(200, 200); // sets the x and y dimension of the frame
+        frame.setSize(300, 200); // sets the x and y dimension of the frame
         frame.setLayout(null);
         frame.setResizable(false);
 
         JTextField textField = new JTextField("Enter dimension (odd number)", 30);
-        textField.setBounds(10, 30, 180, 30);
+        textField.setBounds(10, 30, 280, 30);
         frame.add(textField);
 
         JButton button = new JButton();
         button.setText("Done");
         button.setFocusable(false);
-        button.setBounds(55, 80, 90, 40);
+        button.setBounds(55, 80, 190, 40);
 
         button.addActionListener(e -> getRoom(textField, frame, username));
         frame.add(button);

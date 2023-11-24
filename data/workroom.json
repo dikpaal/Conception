@@ -27,22 +27,22 @@
     },
     "numberedAndFurnitureList": {
         "0": [
-            "Cv",
-            "2",
-            "3",
+            "Sv",
+            "Sv",
+            "vS",
             "Cv"
         ],
         "1": [
-            "5",
-            "Sv",
             "vS",
-            "8"
+            "Tv",
+            "vT",
+            "Sv"
         ],
         "2": [
             "9",
-            "10",
-            "11",
-            "12"
+            "Tv",
+            "vT",
+            "vS"
         ],
         "3": [
             "13",
@@ -51,13 +51,13 @@
             "16"
         ]
     },
-    "name": "fsd",
+    "name": "fds",
     "furnitureList": [
         {
             "color": "BEIGE",
             "spots": [
-                "6",
-                "7"
+                "2",
+                "3"
             ],
             "type": "SOFA",
             "dimension": "2",
@@ -71,10 +71,35 @@
             "direction": "DOWN"
         },
         {
+            "color": "WHITE",
+            "spots": [
+                "6",
+                "7",
+                "10",
+                "11"
+            ],
+            "type": "CENTRETABLE",
+            "dimension": "2",
+            "direction": "DOWN"
+        },
+        {
             "color": "BEIGE",
-            "spot": "1",
-            "type": "CHAIR",
-            "dimension": "1",
+            "spots": [
+                "1",
+                "5"
+            ],
+            "type": "SOFA",
+            "dimension": "2",
+            "direction": "DOWN"
+        },
+        {
+            "color": "BEIGE",
+            "spots": [
+                "8",
+                "12"
+            ],
+            "type": "SOFA",
+            "dimension": "2",
             "direction": "DOWN"
         }
     ],
