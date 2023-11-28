@@ -517,8 +517,7 @@ public class ConsoleUI {
             System.out.print("    ");
             for (int j = 0; j < subList.size(); j++) {
                 String number = subList.get(j);
-                if (number.equals("Cv")
-                        || number.equals("Sv")
+                if (number.equals("Cv") || number.equals("Sv")
                         || number.equals("vS")
                         || number.equals("Tv")
                         || number.equals("vT")) {
