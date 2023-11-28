@@ -382,6 +382,31 @@ public class RoomTest {
 
     }
 
+    @Test
+    public void testPrintLogsToConsole() {
+        room.printLogsToConsole();
+    }
+
+    @Test
+    public void testRoomPrinted() {
+        room.roomPrinted();
+    }
+
+    @Test
+    public void testChairRemoved() {
+        room.chairRemoved();
+    }
+
+    @Test
+    public void testSofaRemoved() {
+        room.sofaRemoved();
+    }
+
+    @Test
+    public void testCentreTableRemoved() {
+        room.centreTableRemoved();
+    }
+
 //
 //    @Test
 //    public void testCreateNumberedPlane() {
