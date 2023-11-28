@@ -65,6 +65,8 @@ public class Canvas extends PanelGUI {
         } else {
             drawRoom();
         }
+
+        room.roomPrinted();
     }
 
     // REQUIRES: nothing

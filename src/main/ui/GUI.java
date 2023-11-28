@@ -157,7 +157,7 @@ public class GUI {
     private void createNewCanvas(boolean load, String username, Room r) {
 
         // The main GUI Frame
-        FrameGUI guiFrame = new FrameGUI(username);
+        FrameGUI guiFrame = new FrameGUI(username, r);
 
         // The message panel that contains the messages for the user
         MessagePanel messagePanel = new MessagePanel(0, 440, 400, 50, r);

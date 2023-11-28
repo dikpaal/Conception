@@ -789,6 +789,7 @@ package model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import ui.Printer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -912,6 +913,45 @@ public class Room {
     // EFFECTS: add f to furnitureList
     public void addToFurnitureList(Furniture f) {
         this.furnitureList.add(f);
+        EventLog.getInstance().logEvent(new Event(f.getType() + " added to the furniture list."));
+    }
+
+    // EVENTLOGS
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: logs if the room is displayed or not
+    public void roomPrinted() {
+        EventLog.getInstance().logEvent(new Event("Room displayed."));
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: logs if the chair was removed
+    public void chairRemoved() {
+        EventLog.getInstance().logEvent(new Event("Chair removed."));
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: logs if the sofa was removed
+    public void sofaRemoved() {
+        EventLog.getInstance().logEvent(new Event("Sofa removed."));
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: logs if the centre table was removed
+    public void centreTableRemoved() {
+        EventLog.getInstance().logEvent(new Event("Centre table removed."));
+    }
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    // EFFECTS: prints out the logs to the console
+    public void printLogsToConsole() {
+        Printer lp = new Printer();
+        lp.printLog(EventLog.getInstance());
     }
 
     // GETTERS

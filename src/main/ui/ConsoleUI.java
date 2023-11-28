@@ -509,6 +509,7 @@ public class ConsoleUI {
     // MODIFIES: nothing
     // EFFECTS: prints the room to the console
     public void printRoom() {
+        room.roomPrinted();
         List<List<String>> numberedAndFurnitureList = room.getNumberedAndFurnitureList();
         for (int i = 0; i < numberedAndFurnitureList.size(); i++) {
             List<String> subList = numberedAndFurnitureList.get(i);
@@ -726,6 +727,7 @@ public class ConsoleUI {
                 }
             }
         }
+        room.sofaRemoved();
     }
 
     // REQUIRES: Integer.parseInt(spot1) > 0 and spot1 in numberedList()
@@ -741,6 +743,8 @@ public class ConsoleUI {
                 }
             }
         }
+
+        room.centreTableRemoved();
     }
 
     // REQUIRES: nothing
@@ -756,6 +760,8 @@ public class ConsoleUI {
                 }
             }
         }
+
+        room.chairRemoved();
     }
 
     // REQUIRES: Integer.parseInt(spot1) > 0 and spot1 in numberedList()
