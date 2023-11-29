@@ -3,73 +3,92 @@
         "0": [
             "1",
             "2",
-            "3"
+            "3",
+            "4"
         ],
         "1": [
-            "4",
             "5",
-            "6"
+            "6",
+            "7",
+            "8"
         ],
         "2": [
-            "7",
-            "8",
-            "9"
+            "9",
+            "10",
+            "11",
+            "12"
+        ],
+        "3": [
+            "13",
+            "14",
+            "15",
+            "16"
         ]
     },
     "numberedAndFurnitureList": {
         "0": [
-            "1",
             "Cv",
+            "Sv",
+            "vS",
             "Cv"
         ],
         "1": [
-            "4",
-            "Cv",
-            "Cv"
+            "5",
+            "Tv",
+            "vT",
+            "8"
         ],
         "2": [
-            "7",
-            "8",
-            "Cv"
+            "9",
+            "Tv",
+            "vT",
+            "12"
+        ],
+        "3": [
+            "13",
+            "14",
+            "15",
+            "16"
         ]
     },
-    "name": "sdf",
+    "name": "Dikpaal",
     "furnitureList": [
         {
+            "color": "WHITE",
+            "spots": [
+                "6",
+                "7",
+                "10",
+                "11"
+            ],
+            "type": "CENTRETABLE",
+            "dimension": "2",
+            "direction": "DOWN"
+        },
+        {
             "color": "BEIGE",
-            "spot": "3",
+            "spots": [
+                "2",
+                "3"
+            ],
+            "type": "SOFA",
+            "dimension": "2",
+            "direction": "DOWN"
+        },
+        {
+            "color": "BEIGE",
+            "spot": "4",
             "type": "CHAIR",
             "dimension": "1",
             "direction": "DOWN"
         },
         {
             "color": "BEIGE",
-            "spot": "6",
-            "type": "CHAIR",
-            "dimension": "1",
-            "direction": "DOWN"
-        },
-        {
-            "color": "BEIGE",
-            "spot": "9",
-            "type": "CHAIR",
-            "dimension": "1",
-            "direction": "DOWN"
-        },
-        {
-            "color": "BEIGE",
-            "spot": "2",
-            "type": "CHAIR",
-            "dimension": "1",
-            "direction": "DOWN"
-        },
-        {
-            "color": "BEIGE",
-            "spot": "5",
+            "spot": "1",
             "type": "CHAIR",
             "dimension": "1",
             "direction": "DOWN"
         }
     ],
-    "dimension": "4"
+    "dimension": "5"
 }
