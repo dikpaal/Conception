@@ -1,4 +1,4 @@
-# Personal Project: Conception
+# Conception 
 *Conception: design (in French)*
 
 The application would essentially be a tool that would allow a user to design rooms of a house from top 
@@ -85,4 +85,6 @@ Chair removed.
 
 ```
 ## Phase 4: Task 3
-If I had more time, I would have applied more efficient and better abstraction to the Furniture, Chair, Sofa, and CenterTable classes. I would have renamed all of my methods in the Room and ConsoleUI class. I would have used SuppressWarnings rather than making helper methods everywhere I had to cut down method length. This would make my code more readable. I would also remove the PanelGUI class as it is of no use for now.
+If I had more time, I would have applied more efficient and better abstraction to the Furniture, Chair, Sofa, and CenterTable classes. It is to remove all the unnecessary methods from the Furniture class and add specific methods to the respective classes. I would have renamed all of my methods in the Room and ConsoleUI class. This would make my code more readable as I have used a lot of helper methods. I would have used SuppressWarnings rather than making helper methods everywhere I had to cut down method length. This would also make my code more readable. I would also remove the PanelGUI class as it is of no use for now.
+I created it thinking that I might need it, but I apparently did not.
+Lastly, I would have applied the Liskov Substitution Principle, and made use of the composite, observer, and singleton patterns wherever necessary.
