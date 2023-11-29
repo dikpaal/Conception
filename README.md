@@ -49,7 +49,7 @@ given that there is space.
 
 ## Phase 4: Task 2
 
-Sample logs:
+Sample Logs:
 ```
 Tue Nov 28 11:59:50 PST 2023
 Room displayed.
@@ -84,6 +84,5 @@ Chair removed.
 
 
 ```
-
 ## Phase 4: Task 3
 If I had more time, I would have applied more efficient and better abstraction to the Furniture, Chair, Sofa, and CenterTable classes. I would have renamed all of my methods in the Room and ConsoleUI class. I would have used SuppressWarnings rather than making helper methods everywhere I had to cut down method length. This would make my code more readable. I would also remove the PanelGUI class as it is of no use for now.
