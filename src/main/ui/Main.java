@@ -11,22 +11,6 @@ public class Main {
         // STARTS THE CONSOLE APPLICATION
 //        new MainConsoleUI();
 
-
-        Room r = new Room(3);
-
-        r.setUsername(username);
-        System.out.println("Hello, " + r.getUsername());
-
-        // USER SELECTS THE DIMENSION OF THE ROOM
-        System.out.println();
-        System.out.println("What would the dimension of your room be? (Select an odd number only) ");
-        String dimensionString = s.nextLine();
-        int dimensionInt = Integer.parseInt(dimensionString);
-        r.setDimension(dimensionInt);
-
-        // THE APP STARTS HERE
-        r.mainUserInput();
-
         // STARTS THE GUI APPLICATION
         new GUI();
 

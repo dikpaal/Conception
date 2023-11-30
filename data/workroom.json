@@ -34,14 +34,14 @@
         ],
         "1": [
             "5",
-            "Tv",
-            "vT",
+            "Sv",
+            "vS",
             "8"
         ],
         "2": [
             "9",
-            "Tv",
-            "vT",
+            "10",
+            "11",
             "12"
         ],
         "3": [
@@ -53,18 +53,6 @@
     },
     "name": "Dikpaal",
     "furnitureList": [
-        {
-            "color": "WHITE",
-            "spots": [
-                "6",
-                "7",
-                "10",
-                "11"
-            ],
-            "type": "CENTRETABLE",
-            "dimension": "2",
-            "direction": "DOWN"
-        },
         {
             "color": "BEIGE",
             "spots": [
@@ -87,6 +75,16 @@
             "spot": "1",
             "type": "CHAIR",
             "dimension": "1",
+            "direction": "DOWN"
+        },
+        {
+            "color": "BEIGE",
+            "spots": [
+                "6",
+                "7"
+            ],
+            "type": "SOFA",
+            "dimension": "2",
             "direction": "DOWN"
         }
     ],

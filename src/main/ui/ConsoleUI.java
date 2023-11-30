@@ -19,12 +19,7 @@ public class ConsoleUI {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    // SAVING AND LOADING DATA INTO THE JSON FILE
-
-
-    // REQUIRES: d > 0 and d is odd
     // REQUIRES: nothing
-
     // MODIFIES: nothing
     // EFFECTS: constructs the consoleUI
     public ConsoleUI() {
@@ -448,14 +443,14 @@ public class ConsoleUI {
                     removeFurniture();
                 } else if (userChoice2.equals("3")) {
                     printListOfFurnitureSoFar();
-//                    furnitureListWithSpotsIsEmpty();   // XYZ
+                    furnitureListWithSpotsIsEmpty();
                 } else {
                     System.out.println("Invalid choice!");
                 }
 
             } else if (userChoice.equals("n")) {
-                System.out.println("Bye! " + getUsername());
-                System.out.println("Okay, here's your final room!!");
+//                System.out.println("Bye! " + room.getUsername());
+//                System.out.println("Okay, here's your final room!!");
                 printRoom();
                 saveRoom();
                 System.out.println("Bye, " + room.getUsername());
@@ -976,8 +971,7 @@ public class ConsoleUI {
         return this.room;
     }
 
-    // SAVING DATA
-
+    // SAVING AND LOADING DATA INTO THE JSON FILE
 
     // REQUIRES: nothing
     // MODIFIES: nothing
@@ -1030,9 +1024,6 @@ public class ConsoleUI {
         }
     }
 }
-
-    // SAVING AND LOADING DATA FROM TEH JSON FILE
-
 
 //import model.*;
 //import persistence.JsonReader;

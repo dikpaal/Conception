@@ -914,7 +914,7 @@ public class Room {
         EventLog.getInstance().logEvent(new Event(f.getType() + " added to the furniture list."));
     }
 
-    // EVENTLOGS
+    // EVENT LOGS
 
     // REQUIRES: nothing
     // MODIFIES: nothing
@@ -927,21 +927,21 @@ public class Room {
     // MODIFIES: nothing
     // EFFECTS: logs if the chair was removed
     public void chairRemoved() {
-        EventLog.getInstance().logEvent(new Event("Chair removed."));
+        EventLog.getInstance().logEvent(new Event("CHAIR removed."));
     }
 
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: logs if the sofa was removed
     public void sofaRemoved() {
-        EventLog.getInstance().logEvent(new Event("Sofa removed."));
+        EventLog.getInstance().logEvent(new Event("SOFA removed."));
     }
 
     // REQUIRES: nothing
     // MODIFIES: nothing
     // EFFECTS: logs if the centre table was removed
     public void centreTableRemoved() {
-        EventLog.getInstance().logEvent(new Event("Centre table removed."));
+        EventLog.getInstance().logEvent(new Event("CENTRETABLE removed."));
     }
 
     // REQUIRES: nothing
