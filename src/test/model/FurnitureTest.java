@@ -61,8 +61,8 @@ public class FurnitureTest {
     @Test
     void testGetDirection() {
         assertEquals(DOWN, sofa.getDirection());
-        sofa.setDirection(NEUTRAL);
-        assertEquals(NEUTRAL, sofa.getDirection());
+        sofa.setDirection(UP);
+        assertEquals(UP, sofa.getDirection());
     }
 
     @Test
@@ -96,5 +96,27 @@ public class FurnitureTest {
     public void testGetCentreTableSpots() {
         centreTable.setSpotsForCenterTable(6, 5);
         assertEquals(6, centreTable.getCentreTableSpots());
+    }
+
+    @Test
+    public void testSetColor() {
+        chair.setColor(BROWN);
+        assertEquals(BROWN, chair.getColor());
+    }
+
+    @Test
+    public void testSetType() {
+        chair.setType(CHAIR);
+        assertEquals(CHAIR, chair.getType());
+    }
+
+    @Test
+    public void testSetSpots() {
+        List<Integer> spots = new ArrayList<>();
+        spots.add(1);
+        spots.add(2);
+        sofa.setSpots(spots);
+        assertEquals(1, sofa.getSofaSpots());
+        assertEquals(2, sofa.getSecondSofaSpots());
     }
 }

@@ -1,0 +1,25 @@
+{
+    "numberedPlane": {
+        "0": [
+            "1",
+            "2"
+        ],
+        "1": [
+            "3",
+            "4"
+        ]
+    },
+    "numberedAndFurnitureList": {
+        "0": [
+            "1",
+            "2"
+        ],
+        "1": [
+            "3",
+            "4"
+        ]
+    },
+    "name": "Dikpaal",
+    "furnitureList": [],
+    "dimension": "3"
+}

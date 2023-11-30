@@ -2,6 +2,6 @@ package model;
 
 // Represents the type of the furniture.
 public enum FurnitureType {
-    CHAIR, SOFA, CENTRETABLE
+    CHAIR, SOFA, CENTRETABLE, SQUARE, GREENSQUARE, REDSQUARE
 }
 

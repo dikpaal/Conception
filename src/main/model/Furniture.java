@@ -19,16 +19,19 @@ public abstract class Furniture {
 
     // GETTERS
 
+
+    // REQUIRES: nothing
+    // MODIFIES: nothing
+    //  EFFECTS: returns the dimension of the furniture
+    public Dimension getDimension() {
+        return this.dimension;
+    }
+
     // REQUIRES: nothing
     // MODIFIES: nothing
     //  EFFECTS: returns the direction of the furniture
     public Direction getDirection() {
-
-        if (this.direction == DOWN) {
-            return this.direction;
-        } else {
-            return NEUTRAL;
-        }
+        return this.direction;
     }
 
     // REQUIRES: nothing
@@ -90,11 +93,39 @@ public abstract class Furniture {
         this.direction = dir;
     }
 
+    // REQUIRES: nothing
+    // MODIFIES: this
+    // EFFECTS: sets the dimension of the furniture to d
+    public void setDimension(Dimension d) {
+        this.dimension = d;
+    }
+
+    // REQUIRES: type in [CHAIR, SOFA, CENTRETABLE];
+    // MODIFIES: this
+    // EFFECTS: sets the type of the furniture to type
+    public void setType(FurnitureType type) {
+        this.type = type;
+    }
+
+    // REQUIRES: c in [BROWN, BLACK, WHITE, BEIGE]
+    // MODIFIES: this
+    // EFFECTS: sets the color of the furniture to c
+    public void setColor(Color c) {
+        this.color = c;
+    }
+
     // REQUIRES: 0 <= s < getNumberedList().size()
     // MODIFIES: this
     // EFFECTS: sets the spot of the furniture to s
     public void setSpot(int s) {
         this.spot = s;
+    }
+
+    // REQUIRES: spots is not empty
+    // MODIFIES: this
+    // EFFECTS: sets the spots of the furniture to spots
+    public void setSpots(List<Integer> spots) {
+        this.spots = spots;
     }
 
     // REQUIRES: 0 <= s1 < getNumberedList().size() and 0 <= s2 < getNumberedList().size() and s1 != s2

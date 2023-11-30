@@ -1,17 +1,16 @@
 package ui;
 
+import model.Room;
+
 import java.util.Scanner;
 
 // Represents the class with the main method that runs the app.
 public class Main {
     public static void main(String[] args) {
 
-        // INTRODUCTION OF THE USER
-        Scanner s = new Scanner(System.in);
-        System.out.println();
-        System.out.println("What do we call you?");
-        String username = s.nextLine();
-        System.out.println();
+        // STARTS THE CONSOLE APPLICATION
+//        new MainConsoleUI();
+
 
         Room r = new Room(3);
 
@@ -27,5 +26,9 @@ public class Main {
 
         // THE APP STARTS HERE
         r.mainUserInput();
+
+        // STARTS THE GUI APPLICATION
+        new GUI();
+
     }
 }

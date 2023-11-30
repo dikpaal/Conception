@@ -1,0 +1,40 @@
+{
+    "numberedPlane": {
+        "0": [
+            "1",
+            "2"
+        ],
+        "1": [
+            "3",
+            "4"
+        ]
+    },
+    "numberedAndFurnitureList": {
+        "0": [
+            "1",
+            "2"
+        ],
+        "1": [
+            "3",
+            "4"
+        ]
+    },
+    "name": "Dikpaal",
+    "furnitureList": [
+        {
+            "color": "BEIGE",
+            "spot": "0",
+            "type": "CHAIR",
+            "dimension": "1",
+            "direction": "DOWN"
+        },
+        {
+            "color": "BEIGE",
+            "spots": [],
+            "type": "SOFA",
+            "dimension": "2",
+            "direction": "DOWN"
+        }
+    ],
+    "dimension": "3"
+}
