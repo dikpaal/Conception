@@ -26,7 +26,7 @@ given that there is space.
 - The user can *save* their progress.
 - The user can *load* their previous progress at the start.
 
-## Instructions for Grader
+## Instructions
 
 - When there's no room to load, at the start, the user is prompted with just one option to create a new room.
   - When the user selects this option, they are then prompted to enter their "username" and "dimension" of their intended room.
@@ -84,7 +84,3 @@ Chair removed.
 
 
 ```
-## Phase 4: Task 3
-If I had more time, I would have applied more efficient and better abstraction to the Furniture, Chair, Sofa, and CenterTable classes. It is to remove all the unnecessary methods from the Furniture class and add specific methods to the respective classes. I would have renamed all of my methods in the Room and ConsoleUI class. This would make my code more readable as I have used a lot of helper methods. I would have used SuppressWarnings rather than making helper methods everywhere I had to cut down method length. This would also make my code more readable. I would also remove the PanelGUI class as it is of no use for now.
-I created it thinking that I might need it, but I apparently did not.
-Lastly, I would have applied the Liskov Substitution Principle, and made use of the composite, observer, and singleton patterns wherever necessary.
