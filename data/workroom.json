@@ -3,90 +3,37 @@
         "0": [
             "1",
             "2",
-            "3",
-            "4"
+            "3"
         ],
         "1": [
+            "4",
             "5",
-            "6",
-            "7",
-            "8"
+            "6"
         ],
         "2": [
-            "9",
-            "10",
-            "11",
-            "12"
-        ],
-        "3": [
-            "13",
-            "14",
-            "15",
-            "16"
+            "7",
+            "8",
+            "9"
         ]
     },
     "numberedAndFurnitureList": {
         "0": [
-            "Cv",
-            "Sv",
-            "vS",
-            "Cv"
+            "1",
+            "2",
+            "3"
         ],
         "1": [
+            "4",
             "5",
-            "Sv",
-            "vS",
-            "8"
+            "6"
         ],
         "2": [
-            "9",
-            "10",
-            "11",
-            "12"
-        ],
-        "3": [
-            "13",
-            "14",
-            "15",
-            "16"
+            "7",
+            "8",
+            "9"
         ]
     },
-    "name": "Dikpaal",
-    "furnitureList": [
-        {
-            "color": "BEIGE",
-            "spots": [
-                "2",
-                "3"
-            ],
-            "type": "SOFA",
-            "dimension": "2",
-            "direction": "DOWN"
-        },
-        {
-            "color": "BEIGE",
-            "spot": "4",
-            "type": "CHAIR",
-            "dimension": "1",
-            "direction": "DOWN"
-        },
-        {
-            "color": "BEIGE",
-            "spot": "1",
-            "type": "CHAIR",
-            "dimension": "1",
-            "direction": "DOWN"
-        },
-        {
-            "color": "BEIGE",
-            "spots": [
-                "6",
-                "7"
-            ],
-            "type": "SOFA",
-            "dimension": "2",
-            "direction": "DOWN"
-        }
-    ],
-    "dimension": "5"
+    "name": "nothing",
+    "furnitureList": [],
+    "dimension": "4"
 }
